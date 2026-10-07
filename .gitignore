@@ -1,0 +1,18 @@
+# Pastas de origem do design (temporárias, recebidas a cada página)
+/Assets/
+/Opella_*/
+/*.pdf
+*.ai
+*.psd
+
+# Claude Code — configurações pessoais
+.claude/settings.local.json
+
+# Python
+__pycache__/
+*.pyc
+
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
