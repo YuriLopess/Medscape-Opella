@@ -7,14 +7,17 @@ ou servir a pasta com qualquer servidor estático (ex.: `python -m http.server`)
 
 ```
 index.html                  Home
+politica-de-privacidade.html  Medscape Network Privacy Policy
+termos-de-uso.html          Medscape Network Terms of Use
 <pagina>.html               Próximas páginas ficam na raiz (allegra.html, enterogermina.html,
-                            os-cal.html, novalgina.html, politica-de-privacidade.html, termos-de-uso.html)
+                            os-cal.html, novalgina.html)
 static/
   css/
     base.css                Fontes, tokens de cor/layout, reset, utilitários, títulos de seção
     icons.css               GERADO — SVGs embutidos (não editar; ver tools/build_icons.py)
     components.css          Partes comuns a todas as páginas: header, menu, busca, dizeres legais, footer
     home.css                Estilos exclusivos da home
+    legal.css               Páginas legais (texto justificado, listas aninhadas de até 4 níveis)
     <pagina>.css            Um arquivo por página nova, se necessário
   js/
     main.js                 Comportamento global (menu mobile)
@@ -50,6 +53,6 @@ tools/
 
 ## Arquivos de origem (temporários)
 
-`Assets/`, `Opella_A_Home_Wireframe/` e o PDF de revisão podem ser apagados: tudo o que o site
+`Assets/`, `Opella_A_*/` e o PDF de revisão podem ser apagados: tudo o que o site
 usa já está em `static/`. **Não** coloque arquivos do site em `Assets/`: no Windows, `assets` e
 `Assets` são a mesma pasta.
