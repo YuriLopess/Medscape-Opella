@@ -1,0 +1,697 @@
+/* ==========================================================================
+   Home
+   Hero · Áreas terapêuticas · Especialistas · Conteúdos em destaque ·
+   Números · Banner Allegra
+   ========================================================================== */
+
+/* ---------- Hero ---------- */
+.hero {
+  background: var(--green-900);
+  color: var(--white);
+  overflow: hidden;
+}
+
+.hero__inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 405px;
+}
+
+.hero__content {
+  align-self: flex-start;
+  flex: 1 1 auto;
+  max-width: 800px;
+  padding: 60px 0 21px 58px;
+}
+
+.hero__brand {
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+.hero__logo {
+  width: 283px;
+  margin-top: 14px;
+  color: var(--cream);
+}
+
+.hero__tagline {
+  font-size: 37px;
+  line-height: 41px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--cream);
+}
+
+.hero__tagline strong {
+  display: block;
+  font-weight: 700;
+}
+
+.hero__title {
+  display: inline-block;
+  margin: 40px 0 0 2px;
+  padding-bottom: 6px;
+  font-size: 44px;
+  line-height: 53px;
+  font-weight: 700;
+  color: var(--cream);
+}
+
+.hero__title::after {
+  content: "";
+  display: block;
+  width: 122px;
+  height: 2px;
+  margin-top: 5px;
+  background: var(--green-700);
+}
+
+.hero__text {
+  margin: 14px 0 0 2px;
+  max-width: 710px;
+  font-size: 21px;
+  line-height: 28px;
+}
+
+.hero__media {
+  flex: none;
+  width: 400px;
+  aspect-ratio: 1;
+  margin-left: auto;
+  margin-right: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 1180px) {
+  .hero__content { padding-left: 24px; }
+  .hero__media { width: 340px; margin-right: 0; }
+  .hero__logo { width: 230px; }
+  .hero__tagline { font-size: 30px; line-height: 34px; }
+}
+
+@media (max-width: 900px) {
+  .hero__inner { flex-direction: column-reverse; align-items: stretch; }
+  .hero__content { padding: 32px 0 48px; max-width: none; }
+  .hero__media { width: min(320px, 78vw); margin: 32px auto 0; }
+}
+
+@media (max-width: 520px) {
+  .hero__brand { gap: 16px; }
+  .hero__logo { width: 150px; margin-top: 6px; }
+  .hero__tagline { font-size: 20px; line-height: 23px; }
+  .hero__title { margin-top: 28px; font-size: 34px; line-height: 42px; }
+  .hero__text { font-size: 18px; line-height: 25px; }
+}
+
+/* ---------- Áreas terapêuticas ---------- */
+.areas {
+  padding-top: 30px;
+}
+
+.areas__box {
+  padding: 32px 37px 32px;
+  background: var(--cream);
+  border: 1px solid var(--cream-border);
+  border-radius: var(--radius-xl);
+}
+
+.areas__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 35px;
+}
+
+.area-card {
+  --brand: var(--green-900);
+  --brand-soft: var(--cream);
+  --arrow: var(--brand);
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border: 1px solid var(--grey-300);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.area-card--allegra { --brand: var(--allegra); --brand-soft: var(--allegra-soft); }
+.area-card--enterogermina { --brand: var(--entero); --brand-soft: var(--entero-soft); --arrow: var(--entero-arrow); }
+.area-card--oscal { --brand: var(--oscal); --brand-soft: var(--oscal-soft); }
+.area-card--novalgina { --brand: var(--novalgina); --brand-soft: var(--novalgina-soft); }
+
+.area-card__head {
+  position: relative;
+  aspect-ratio: 303 / 243;
+  margin: -1px -1px 0;
+  padding: 35% 21px 0;
+  color: var(--white);
+}
+
+.area-card--enterogermina .area-card__head {
+  color: var(--entero);
+}
+
+.area-card__head img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.area-card__title,
+.area-card__desc {
+  position: relative;
+}
+
+.area-card__title {
+  font-size: 17px;
+  line-height: 21px;
+  font-weight: 700;
+}
+
+.area-card__desc {
+  margin-top: 4px;
+  max-width: 190px;
+  font-size: 15px;
+  line-height: 21px;
+}
+
+.area-card--novalgina .area-card__desc { max-width: 160px; }
+.area-card--enterogermina .area-card__desc { max-width: none; }
+
+.area-card__label {
+  margin-top: 19px;
+  font-size: 15px;
+  line-height: 18px;
+  font-weight: 700;
+  color: var(--brand);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.area-card__links {
+  padding: 1px 18px 20px;
+}
+
+.area-card__links li + li {
+  border-top: 1px solid var(--grey-300);
+}
+
+.area-card__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 79px;
+  padding: 0 13px 0 14px;
+  font-size: 19px;
+  line-height: 23px;
+  font-weight: 700;
+  color: var(--green-900);
+}
+
+.area-card__arrow {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--brand-soft);
+  color: var(--arrow);
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.area-card__link:hover .area-card__arrow {
+  transform: translateX(3px);
+  background: var(--arrow);
+  color: var(--white);
+}
+
+@media (max-width: 1180px) {
+  .areas__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px) {
+  .areas__box { padding: 28px 16px 20px; }
+  .areas__grid { grid-template-columns: minmax(0, 1fr); gap: 20px; margin-top: 24px; }
+}
+
+/* ---------- Especialistas ---------- */
+.experts {
+  padding-top: 34px;
+  padding-bottom: 50px;
+}
+
+.experts .section-subtitle {
+  margin-top: 23px;
+}
+
+.experts__carousel {
+  position: relative;
+  margin-top: 24px;
+}
+
+.experts__viewport {
+  overflow: hidden;
+  margin-inline: 3px;
+  touch-action: pan-y;
+}
+
+.experts__track {
+  display: flex;
+  gap: 18px;
+  will-change: transform;
+}
+
+.expert-card {
+  flex: 0 0 calc((100% - 18px * 3) / 4);
+  display: flex;
+  min-height: 323px;
+  background: var(--white);
+  border: 2px solid var(--cream);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.expert-card__photo {
+  flex: 0 0 128px;
+  margin: -2px 0 -2px -2px;
+  background: var(--cream);
+}
+
+.expert-card__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.expert-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 23px 0 22px 8px;
+}
+
+.expert-card__name {
+  font-size: 17px;
+  line-height: 20px;
+  font-weight: 700;
+  color: var(--green-900);
+}
+
+.expert-card__meta {
+  margin-top: 0;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 700;
+  color: var(--sage-600);
+}
+
+.expert-card__bio {
+  max-width: 167px;
+  margin-top: 14px;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--black);
+}
+
+.expert-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: auto;
+  padding-top: 16px;
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: 700;
+  color: var(--link-blue);
+}
+
+.expert-card__link:hover {
+  text-decoration: underline;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 119px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-top: -10px;
+  color: var(--sage-600);
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.carousel-btn:hover {
+  background: var(--cream);
+}
+
+.carousel-btn--prev { left: -41px; }
+.carousel-btn--next { right: -42px; }
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.carousel-dots button {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: var(--cream);
+  transition: background-color 0.2s ease;
+}
+
+.carousel-dots button[aria-current="true"] {
+  background: var(--sage-600);
+}
+
+@media (max-width: 1420px) {
+  .experts__carousel { padding-inline: 36px; }
+  .carousel-btn--prev { left: -8px; }
+  .carousel-btn--next { right: -8px; }
+}
+
+@media (max-width: 1240px) {
+  .expert-card { flex-basis: calc((100% - 18px * 2) / 3); }
+}
+
+@media (max-width: 960px) {
+  .expert-card { flex-basis: calc((100% - 18px) / 2); }
+}
+
+@media (max-width: 640px) {
+  .experts__carousel { padding-inline: 0; }
+  .expert-card { flex-basis: 100%; }
+  .carousel-btn { display: none; }
+}
+
+/* ---------- Conteúdos em destaque ---------- */
+.featured {
+  padding: 34px 0 49px;
+  background: var(--green-900);
+}
+
+.featured .section-title {
+  color: var(--cream);
+}
+
+.featured__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 27px;
+  margin-top: 30px;
+  padding-inline: 2px 0;
+}
+
+.content-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--off-white);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.content-card__media {
+  position: relative;
+  aspect-ratio: 425 / 186;
+}
+
+.content-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.content-card__badge {
+  position: absolute;
+  top: 25px;
+  left: 20px;
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 15px 0 20px;
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  line-height: 1;
+  color: var(--white);
+  text-transform: uppercase;
+}
+
+.content-card__badge--allegra { background: var(--allegra-badge); }
+.content-card__badge--entero { background: var(--entero-badge); padding-left: 15px; }
+.content-card__badge--novalgina { background: var(--novalgina-badge); padding-left: 15px; }
+
+.content-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  padding: 12px 20px 21px;
+}
+
+.content-card__title {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+  color: var(--green-900);
+}
+
+.content-card__source {
+  margin-top: 15px;
+  font-size: 15px;
+  line-height: 21px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.content-card__excerpt {
+  margin-top: 24px;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--ink);
+}
+
+.content-card__more {
+  display: inline-flex;
+  align-self: flex-start;
+  gap: 4px;
+  margin-top: auto;
+  padding-top: 20px;
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: 700;
+  color: var(--sage-600);
+}
+
+.content-card__more:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 1100px) {
+  .featured__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 700px) {
+  .featured__grid { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+}
+
+/* ---------- Números ---------- */
+.stats {
+  padding-top: 62px;
+}
+
+.stats__box {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding: 25px 0 17px;
+  background: var(--cream);
+  border: 1px solid var(--cream-border);
+  border-radius: var(--radius-lg);
+  margin-inline: 3px 0;
+}
+
+.stat {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  min-height: 143px;
+  padding: 0 12px 0 27px;
+}
+
+.stat + .stat {
+  border-left: 1px solid var(--green-900);
+}
+
+.stat__icon {
+  flex: none;
+  margin-top: 4px;
+  color: var(--sage-600);
+}
+
+/* o número sobe acima do início do divisor, como no layout */
+.stat__body {
+  margin-top: -14px;
+}
+
+.i-stat-conteudos { width: 85px; height: 71px; }
+.i-stat-especialistas { width: 94px; height: 68px; }
+.i-stat-areas { width: 75px; height: 72px; }
+.i-stat-atualizacao { width: 59px; height: 59px; margin-top: 14px; }
+
+.stat:nth-child(2) { padding-left: 28px; }
+.stat:nth-child(2) .stat__icon { margin-top: 1px; }
+.stat:nth-child(3) .stat__icon { margin-top: 2px; }
+.stat:nth-child(2) .stat__body { margin-left: -1px; }
+.stat:nth-child(3) { padding-left: 17px; gap: 17px; }
+.stat:nth-child(4) { padding-left: 25px; gap: 10px; }
+
+.stat__value {
+  display: flex;
+  align-items: flex-end;
+  height: 56px;
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 700;
+  color: var(--green-900);
+}
+
+.stat__value--text {
+  font-size: 36px;
+}
+
+.stat__label {
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 700;
+  color: var(--green-900);
+}
+
+.stat__desc {
+  margin-top: 12px;
+  max-width: 160px;
+  font-size: 16px;
+  line-height: 18px;
+  color: var(--sage-700);
+}
+
+@media (max-width: 1240px) {
+  .stats__box { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 24px; padding-block: 24px; }
+  .stat:nth-child(3) { border-left: 0; }
+  .stat:nth-child(n) { padding-left: 24px; gap: 15px; }
+}
+
+@media (max-width: 640px) {
+  .stats { padding-top: 40px; }
+  .stats__box { grid-template-columns: minmax(0, 1fr); row-gap: 0; padding: 8px 20px; margin: 0; }
+  .stat:nth-child(n) { min-height: 0; padding: 20px 0; border-left: 0; }
+  .stat + .stat { border-top: 1px solid rgba(4, 43, 10, 0.2); }
+  .stat__icon { transform: scale(0.75); transform-origin: top left; margin-right: -16px; }
+}
+
+/* ---------- Banner Allegra ---------- */
+.promo {
+  padding-top: 59px;
+}
+
+.promo__box {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  column-gap: 32px;
+  min-height: 201px;
+  margin-left: 1px;
+  padding: 27px 57px 28px 251px;
+  background: var(--allegra-banner) url("../img/home/banner-allegra-bg.webp") left center / auto 100% no-repeat;
+  color: var(--white);
+  overflow: hidden;
+}
+
+.promo__product {
+  position: absolute;
+  left: 89px;
+  top: 12px;
+  width: 105px;
+}
+
+.promo__title {
+  font-size: clamp(24px, 2.7vw, 38.6px);
+  line-height: 1.19;
+  font-weight: 400;
+}
+
+.promo__title strong {
+  font-weight: 700;
+}
+
+.promo__title sup {
+  font-size: 0.58em;
+  line-height: 0;
+  vertical-align: 0.75em;
+}
+
+.promo__cta {
+  display: inline-grid;
+  place-items: center;
+  width: 150px;
+  height: 49px;
+  align-self: start;
+  margin-top: 38px;
+  border-radius: 999px;
+  background: var(--allegra-button);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--white);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.promo__cta:hover {
+  background: #4a004b;
+  transform: translateY(-1px);
+}
+
+.promo__legal {
+  grid-column: 1 / -1;
+  margin-top: 15px;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.promo__legal strong {
+  font-weight: 700;
+}
+
+@media (max-width: 1100px) {
+  .promo__box { padding-left: 200px; padding-right: 32px; }
+  .promo__product { left: 50px; }
+}
+
+@media (max-width: 760px) {
+  .promo__box {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 28px 20px 24px 124px;
+    background-size: auto 100%;
+  }
+  .promo__product { left: 16px; top: 24px; width: 92px; }
+  .promo__cta { margin-top: 18px; justify-self: start; }
+  .promo__box { align-items: start; }
+  .promo__legal { margin-top: 16px; }
+}

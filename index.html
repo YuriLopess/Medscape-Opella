@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Opella | Hub científico para profissionais de saúde</title>
+  <meta name="description" content="Hub científico com evidências, insights clínicos e ferramentas práticas nas áreas de dor, alergia, saúde óssea e saúde digestiva.">
+
+  <link rel="preload" href="static/fonts/OpellaSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="static/fonts/OpellaSans-Bold.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="stylesheet" href="static/css/base.css">
+  <link rel="stylesheet" href="static/css/icons.css">
+  <link rel="stylesheet" href="static/css/components.css">
+  <link rel="stylesheet" href="static/css/home.css">
+</head>
+<body>
+
+  <!-- ===================== Header ===================== -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <p class="site-header__disclaimer">Solicitado pela Opella e desenvolvido pela Medscape.</p>
+
+      <div class="site-header__bar">
+        <a class="site-header__logo" href="index.html" aria-label="Opella — página inicial">
+          <span class="i i-logo"></span>
+        </a>
+
+        <nav class="main-nav" id="main-nav" aria-label="Principal">
+          <ul class="main-nav__list">
+            <li><a class="main-nav__link" href="index.html" aria-current="page">Home</a></li>
+            <li><a class="main-nav__link" href="allegra.html">Allegra</a></li>
+            <li><a class="main-nav__link" href="enterogermina.html">Enterogermina</a></li>
+            <li><a class="main-nav__link" href="os-cal.html">Os-Cal</a></li>
+            <li><a class="main-nav__link" href="novalgina.html">Novalgina</a></li>
+          </ul>
+        </nav>
+
+        <form class="search" role="search" action="#" method="get">
+          <label class="visually-hidden" for="search-input">Buscar no site</label>
+          <input class="search__input" id="search-input" type="search" name="q" placeholder="Buscar" autocomplete="off">
+          <button class="search__submit" type="submit" aria-label="Buscar">
+            <span class="i i-search"></span>
+          </button>
+        </form>
+
+        <button class="nav-toggle" type="button" aria-controls="main-nav" aria-expanded="false" aria-label="Abrir menu">
+          <span class="nav-toggle__bars"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===================== Hero ===================== -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero__inner">
+        <div class="hero__content">
+          <div class="hero__brand">
+            <span class="i i-logo hero__logo" role="img" aria-label="Opella"></span>
+            <p class="hero__tagline"><strong>Health.</strong> In your hands.</p>
+          </div>
+
+          <h1 class="hero__title" id="hero-title">Bem-vindo</h1>
+          <p class="hero__text">
+            Explore um hub científico com evidências, insights clínicos e ferramentas práticas nas áreas de dor,
+            alergia e saúde digestiva, desenvolvido para apoiar decisões mais adequadas no cuidado ao paciente.
+          </p>
+        </div>
+
+        <figure class="hero__media">
+          <img src="static/img/home/hero-medicos.webp" width="400" height="400"
+               alt="Médica e médico sorrindo em um corredor de hospital">
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===================== Áreas terapêuticas ===================== -->
+    <section class="areas" aria-labelledby="areas-title">
+      <div class="container">
+        <div class="areas__box">
+          <h2 class="section-title" id="areas-title">Explore nossas áreas terapêuticas</h2>
+          <p class="section-subtitle">Conteúdo científico especializado para apoiar sua prática clínica.</p>
+
+          <div class="areas__grid">
+
+            <!-- Allegra -->
+            <article class="area-card area-card--allegra">
+              <a class="area-card__head" href="allegra.html">
+                <img src="static/img/home/area-allegra.webp" width="303" height="243" alt="Allegra">
+                <h3 class="area-card__title">Alergia</h3>
+                <p class="area-card__desc">Atualizações científicas sobre rinite alérgica e manejo clínico.</p>
+              </a>
+              <p class="area-card__label">Acesso principal</p>
+              <ul class="area-card__links">
+                <!-- TODO: vincular ao arquivo ID14 — Doc Científico SBP Anti-histamínicos em doenças alérgicas: Eventos Adversos -->
+                <li><a class="area-card__link" href="#" data-doc="ID14">Gerações de<br>anti-histamínicos<span class="area-card__arrow"><span class="i i-arrow-right"></span></span></a></li>
+                <!-- TODO: vincular ao arquivo ID09 — Mais que um descongestionante: Eficácia Comprovada, Segurança Garantida -->
+                <li><a class="area-card__link" href="#" data-doc="ID09">Congestão nasal<span class="area-card__arrow"><span class="i i-arrow-right"></span></span></a></li>
+              </ul>
+            </article>
+
+            <!-- Enterogermina -->
+            <article class="area-card area-card--enterogermina">
+              <a class="area-card__head" href="enterogermina.html">
+                <img src="static/img/home/area-enterogermina.webp" width="303" height="243" alt="Enterogermina">
+                <h3 class="area-card__title">Saúde Digestiva</h3>
+                <p class="area-card__desc">Equilíbrio da Flora Intestinal.</p>
+              </a>
+              <p class="area-card__label">Acesso principal</p>
+              <ul class="area-card__links">
+                <!-- TODO: vincular ao arquivo ID12 — Bacillus clausii (OC, NR, SIN e T) e prevenção da DiAA -->
+                <li><a class="area-card__link" href="#" data-doc="ID12">Prevenção da DiAA<span class="area-card__arrow"><span class="i i-arrow-right"></span></span></a></li>
+                <!-- TODO: vincular ao arquivo ID10 -->
+                <li><a class="area-card__link" href="#" data-doc="ID10">Viroses<br>gastrointestinais<span class="area-card__arrow"><span class="i i-arrow-right"></span></span></a></li>
+              </ul>
+            </article>
+
+            <!-- Os-Cal -->
+            <article class="area-card area-card--oscal">
+              <a class="area-card__head" href="os-cal.html">
+                <img src="static/img/home/area-oscal.webp" width="303" height="243" alt="Os-Cal">
+                <h3 class="area-card__title">Saúde Óssea Da Mulher</h3>
+                <p class="area-card__desc">Informações científicas sobre cálcio e vitamina D.</p>
+              </a>
+              <p class="area-card__label">Acesso principal</p>
+              <ul class="area-card__links">
+                <!-- TODO: vincular ao arquivo ID01 — Questionário de consumo de cálcio -->
+                <li><a class="area-card__link" href="#" data-doc="ID01">Calculadora de<br>ingestão de cálcio<span class="area-card__arrow"><span class="i i-arrow-right"></span></span></a></li>
+                <!-- TODO: vincular ao arquivo ID03 — O desafio silencioso da osteoporose -->
+                <li><a class="area-card__link" href="#" data-doc="ID03">Prevenção da<br>osteoporose<span class="area-card__arrow"><span class="i i-arrow-right"></span></span></a></li>
+              </ul>
+            </article>
+
+            <!-- Novalgina -->
+            <article class="area-card area-card--novalgina">
+              <a class="area-card__head" href="novalgina.html">
+                <img src="static/img/home/area-novalgina.webp" width="303" height="243" alt="Novalgina">
+                <h3 class="area-card__title">Dor e Febre</h3>
+                <p class="area-card__desc">Conteúdo sobre manejo da dor e febre.</p>
+              </a>
+              <p class="area-card__label">Acesso principal</p>
+              <ul class="area-card__links">
+                <!-- TODO: vincular ao arquivo ID13 — Doc Científico SBP Abordagem Febre Aguda em Pediatria e Reflexões -->
+                <li><a class="area-card__link" href="#" data-doc="ID13">Algoritmo de febre<span class="area-card__arrow"><span class="i i-arrow-right"></span></span></a></li>
+                <!-- TODO: vincular ao arquivo ID13 (conforme revisão) -->
+                <li><a class="area-card__link" href="#" data-doc="ID13">Dipirona vs.<br>paracetamol<span class="area-card__arrow"><span class="i i-arrow-right"></span></span></a></li>
+              </ul>
+            </article>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== Especialistas ===================== -->
+    <section class="experts" aria-labelledby="experts-title">
+      <div class="container">
+        <h2 class="section-title" id="experts-title">Conheça nossos especialistas</h2>
+        <p class="section-subtitle">Conteúdo científico especializado para apoiar sua prática clínica.</p>
+
+        <div class="experts__carousel" data-carousel>
+          <button class="carousel-btn carousel-btn--prev" type="button" data-carousel-prev aria-label="Especialista anterior">
+            <span class="i i-chevron-left"></span>
+          </button>
+
+          <div class="experts__viewport" data-carousel-viewport>
+            <ul class="experts__track" data-carousel-track>
+
+              <li class="expert-card">
+                <figure class="expert-card__photo">
+                  <img src="static/img/experts/flavio-melo.webp" width="128" height="323" alt="Dr. Flávio Melo" loading="lazy">
+                </figure>
+                <div class="expert-card__body">
+                  <h3 class="expert-card__name">Dr. Flávio Melo</h3>
+                  <p class="expert-card__meta">Médico Pediatra<br>Hospital Regional de Guarabira<br>CRM-PB: 5239<br>RQE: 3065</p>
+                  <p class="expert-card__bio">Pediatra com experiência em saúde infantil, aborda o manejo da febre e da dor.</p>
+                  <a class="expert-card__link" href="novalgina.html">Ver publicações →</a>
+                </div>
+              </li>
+
+              <li class="expert-card">
+                <figure class="expert-card__photo">
+                  <img src="static/img/experts/carlos-mauricio.webp" width="128" height="323" alt="Dr. Carlos Maurício" loading="lazy">
+                </figure>
+                <div class="expert-card__body">
+                  <h3 class="expert-card__name">Dr. Carlos Maurício</h3>
+                  <p class="expert-card__meta">Médico Otorrinolaringologista<br>CLIAOD (Clínica de Otorrinolaringologia e Fonoaudiologia)<br>CRM-DF: 15474<br>RQE: 15338</p>
+                  <p class="expert-card__bio">Otorrinolaringologista, aborda o manejo das doenças alérgicas e o papel dos anti-histamínicos no controle dos sintomas.</p>
+                  <a class="expert-card__link" href="allegra.html">Ver publicações →</a>
+                </div>
+              </li>
+
+              <li class="expert-card">
+                <figure class="expert-card__photo">
+                  <img src="static/img/experts/flavio-melo.webp" width="128" height="323" alt="Dr. Flávio Melo" loading="lazy">
+                </figure>
+                <div class="expert-card__body">
+                  <h3 class="expert-card__name">Dr. Flávio Melo</h3>
+                  <p class="expert-card__meta">Médico Pediatra<br>Hospital Regional de Guarabira<br>CRM-PB: 5239<br>RQE: 3065</p>
+                  <p class="expert-card__bio">Especialista em Pediatria, compartilha orientações sobre a saúde da microbiota intestinal.</p>
+                  <a class="expert-card__link" href="enterogermina.html">Ver publicações →</a>
+                </div>
+              </li>
+
+              <li class="expert-card">
+                <figure class="expert-card__photo">
+                  <img src="static/img/experts/lucia-costa-paiva.webp" width="128" height="323" alt="Dra. Lucia Costa Paiva" loading="lazy">
+                </figure>
+                <div class="expert-card__body">
+                  <h3 class="expert-card__name">Dra. Lucia Costa Paiva</h3>
+                  <p class="expert-card__meta">Médica Ginecologista<br>UNICAMP<br>CRM-SP: 52.252<br>RQE: 129.821</p>
+                  <p class="expert-card__bio">Ginecologista, aborda a importância do cálcio na saúde da mulher, da prevenção da perda óssea à suplementação durante a gestação.</p>
+                  <a class="expert-card__link" href="os-cal.html">Ver publicações →</a>
+                </div>
+              </li>
+
+            </ul>
+          </div>
+
+          <button class="carousel-btn carousel-btn--next" type="button" data-carousel-next aria-label="Próximo especialista">
+            <span class="i i-chevron-right"></span>
+          </button>
+
+          <div class="carousel-dots" data-carousel-dots></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== Conteúdos em destaque ===================== -->
+    <section class="featured" aria-labelledby="featured-title">
+      <div class="container">
+        <h2 class="section-title" id="featured-title">Conteúdos em destaque</h2>
+
+        <div class="featured__grid">
+
+          <article class="content-card">
+            <div class="content-card__media">
+              <img src="static/img/home/destaque-anti-histaminicos.webp" width="425" height="186" alt="" loading="lazy">
+              <span class="content-card__badge content-card__badge--allegra">Documento científico</span>
+            </div>
+            <div class="content-card__body">
+              <h3 class="content-card__title">Anti-histamínicos em doenças alérgicas: eventos adversos</h3>
+              <p class="content-card__source">Sociedade Brasileira de Pediatria<br>Departamento Científico de Alergia<br>Nº 205, 13 de Maio de 2025</p>
+              <p class="content-card__excerpt">Há dezenas de formulações de anti-histamínicos (AH) anti-H1 disponíveis no mundo para o tratamento da rinite alérgica (RA) e urticária crônica (UC), incluindo formulações sistêmicas e tópicas.</p>
+              <!-- TODO: vincular ao arquivo ID14 -->
+              <a class="content-card__more" href="#" data-doc="ID14">Ver mais →<span class="visually-hidden"> sobre anti-histamínicos em doenças alérgicas</span></a>
+            </div>
+          </article>
+
+          <article class="content-card">
+            <div class="content-card__media">
+              <img src="static/img/home/destaque-probioticos.webp" width="425" height="186" alt="" loading="lazy">
+              <span class="content-card__badge content-card__badge--entero">Guia prático de atualização</span>
+            </div>
+            <div class="content-card__body">
+              <h3 class="content-card__title">Uso de probióticos em crianças com infecções comuns da infância e na prevenção de alergias</h3>
+              <p class="content-card__source">Sociedade Brasileira de Pediatria<br>Departamento Científico de Alergia<br>Nº 213, 13 de Junho de 2025</p>
+              <p class="content-card__excerpt">O microbioma humano desempenha um papel essencial na proteção do hospedeiro e no desenvolvimento de um sistema imunológico equilibrado.</p>
+              <!-- TODO: vincular ao arquivo ID15 -->
+              <a class="content-card__more" href="#" data-doc="ID15">Ver mais →<span class="visually-hidden"> sobre uso de probióticos em crianças</span></a>
+            </div>
+          </article>
+
+          <article class="content-card">
+            <div class="content-card__media">
+              <img src="static/img/home/destaque-febre-aguda.webp" width="425" height="186" alt="" loading="lazy">
+              <span class="content-card__badge content-card__badge--novalgina">Documento científico</span>
+            </div>
+            <div class="content-card__body">
+              <h3 class="content-card__title">Abordagem da febre aguda em pediatria e reflexões sobre a febre nas arboviroses</h3>
+              <p class="content-card__source">Sociedade Brasileira de Pediatria<br>Departamentos Científicos de Pediatria Ambulatorial e Infectologia<br>Nº 206, 15 de Maio de 2025</p>
+              <p class="content-card__excerpt">A febre representa uma das queixas mais frequentes nos atendimentos pediátricos, tanto em consultas ambulatoriais como em atendimentos de emergência.</p>
+              <!-- TODO: vincular ao arquivo ID13 -->
+              <a class="content-card__more" href="#" data-doc="ID13">Ver mais →<span class="visually-hidden"> sobre abordagem da febre aguda em pediatria</span></a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== Números ===================== -->
+    <section class="stats" aria-label="O hub em números">
+      <div class="container">
+        <ul class="stats__box">
+          <li class="stat">
+            <span class="i stat__icon i-stat-conteudos"></span>
+            <div class="stat__body">
+              <p class="stat__value">14</p>
+              <p class="stat__label">conteúdos científicos</p>
+              <p class="stat__desc">Artigos, videos, infográficos e casos clínicos.</p>
+            </div>
+          </li>
+          <li class="stat">
+            <span class="i stat__icon i-stat-especialistas"></span>
+            <div class="stat__body">
+              <p class="stat__value">+4</p>
+              <p class="stat__label">especialistas</p>
+              <p class="stat__desc">Nacionais</p>
+            </div>
+          </li>
+          <li class="stat">
+            <span class="i stat__icon i-stat-areas"></span>
+            <div class="stat__body">
+              <p class="stat__value">4</p>
+              <p class="stat__label">áreas terapêuticas</p>
+              <p class="stat__desc">Alergia, Saúde Digestiva, Saúde Óssea e Dor e Febre.</p>
+            </div>
+          </li>
+          <li class="stat">
+            <span class="i stat__icon i-stat-atualizacao"></span>
+            <div class="stat__body">
+              <p class="stat__value stat__value--text">Atualização</p>
+              <p class="stat__label">contínua</p>
+              <p class="stat__desc">Conteúdo novo toda semana.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================== Banner Allegra ===================== -->
+    <section class="promo" aria-label="Destaque Allegra">
+      <div class="container">
+        <div class="promo__box">
+          <img class="promo__product" src="static/img/home/banner-allegra-produto.webp" width="105" height="174"
+               alt="Embalagem de Allegra Pediátrico 150 mL com copinho" loading="lazy">
+          <p class="promo__title"><strong>Atualização SBP:</strong> Fexofenadina não impacta funções cognitivas e desempenho psicomotor.<sup>1</sup></p>
+          <a class="promo__cta" href="allegra.html">Saiba mais</a>
+          <p class="promo__legal"><strong>ALLEGRA®</strong> (cloridrato de fexofenadina). Indicações: é um anti-histamínico destinado ao tratamento das manifestações alérgicas, tais como sintomas de rinite alérgica (incluindo espirros, obstrução nasal, prurido, coriza, conjuntivite alérgica) e urticária (erupção avermelhada e pruriginosa na pele).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== Dizeres legais ===================== -->
+    <section class="legal" aria-label="Dizeres legais">
+      <div class="container">
+        <details class="legal__box" open>
+          <summary class="legal__summary">
+            <h2 class="legal__title">Dizeres legais</h2>
+            <span class="i i-chevron-up" aria-hidden="true"></span>
+          </summary>
+          <div class="legal__body">
+            <p><strong>ALLEGRA® (cloridrato de fexofenadina).</strong> Indicações: é um anti-histamínico destinado ao tratamento das manifestações alérgicas, tais como sintomas de rinite alérgica (incluindo espirros, obstrução nasal, prurido, coriza, conjuntivite alérgica) e urticária (erupção avermelhada e pruriginosa na pele). MS: 1.8620.0010. O USO DO MEDICAMENTO PODE TRAZER ALGUNS RISCOS. Leia atentamente a bula. SE PERSISTIREM OS SINTOMAS, O MÉDICO DEVERÁ SER CONSULTADO.</p>
+            <p><strong>ENTEROGERMINA® – Não contém glúten.</strong></p>
+            <p><strong>NOVALGINA® (dipirona monoidratada).</strong> Indicação: analgésico e antitérmico. MS 1.8620.0018. O USO DO MEDICAMENTO PODE TRAZER ALGUNS RISCOS. Leia atentamente a bula. SE PERSISTIREM OS SINTOMAS, O MÉDICO DEVERÁ SER CONSULTADO.</p>
+            <p><strong>OS-CAL® Cálcio – Contém glúten.</strong></p>
+            <p><strong>TARGIFOR® Te ajuda! Stress – Não contém glúten.</strong></p>
+            <p><strong>DULCOLAX® (bisacodil).</strong> Indicação: casos de constipação intestinal, no preparo para procedimentos diagnósticos, no pré e pós-operatório e em condições que exigem uma evacuação facilitada. MS 1.8620.0020.</p>
+            <p><strong>NOVALGINA®</strong> (dipirona monoidratada). Indicação: analgésico e antitérmico. MS 1.8620.0018. O USO DO MEDICAMENTO PODE TRAZER ALGUNS RISCOS. Leia atentamente a bula. SE PERSISTIREM OS SINTOMAS, O MÉDICO DEVERÁ SER CONSULTADO. MAT-BR-XXXXX-1.0-XX/2026.</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== Footer ===================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <a class="site-footer__logo" href="index.html" aria-label="Opella — página inicial">
+        <span class="i i-logo"></span>
+      </a>
+      <nav class="site-footer__links" aria-label="Institucional">
+        <a href="politica-de-privacidade.html">Política de Privacidade</a>
+        <a href="termos-de-uso.html">Termos de Uso</a>
+      </nav>
+      <p class="site-footer__disclaimer">Desenvolvido pela Medscape com o apoio da Opella. As opiniões e os pontos de vista expressos não representam necessariamente a visão da Medscape, de seus editores, consultores ou anunciantes.</p>
+    </div>
+  </footer>
+
+  <script src="static/js/main.js" defer></script>
+  <script src="static/js/carousel.js" defer></script>
+</body>
+</html>
