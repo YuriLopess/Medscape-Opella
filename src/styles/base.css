@@ -213,3 +213,8 @@ button {
     scroll-behavior: auto !important;
   }
 }
+
+/* impede a quebra de linha (ex.: palavras com hífen como "pré-natal") */
+.nobr {
+  white-space: nowrap;
+}

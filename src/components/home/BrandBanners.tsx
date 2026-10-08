@@ -67,7 +67,7 @@ const slides: Slide[] = [
           alt="Embalagem de Os-Cal Cálcio 500 mg" loading="lazy" />
         </div>
         <p className="promo__title">
-          Nova diretriz do MS: cálcio obrigatório no pré-natal.<sup>1</sup>
+          Nova diretriz do MS: cálcio obrigatório no <span className="nobr">pré-natal.</span><sup>1</sup>
           <br />
           <span className="promo__title-sub">
             <span className="promo__highlight">Veja as evidências</span> por trás da recomendação.
