@@ -680,9 +680,12 @@
   padding-top: 20px;
 }
 
+/* cantos arredondados como os demais cards (o arredondamento fica no viewport,
+   então os cantos se mantêm durante a troca de slide) */
 .promo__viewport {
   overflow: hidden;
   margin-left: 1px;
+  border-radius: var(--radius-xl);
   touch-action: pan-y;
 }
 
@@ -928,9 +931,6 @@
 
 /* ---- tablet: embalagem numa coluna à esquerda, texto + botão + legal à direita ---- */
 @media (max-width: 1100px) {
-  /* cantos arredondados como os demais cards (o arredondamento fica no viewport,
-     então os cantos se mantêm durante a troca de slide) */
-  .promo__viewport { border-radius: var(--radius-xl); }
   .promo__box,
   .promo__box--enterogermina,
   .promo__box--oscal,
