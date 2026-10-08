@@ -1,0 +1,199 @@
+/* ==========================================================================
+   Movimento — efeitos de hover nos blocos e entrada das páginas
+   - Hovers só em aparelhos com mouse (hover: hover): no toque não ficam "presos"
+   - Tudo desligado quando o sistema pede menos movimento
+   ========================================================================== */
+
+:root {
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-soft: cubic-bezier(0.25, 0.8, 0.25, 1);
+  --hover-dur: 0.38s;
+  --zoom-dur: 0.7s;
+  --lift: -6px;
+  --shadow-soft: 0 2px 6px -2px rgba(4, 43, 10, 0.08);
+  --shadow-hover: 0 22px 40px -22px rgba(4, 43, 10, 0.45), 0 6px 14px -8px rgba(4, 43, 10, 0.18);
+}
+
+/* ---------- Entrada das páginas ---------- */
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* cada bloco do conteúdo entra em sequência (cascata curta) */
+  .page-enter > * {
+    animation: page-enter 0.6s var(--ease-out) both;
+  }
+  .page-enter > :nth-child(2) { animation-delay: 70ms; }
+  .page-enter > :nth-child(3) { animation-delay: 140ms; }
+  .page-enter > :nth-child(n + 4) { animation-delay: 200ms; }
+}
+
+/* ---------- Hovers ---------- */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+
+  /* ---- base: cards que "levantam" ---- */
+  .area-card,
+  .expert-card,
+  .content-card,
+  .more-card,
+  .aside-item,
+  .stat,
+  .p-feature,
+  .p-video,
+  .p-areas,
+  .areas__box,
+  .stats__box {
+    transition:
+      transform var(--hover-dur) var(--ease-soft),
+      box-shadow var(--hover-dur) var(--ease-soft),
+      border-color var(--hover-dur) var(--ease-soft),
+      background-color var(--hover-dur) var(--ease-soft);
+  }
+
+  .area-card:hover,
+  .expert-card:hover,
+  .content-card:hover,
+  .more-card:hover {
+    transform: translateY(var(--lift));
+    box-shadow: var(--shadow-hover);
+  }
+
+  /* blocos grandes: levantam menos */
+  .p-feature:hover,
+  .p-video:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  /* ---- imagens que aproximam devagar dentro do card ---- */
+  .area-card__head img,
+  .expert-card__photo img,
+  .content-card__media img,
+  .more-card__media img,
+  .p-feature__media img,
+  .p-video__media img,
+  .area-tile img,
+  .aside-tile img,
+  .doc-body__media img {
+    transition: transform var(--zoom-dur) var(--ease-out), filter var(--zoom-dur) var(--ease-out);
+  }
+
+  .area-card:hover .area-card__head img,
+  .expert-card:hover .expert-card__photo img,
+  .content-card:hover .content-card__media img,
+  .more-card:hover .more-card__media img,
+  .p-feature:hover .p-feature__media img,
+  .p-video:hover .p-video__media img,
+  .area-tile:hover img,
+  .aside-tile:hover img {
+    transform: scale(1.06);
+  }
+
+  .doc-body__media { overflow: hidden; border-radius: var(--radius-xl); }
+  .doc-body__media:hover img { transform: scale(1.03); }
+
+  /* ---- áreas terapêuticas (home): linha de link com fundo suave ---- */
+  .area-card__link {
+    border-radius: 10px;
+    transition: background-color var(--hover-dur) var(--ease-soft), color var(--hover-dur) var(--ease-soft);
+  }
+  .area-card__link:hover { background: var(--brand-soft); }
+
+  /* ---- especialistas: nome muda de cor ---- */
+  .expert-card__name { transition: color var(--hover-dur) var(--ease-soft); }
+  .expert-card:hover .expert-card__name { color: var(--link-blue); }
+
+  /* ---- destaques e conteúdo adicional: seta do link avança ---- */
+  .content-card__more,
+  .more-card__link,
+  .aside-item__link,
+  .expert-card__link {
+    transition: transform var(--hover-dur) var(--ease-soft), color var(--hover-dur) var(--ease-soft);
+  }
+  .content-card:hover .content-card__more,
+  .more-card:hover .more-card__link,
+  .aside-item:hover .aside-item__link,
+  .expert-card:hover .expert-card__link {
+    transform: translateX(4px);
+  }
+
+  /* ---- números: o ícone sobe e escurece ---- */
+  .stat__icon { transition: transform 0.5s var(--ease-out), color var(--hover-dur) var(--ease-soft); }
+  .stat:hover .stat__icon { transform: translateY(-4px) rotate(-4deg); color: var(--green-900); }
+
+  /* ---- caixas de seção: borda e sombra discretas ---- */
+  .areas__box:hover,
+  .stats__box:hover {
+    border-color: #d9cfc4;
+    box-shadow: var(--shadow-soft);
+  }
+
+  /* ---- banners: embalagem cresce de leve ---- */
+  .promo__product { transition: transform 0.6s var(--ease-out); }
+  .promo__box:hover .promo__product { transform: scale(1.05) rotate(-1.5deg); }
+  .promo__cta { transition: filter 0.25s ease, transform 0.25s var(--ease-soft), box-shadow 0.25s ease; }
+  .promo__cta:hover { box-shadow: 0 10px 22px -10px rgba(0, 0, 0, 0.45); }
+
+  /* ---- botões das marcas ---- */
+  .btn-brand { transition: filter 0.25s ease, transform 0.25s var(--ease-soft), box-shadow 0.25s ease; }
+  .btn-brand:hover { transform: translateY(-2px); box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.45); }
+
+  /* ---- produto: embalagem flutua ---- */
+  .p-product__media img { transition: transform 0.7s var(--ease-out); }
+  .p-product__media:hover img { transform: translateY(-6px) scale(1.02); }
+
+  /* ---- outras áreas (tiles) ---- */
+  .area-tile { transition: transform var(--hover-dur) var(--ease-soft), box-shadow var(--hover-dur) var(--ease-soft); }
+  .area-tile:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+  .p-areas:hover { box-shadow: var(--shadow-soft); }
+
+  /* ---- barra lateral do documento ---- */
+  .aside-item { border-radius: var(--radius-md); }
+  .aside-item img { transition: transform var(--hover-dur) var(--ease-soft), box-shadow var(--hover-dur) var(--ease-soft); }
+  .aside-item:hover img { transform: translateY(-3px); box-shadow: 0 12px 20px -12px rgba(0, 0, 0, 0.4); }
+  .aside-box { transition: box-shadow var(--hover-dur) var(--ease-soft), border-color var(--hover-dur) var(--ease-soft); }
+  .aside-box:hover { box-shadow: var(--shadow-soft); }
+  .aside-tile { transition: transform var(--hover-dur) var(--ease-soft), box-shadow var(--hover-dur) var(--ease-soft); }
+  .aside-tile:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+
+  /* ---- menu: sublinhado que cresce do centro ---- */
+  .main-nav__link { position: relative; }
+  .main-nav__link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    transform: scaleX(0);
+    transition: transform 0.35s var(--ease-out);
+  }
+  .main-nav__link:hover::after { transform: scaleX(1); }
+
+  /* ---- busca ---- */
+  .search__input { transition: border-color 0.25s ease, box-shadow 0.25s ease; }
+  .search__input:hover { border-color: var(--sage-600); }
+  .search__submit { transition: transform 0.3s var(--ease-soft); }
+  .search__submit:hover { transform: translateY(-50%) scale(1.12); }
+
+  /* ---- controles dos carrosséis ---- */
+  .carousel-dots button { transition: background-color 0.25s ease, transform 0.25s var(--ease-soft); }
+  .carousel-dots button:hover { transform: scale(1.25); }
+  .carousel-btn { transition: background-color 0.25s ease, transform 0.25s var(--ease-soft); }
+  .carousel-btn--prev:hover { transform: translateX(-3px); }
+  .carousel-btn--next:hover { transform: translateX(3px); }
+
+  /* ---- dizeres legais ---- */
+  .legal__summary .i-chevron-up { transition: transform 0.3s var(--ease-soft), color 0.25s ease; }
+  .legal__summary:hover .i-chevron-up { color: var(--cream); }
+
+  /* ---- rodapé: logo ---- */
+  .site-footer__logo,
+  .site-header__logo { transition: opacity 0.25s ease; }
+  .site-footer__logo:hover,
+  .site-header__logo:hover { opacity: 0.75; }
+}
