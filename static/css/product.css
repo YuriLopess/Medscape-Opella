@@ -591,6 +591,10 @@
   text-align: justify;
 }
 
+.p-regulatory__text + .p-regulatory__text {
+  margin-top: 20px;
+}
+
 .p-regulatory__text strong {
   font-weight: 900;
 }

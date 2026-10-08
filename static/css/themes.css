@@ -156,6 +156,81 @@
 .theme-oscal .doc-callout { margin-top: 28px; }
 .theme-oscal .p-regulatory { min-height: 226px; margin: 63px 0 51px; }
 
+/* ---------- Novalgina ---------- */
+.theme-novalgina {
+  --nav-active: #0e6708;
+  --footer-bg: #f6f8ed;
+
+  --brand-font: var(--font-allegra);
+  --brand-bg: #0e6707;
+  --brand-ink: #0e6708;
+  --brand-accent: #0e6708;
+  --brand-highlight: #0e6708;
+  --brand-card-border: #f8efe7;
+  --brand-divider: #e5ded7;
+  --brand-button: #a2df58;
+  --brand-rule: linear-gradient(90deg, #a6d6ea 0%, #8dd174 100%);
+
+  --hero-text-start: 53.3%;
+  --hero-art-mobile: 8% center;
+
+  --feature-label: #ffffff;
+
+  --video-bg: #f6f8ed;
+  --video-ink: #0e6708;
+  --video-label: #0e6708;
+  --video-label-weight: 400;
+  --video-meta: #0e6708;
+  --video-meta-weight: 400;
+
+  --more-bg: #109f00;
+  --more-heading: #ffffff;
+  --more-label: #0e6708;
+  --more-title: #0e6708;
+  --more-link: #0e6708;
+  --more-media-ratio: 414.6 / 138.5;
+  --more-card-min-h: 263px;
+
+  --areas-bg: #f6f8ed;
+  --entero-tile-ink: #007ec6;
+
+  --reg-bg: #0e6707;
+  --reg-title: #ffffff;
+  --reg-rule: transparent;
+
+  --doc-text: #0e6708;
+  --doc-heading: #0e6708;
+  --callout-bg: #f6f8ed;
+}
+
+/* botões verde-claros com texto verde escuro */
+.theme-novalgina .btn-brand { color: #0e6708; }
+.theme-novalgina .p-video__avatar { background: #0e6708; }
+.theme-novalgina .p-hero__title { font-size: clamp(22px, 2.65vw, 38px); line-height: 1.21; }
+.theme-novalgina .p-hero__title strong { font-weight: 900; }
+.theme-novalgina .p-product { --product-img-w: 547px; --product-img-ml: 12px; }
+
+/* espaçamentos em que o layout do Novalgina difere do modelo */
+.theme-novalgina .p-hero__title { padding-bottom: 34px; }
+.theme-novalgina .p-product__title { max-width: 680px; }
+.theme-novalgina .p-product { --product-text-offset: 73px; }
+.theme-novalgina .p-product__text { margin-top: 30px; }
+.theme-novalgina .p-areas { --areas-mt: 89px; }
+.theme-novalgina .p-refs { margin-top: 54px; }
+.theme-novalgina .p-regulatory { min-height: 307px; margin-top: 45px; }
+.theme-novalgina .p-feature .btn-brand { margin-top: 48px; }
+.theme-novalgina .p-video__expert { margin-top: 20px; }
+.theme-novalgina .p-video__text { margin-top: 29px; }
+.theme-novalgina .p-video .btn-brand { margin-top: 41px; }
+.theme-novalgina .doc-banner { padding-right: 80px; }
+.theme-novalgina .aside-item__title { margin-top: 7px; }
+.theme-novalgina .aside-list { gap: 44px; }
+.theme-novalgina .aside-box:first-child { padding-bottom: 47px; }
+.theme-novalgina .doc-content { --doc-measure: 960px; margin-top: 66px; }
+.theme-novalgina .doc-content h2 { margin-top: 23px; }
+.theme-novalgina .doc-content h2 + p { margin-top: 30px; }
+.theme-novalgina .doc-callout { margin-top: 28px; }
+
 /* espaçamentos em que o layout do Enterogermina difere do modelo */
 .theme-enterogermina .p-feature__body { padding-bottom: 47px; }
 .theme-enterogermina .p-feature .btn-brand { margin-top: 42px; }

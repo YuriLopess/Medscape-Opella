@@ -10,6 +10,7 @@ index.html                    Home
 allegra.html                  Página de produto: Allegra (alergia)
 enterogermina.html            Página de produto: Enterogermina (saúde digestiva)
 os-cal.html                   Página de produto: Os-Cal (saúde óssea da mulher)
+novalgina.html                Página de produto: Novalgina (dor e febre)
 <marca>-<documento>.html      Páginas de documento de cada área (ex.: allegra-anti-histaminicos-em-doencas-alergicas)
 politica-de-privacidade.html  Medscape Network Privacy Policy
 termos-de-uso.html            Medscape Network Terms of Use
@@ -18,7 +19,7 @@ static/
     base.css                  Fontes, tokens de cor/layout, reset, utilitários, títulos de seção
     icons.css                 GERADO — SVGs embutidos (não editar; ver tools/build_icons.py)
     components.css            Comum a todas as páginas: header, menu, busca, dizeres legais, footer
-    themes.css                Cores, fonte e ajustes finos de cada marca (.theme-allegra, .theme-enterogermina, .theme-oscal, …)
+    themes.css                Cores, fonte e ajustes finos de cada marca (.theme-allegra, .theme-enterogermina, .theme-oscal, .theme-novalgina)
     product.css               Modelo de página de produto (banner, destaque, vídeo, conteúdo adicional…)
     document.css              Modelo de página de documento (banner com breadcrumb, texto, barra lateral)
     home.css                  Exclusivo da home
@@ -74,15 +75,19 @@ Até lá a Opella Sans é usada no lugar (`--font-allegra` em `base.css`). Ao re
 ## Pendências
 
 - Links para documentos ainda não entregues apontam para `#`. Cada um tem `data-doc="IDxx"` e um
-  comentário `TODO` com o arquivo que a revisão pediu para vincular (ID01, 02, 03, 07, 08, 09, 10,
-  11, 12, 13). ID14 e ID15 já têm página.
+  comentário `TODO` com o arquivo que a revisão pediu para vincular (ID01 a ID12).
+  ID13, ID14 e ID15 já têm página.
 - Vídeos: "Ver vídeo" (Allegra) e o conteúdo ID08 precisam do arquivo/URL do vídeo.
-- A imagem do card "Allegra D®" é uma prévia da Shutterstock com marca d'água
-  (stock-photo-…-2715886517): trocar pela versão licenciada.
+- Imagens que são prévias da Shutterstock com marca d'água — trocar pela versão licenciada:
+  card "Allegra D®" (stock-photo-…-2715886517) e card "Febre na Pediatria" do Novalgina
+  (stock-photo-…-2537922789).
+- Novalgina: no .ai o ícone da busca é roxo (herdado do arquivo do Os-Cal); foi mantido o laranja
+  padrão da Opella.
+- Carrossel da home: o slide do Enterogermina aponta para `enterogermina.html` até o ID12 chegar.
 - Página de documento: o círculo laranja ao lado da fonte (SBP) é um espaço reservado do layout,
   provavelmente para o logo da instituição.
-- Documento ID15 (Enterogermina) e `oscal-saude-ossea-feminina.html`: o corpo é o lorem ipsum do
-  próprio layout; aguardando o texto.
+- Documentos ID13 (Novalgina), ID15 (Enterogermina) e `oscal-saude-ossea-feminina.html`: o corpo é
+  o lorem ipsum do próprio layout; aguardando o texto.
 - `oscal-saude-ossea-feminina.html` ainda não tem link de entrada: o título é o do vídeo em destaque
   do Os-Cal e a fonte aponta para o ID02. Definir de onde a página é acessada.
 - Os-Cal: o texto de "Informações Regulatórias" é lorem ipsum no layout.
