@@ -20,3 +20,76 @@
   --brand-button: linear-gradient(90deg, #ff5002 0%, #fd7109 50%, #fc8f09 100%);
   --brand-rule: linear-gradient(90deg, #fc8f09 0%, #ff5502 50%, #611070 100%);
 }
+
+/* ---------- Enterogermina ---------- */
+.theme-enterogermina {
+  --nav-active: #4c789b;
+  --footer-bg: #dceeeb;
+
+  --brand-font: var(--font-allegra);
+  --brand-ink: #4c789b;           /* títulos */
+  --brand-accent: #1e66c7;        /* links, botões, marcadores */
+  --brand-highlight: #4c789b;
+  --brand-card-border: #f8efe7;
+  --brand-divider: #e5ded7;
+  --brand-button: #1e66c7;
+  --brand-rule: linear-gradient(90deg, #a6d6ea 0%, #bbe0ee 100%);
+
+  --hero-bg: #d1eaf4;
+  --hero-ink: #4c789b;
+  --hero-weight: 900;
+  --hero-text-start: 53.3%;
+  --hero-art-mobile: 4% center;
+
+  --feature-bg: #dcedeb;
+  --feature-ink: #4c789b;
+  --feature-label: #4c789b;
+  --feature-meta: #666666;
+
+  --video-bg: #f6f8e5;
+  --video-ink: #4c789b;
+  --video-label: #4c789b;
+  --video-label-weight: 400;
+  --video-meta: #4c789b;
+  --video-meta-weight: 400;
+  --video-text: #666666;
+
+  --more-bg: #f9f3f7;
+  --more-label: #4c789b;
+  --more-title: #1e66c7;
+  --more-link: #1e66c7;
+  --more-media-ratio: 414.6 / 198;
+  --more-card-min-h: 334px;
+
+  --areas-bg: #ecf8de;
+
+  --reg-bg: #dceeeb;
+  --reg-ink: #4c789b;
+  --reg-title: #4c789b;
+  --reg-rule: #4b779b;
+
+  --doc-banner-bg: #d3ebf4;
+  --doc-banner-ink: #4c789b;
+  --doc-text: #666666;
+  --doc-heading: #666666;
+  --callout-bg: #def8d3;
+}
+
+/* espaçamentos em que o layout do Enterogermina difere do modelo */
+.theme-enterogermina .p-feature__body { padding-bottom: 47px; }
+.theme-enterogermina .p-feature .btn-brand { margin-top: 42px; }
+.theme-enterogermina .p-video__expert { margin-top: 35px; }
+.theme-enterogermina .p-video__text { margin-top: 23px; }
+.theme-enterogermina .p-video .btn-brand { margin-top: 29px; }
+.theme-enterogermina .p-more { margin-top: 31px; padding: 26px 0 85px; }
+.theme-enterogermina .p-more__grid { margin-top: 35px; }
+.theme-enterogermina .p-product { --product-pt: 55px; --product-text-offset: 14px; }
+.theme-enterogermina .p-areas { --areas-mt: 61px; }
+.theme-enterogermina .p-regulatory { margin-top: 52px; }
+.theme-enterogermina .p-refs { margin-top: 71px; }
+.theme-enterogermina .doc-banner { padding-right: 80px; }
+.theme-enterogermina .aside-item__title { margin-top: 7px; }
+.theme-enterogermina .doc-content { --doc-measure: 960px; margin-top: 66px; }
+.theme-enterogermina .doc-content h2 { margin-top: 23px; }
+.theme-enterogermina .doc-content h2 + p { margin-top: 30px; }
+.theme-enterogermina .doc-callout { margin-top: 28px; }

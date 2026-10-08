@@ -19,8 +19,8 @@
   padding: 64px 420px 54px 55px;
   border-radius: var(--radius-xl);
   overflow: hidden;
-  background: var(--brand-bg);
-  color: var(--white);
+  background: var(--doc-banner-bg, var(--brand-bg));
+  color: var(--doc-banner-ink, var(--white));
 }
 
 .doc-banner__art {
@@ -93,7 +93,7 @@
 
 /* ---------- Conteúdo ---------- */
 .doc-body {
-  color: var(--brand-ink);
+  color: var(--doc-text, var(--brand-ink));
   font-size: 18px;
   line-height: 24px;
 }
@@ -114,6 +114,11 @@
   font-size: 20px;
   line-height: 24px;
   font-weight: 900;
+  color: var(--brand-ink);
+}
+
+.doc-source a:hover {
+  text-decoration: underline;
 }
 
 /* círculo da fonte: espaço reservado do layout para o logo da instituição */
@@ -126,6 +131,7 @@
 
 .doc-content {
   margin-top: 49px;
+  max-width: var(--doc-measure, none);
 }
 
 .doc-content p + p,
@@ -138,6 +144,7 @@
   font-size: 24px;
   line-height: 29px;
   font-weight: 900;
+  color: var(--doc-heading, var(--brand-ink));
 }
 
 .doc-content h2 + p {
@@ -151,7 +158,7 @@
 .doc-callout {
   margin: 32px 0 37px;
   padding: 25px 40px 30px 59px;
-  background: var(--brand-soft);
+  background: var(--callout-bg, var(--brand-soft));
   font-size: 20px;
   line-height: 24px;
   font-weight: 900;
@@ -231,7 +238,7 @@
   font-size: 13.2px;
   line-height: 17.6px;
   font-weight: 900;
-  color: var(--brand-ink);
+  color: var(--more-title, var(--brand-ink));
 }
 
 .aside-item__link {
@@ -241,7 +248,7 @@
   font-size: 11.8px;
   line-height: 14px;
   font-weight: 900;
-  color: var(--brand-accent);
+  color: var(--more-link, var(--brand-accent));
 }
 
 .aside-item__link:hover {

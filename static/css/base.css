@@ -26,6 +26,22 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Opella Sans";
+  src: url("../fonts/OpellaSans-RegularItalic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Opella Sans";
+  src: url("../fonts/OpellaSans-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
   /* Marca Opella */
   --green-900: #042b0a;
