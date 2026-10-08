@@ -709,3 +709,52 @@
   .p-product__media { display: flex; justify-content: center; max-width: none; }
   .p-product__media img { width: auto; max-width: min(100%, 300px); max-height: 230px; margin: 0; }
 }
+
+/* celular: "Explore outras áreas" como lista compacta (miniatura + área + seta),
+   com os 3 itens visíveis sem rolagem lateral */
+@media (max-width: 760px) {
+  .p-areas { padding: 22px 16px 16px; }
+  .p-areas__title { padding-inline: 4px; font-size: 22px; line-height: 28px; }
+  .p-areas__list {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 16px;
+    padding: 0;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+  .p-areas__item,
+  .p-areas__item + .p-areas__item { display: block; }
+  .area-tile,
+  .area-tile--enterogermina {
+    display: grid;
+    grid-template-columns: 104px minmax(0, 1fr) auto;
+    place-items: center start;
+    column-gap: 14px;
+    width: 100%;
+    height: auto;
+    padding: 8px 16px 8px 8px;
+    background: var(--white);
+    border-radius: var(--radius-md);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+    color: var(--brand-ink);
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .area-tile img {
+    position: static;
+    width: 104px;
+    height: 62px;
+    border-radius: 10px;
+  }
+  .area-tile span { text-align: left; }
+  .area-tile::after {
+    content: "→";
+    justify-self: end;
+    font-size: 18px;
+    color: var(--brand-accent);
+    transition: transform 0.2s ease;
+  }
+  .area-tile:hover { transform: none; box-shadow: 0 6px 16px -10px rgba(0, 0, 0, 0.35); }
+  .area-tile:hover::after { transform: translateX(3px); }
+}
