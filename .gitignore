@@ -1,6 +1,7 @@
 # Dependências e build
 node_modules/
 dist/
+*.tsbuildinfo
 *.local
 
 # Pastas de origem do design (temporárias, recebidas a cada página)
