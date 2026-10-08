@@ -1,3 +1,8 @@
+# Dependências e build
+node_modules/
+dist/
+*.local
+
 # Pastas de origem do design (temporárias, recebidas a cada página)
 /Assets/
 /Opella_*/

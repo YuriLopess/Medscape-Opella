@@ -1,11 +1,11 @@
-﻿"""Extrai os assets da home a partir do arquivo Illustrator (.ai é compatível com PDF).
+"""Extrai os assets da home a partir do arquivo Illustrator (.ai é compatível com PDF).
 
 Regiões raster são renderizadas de uma cópia da prancheta sem textos, para que
 máscaras, degradês e sobreposições fiquem idênticos ao layout. Ícones e o logo
 Opella são reconstruídos como SVG a partir dos vetores.
 
 Referência para as próximas páginas: as pastas de origem são temporárias, então
-este script só roda enquanto elas existirem. Os resultados já estão em static/.
+este script só roda enquanto elas existirem. Os resultados já estão em src/assets/img e public/fonts.
 
 Uso:  python tools/extract_home_assets.py <pasta 003_Opella_Fonts extraída do zip>
 Dependências: pip install pymupdf pillow
@@ -18,9 +18,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 AI = os.path.join(ROOT, 'Opella_A_Home_Wireframe', 'Opella_Home_Wireframe.ai')
 LINKS = os.path.join(ROOT, 'Opella_A_Home_Wireframe', 'Links')
 FONTS = sys.argv[1]  # pasta de fontes extraída de Assets/Opella-Code-Brand.zip
-OUT = os.path.join(ROOT, 'static')
+OUT = os.path.join(ROOT, 'src', 'assets')
+FONTS_OUT = os.path.join(ROOT, 'public', 'fonts')
 
-for sub in ('img/home', 'img/brand', 'img/icons', 'img/experts', 'fonts'):
+for sub in ('img/home', 'img/brand', 'img/icons', 'img/experts'):
     os.makedirs(os.path.join(OUT, sub), exist_ok=True)
 
 
@@ -164,6 +165,6 @@ to_svg((1078, 2636, 1137, 2695), 'img/icons/stat-atualizacao.svg')
 # ---------- fonts ----------
 fam = os.path.join(FONTS, 'Opella Full Family_All formats', 'Opella Sans', 'WOFF2')
 for f in ('OpellaSans-Regular.woff2', 'OpellaSans-Bold.woff2', 'OpellaSans-Light.woff2'):
-    shutil.copy(os.path.join(fam, f), os.path.join(OUT, 'fonts', f))
+    shutil.copy(os.path.join(fam, f), os.path.join(FONTS_OUT, f))
 print('   fonts copied')
 

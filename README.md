@@ -1,102 +1,114 @@
 # Opella — Hub científico
 
-Site estático (HTML + CSS + JS puro, sem build). Basta abrir `index.html` no navegador
-ou servir a pasta com qualquer servidor estático (ex.: `python -m http.server`).
+Site em **React 19 + TypeScript**, com **Vite** e **React Router**.
+
+```bash
+npm install        # primeira vez
+npm run dev        # desenvolvimento em http://localhost:5173
+npm run build      # checa tipos e gera o site em dist/
+npm run preview    # serve o build de dist/ em http://localhost:4173
+```
+
+## Rotas
+
+| Rota | Página |
+|---|---|
+| `/` | Home |
+| `/allegra`, `/enterogermina`, `/os-cal`, `/novalgina` | Página de cada marca |
+| `/allegra/anti-histaminicos-em-doencas-alergicas` | Documento ID14 |
+| `/enterogermina/uso-de-probioticos-em-criancas` | Documento ID15 |
+| `/os-cal/saude-ossea-feminina` | Documento (vídeo em destaque do Os-Cal) |
+| `/novalgina/abordagem-da-febre-aguda` | Documento ID13 |
+| `/politica-de-privacidade`, `/termos-de-uso` | Textos legais |
+| qualquer outra | Página não encontrada |
+
+**Hospedagem:** como é uma SPA, o servidor precisa devolver o `index.html` para qualquer rota
+(senão um F5 em `/allegra` dá 404). Exemplos: Netlify → arquivo `public/_redirects` com
+`/* /index.html 200`; Vercel → `rewrites` para `/index.html`; Nginx → `try_files $uri /index.html`.
+O `npm run preview` já faz isso.
 
 ## Estrutura
 
 ```
-index.html                    Home
-allegra.html                  Página de produto: Allegra (alergia)
-enterogermina.html            Página de produto: Enterogermina (saúde digestiva)
-os-cal.html                   Página de produto: Os-Cal (saúde óssea da mulher)
-novalgina.html                Página de produto: Novalgina (dor e febre)
-<marca>-<documento>.html      Páginas de documento de cada área (ex.: allegra-anti-histaminicos-em-doencas-alergicas)
-politica-de-privacidade.html  Medscape Network Privacy Policy
-termos-de-uso.html            Medscape Network Terms of Use
-static/
-  css/
-    base.css                  Fontes, tokens de cor/layout, reset, utilitários, títulos de seção
-    icons.css                 GERADO — SVGs embutidos (não editar; ver tools/build_icons.py)
-    components.css            Comum a todas as páginas: header, menu, busca, dizeres legais, footer
-    themes.css                Cores, fonte e ajustes finos de cada marca (.theme-allegra, .theme-enterogermina, .theme-oscal, .theme-novalgina)
-    product.css               Modelo de página de produto (banner, destaque, vídeo, conteúdo adicional…)
-    document.css              Modelo de página de documento (banner com breadcrumb, texto, barra lateral)
-    home.css                  Exclusivo da home
-    legal.css                 Páginas legais (texto justificado, listas aninhadas de até 4 níveis)
-  js/
-    main.js                   Comportamento global (menu mobile)
-    carousel.js               Carrossel reutilizável (data-carousel)
-  fonts/                      Opella Sans (Light, Regular, Bold) em woff2
-  img/
-    brand/                    Logo Opella (SVG)
-    icons/                    Ícones SVG (fonte do icons.css)
-    experts/                  Fotos dos especialistas (reutilizáveis entre páginas)
-    areas/                    Tiles das áreas terapêuticas ("Explore outras áreas")
-    conteudos/                Imagens de cada conteúdo/documento (card, miniatura, destaque)
-    home/, allegra/, …        Imagens exclusivas de cada página
-tools/
-  sync_layout.py              Copia header e footer do index.html para todas as páginas
-  build_icons.py              Regenera static/css/icons.css a partir de static/img/{brand,icons}
-  extract_*_assets.py         Como os assets de cada página foram extraídos do .ai (referência)
+index.html                 Entrada do Vite (fontes pré-carregadas, favicon)
+public/
+  fonts/                   Opella Sans (woff2), servidas como /fonts/…
+  favicon.svg
+src/
+  main.tsx                 Monta o app com o roteador e os estilos globais
+  App.tsx                  Tabela de rotas (gerada a partir dos dados)
+  pages/                   Uma por tipo de página
+    HomePage, ProductPage, DocumentPage, LegalPage, NotFoundPage
+  components/
+    layout/                PageShell (head + tema + header/footer), Header, Footer, ScrollToTop
+    ui/                    Icon, DocLink (link de conteúdo, pendente ou não), CarouselDots
+    home/                  Seções da home (hero, áreas, especialistas, destaques, números, banners, dizeres legais)
+    product/               Seções da página de marca
+    document/              Banner com breadcrumb e barra lateral do documento
+  hooks/
+    useCarousel.ts         Carrossel circular (setas, pontos, swipe, teclado, autoplay com pausa)
+    useReducedMotion.ts
+  data/                    TODO o conteúdo do site
+    brands.ts              Marcas: nome, rota, tema, área terapêutica + rotas fixas
+    products/<marca>.tsx   Conteúdo de cada página de marca
+    documents.tsx          Conteúdo das páginas de documento
+    contents.tsx           Conteúdos de "Conteúdo adicional" (card + miniatura + link)
+    home.tsx               Conteúdo da home
+    legal/*.html           Política de Privacidade e Termos de Uso
+  lib/
+    types.ts               Tipos dos dados (ProductPageData, DocumentPageData…)
+    assets.ts              img('pasta/arquivo.webp') → URL da imagem em src/assets/img
+  styles/                  CSS global, na ordem de index.css
+    base.css               Fontes, tokens de cor/layout, reset
+    icons.css              GERADO por tools/build_icons.py
+    components.css         Header, menu, busca, dizeres legais, footer
+    themes.css             Cores e ajustes finos de cada marca (.theme-<marca>)
+    home.css / product.css / document.css / legal.css
+  assets/img/              Imagens (o Vite gera nomes com hash no build)
+tools/                     Scripts Python de apoio (ícones e extração de assets dos .ai)
 ```
 
-## Convenções
+## Como fazer…
 
-- **Header e footer** só se editam no `index.html`; depois rode `python tools/sync_layout.py`.
-  Nas outras páginas eles aparecem como stub e o script preenche:
-  ```html
-  <body class="theme-allegra" data-section="allegra.html">
-    <!-- ===================== Header ===================== -->
-    </header>
-    …
-    <!-- ===================== Footer ===================== -->
-    </footer>
-  ```
-  `data-section` define qual item do menu fica ativo (documentos apontam para a página da marca).
-- **Página de produto** = `themes.css` + `product.css` e `<body class="theme-<marca>">`.
-  **Página de documento** = `themes.css` + `document.css`. Uma marca nova só precisa de um tema
-  em `themes.css`.
-- **Cores e medidas** vêm dos tokens em `base.css` e dos temas em `themes.css`.
-- **Ícones**: salve o SVG em `static/img/icons/`, rode `python tools/build_icons.py` e use
-  `<span class="i i-nome"></span>` (a cor segue `currentColor`).
-- **Imagens**: WebP em 2x do tamanho exibido.
-- O layout de referência é desktop 1440px; abaixo disso a página se adapta (tablet e celular).
+- **Mudar um texto, imagem ou link:** edite o arquivo em `src/data/`. Os componentes não têm conteúdo.
+- **Ligar um documento que chegou:** crie a entrada em `data/documents.tsx` (a rota é criada sozinha)
+  e, nos lugares que apontam para ele, troque `{ doc: 'IDxx' }` por `{ to: '/rota', doc: 'IDxx' }`.
+  Links sem `to` ficam pendentes (`href="#"`, não navegam); busque por `doc: 'ID` para achar todos.
+- **Nova marca:** adicione em `data/brands.ts` e `lib/types.ts` (`BrandId`), crie
+  `data/products/<marca>.tsx`, registre em `data/products/index.ts` e crie o tema em `styles/themes.css`.
+- **Novo ícone:** salve o SVG em `src/assets/img/icons/`, rode `python tools/build_icons.py` e use
+  `<Icon name="..." />` (adicione o nome em `IconName`).
+- **Imagens:** WebP em 2x do tamanho exibido, em `src/assets/img/<pasta>/`, usadas com `img('<pasta>/arquivo.webp')`.
+  Um caminho errado quebra já no `npm run dev`.
+
+O layout de referência é desktop 1440px; abaixo disso as páginas se adaptam (tablet e celular).
 
 ## Fonte Nexa (pendente)
 
-As páginas do Allegra usam a família **Nexa** (Regular, Bold, Heavy), ainda não entregue.
+As páginas das marcas usam a família **Nexa** (Regular, Bold, Heavy e itálicos), ainda não entregue.
 Até lá a Opella Sans é usada no lugar (`--font-allegra` em `base.css`). Ao receber os arquivos:
 
-1. coloque os `.woff2` em `static/fonts/` (ex.: `Nexa-Regular.woff2`, `Nexa-Bold.woff2`, `Nexa-Heavy.woff2`);
-2. declare os `@font-face` em `base.css` com `font-family: "Nexa"` e pesos 400, 700 e 900;
-3. recalibre os espaçamentos das páginas do Allegra (as quebras de linha mudam com a fonte).
+1. coloque os `.woff2` em `public/fonts/` (ex.: `Nexa-Regular.woff2`, `Nexa-Bold.woff2`, `Nexa-Heavy.woff2`);
+2. declare os `@font-face` em `styles/base.css` com `font-family: "Nexa"` e pesos 400, 700 e 900;
+3. recalibre os espaçamentos das páginas das marcas (as quebras de linha mudam com a fonte).
 
-## Pendências
+## Pendências de conteúdo
 
-- Links para documentos ainda não entregues apontam para `#`. Cada um tem `data-doc="IDxx"` e um
-  comentário `TODO` com o arquivo que a revisão pediu para vincular (ID01 a ID12).
-  ID13, ID14 e ID15 já têm página.
-- Vídeos: "Ver vídeo" (Allegra) e o conteúdo ID08 precisam do arquivo/URL do vídeo.
-- Imagens que são prévias da Shutterstock com marca d'água — trocar pela versão licenciada:
-  card "Allegra D®" (stock-photo-…-2715886517) e card "Febre na Pediatria" do Novalgina
-  (stock-photo-…-2537922789).
-- Novalgina: no .ai o ícone da busca é roxo (herdado do arquivo do Os-Cal); foi mantido o laranja
-  padrão da Opella.
-- Carrossel da home: o slide do Enterogermina aponta para `enterogermina.html` até o ID12 chegar.
-- Página de documento: o círculo laranja ao lado da fonte (SBP) é um espaço reservado do layout,
-  provavelmente para o logo da instituição.
-- Documentos ID13 (Novalgina), ID15 (Enterogermina) e `oscal-saude-ossea-feminina.html`: o corpo é
-  o lorem ipsum do próprio layout; aguardando o texto.
-- `oscal-saude-ossea-feminina.html` ainda não tem link de entrada: o título é o do vídeo em destaque
-  do Os-Cal e a fonte aponta para o ID02. Definir de onde a página é acessada.
-- Os-Cal: o texto de "Informações Regulatórias" é lorem ipsum no layout.
+- Links para documentos ainda não entregues (ID01 a ID12) ficam pendentes; ID13, ID14 e ID15 já têm página.
+- Vídeos: nenhum "Ver vídeo" tem arquivo/URL ainda (o conteúdo ID08 também tem vídeo).
+- Corpo em lorem ipsum (do próprio layout): documentos ID13, ID15 e `/os-cal/saude-ossea-feminina`;
+  "Informações Regulatórias" do Os-Cal.
+- `/os-cal/saude-ossea-feminina` ainda não tem link de entrada: definir de onde é acessada.
+- Prévias da Shutterstock com marca d'água — trocar pela versão licenciada: card "Allegra D®"
+  (stock-photo-…-2715886517) e card "Febre na Pediatria" (stock-photo-…-2537922789).
 - Os-Cal: no layout o rótulo "DOCUMENTO CIENTÍFICO" do destaque sai azul sobre azul (ilegível);
-  foi usado um lilás claro (`--feature-label` em themes.css).
-- A busca do header ainda não tem destino (`action="#"`).
+  usado um lilás claro (`--feature-label` em themes.css).
+- Novalgina: no .ai o ícone da busca é roxo (herdado do Os-Cal); mantido o laranja da Opella.
+- Banner do Enterogermina na home aponta para `/enterogermina` até o ID12 chegar.
+- A busca do header ainda não tem destino.
 
 ## Arquivos de origem (temporários)
 
-`Assets/`, `Opella_*/` e o PDF de revisão ficam fora do git e podem ser apagados: tudo o que o
-site usa já está em `static/`. **Não** coloque arquivos do site em `Assets/`: no Windows, `assets` e
-`Assets` são a mesma pasta.
+`Assets/`, `Opella_*/` e o PDF de revisão ficam fora do git e podem ser apagados: tudo o que o site
+usa já está em `src/` e `public/`. Os scripts `tools/extract_*.py` só rodam enquanto essas pastas
+existirem. **Não** coloque arquivos do site em `Assets/`: no Windows, `assets` e `Assets` são a mesma pasta.

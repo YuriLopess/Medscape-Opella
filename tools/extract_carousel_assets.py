@@ -1,8 +1,8 @@
 """Extrai os slides do carrossel da home a partir de "Opella G - Carrusel.ai".
 
 Cada prancheta (1330x200) vira: fundo sem textos, sem botão e sem a embalagem
-(static/img/home/banner-<marca>-bg.webp) + embalagem em PNG transparente da pasta Links
-(static/img/home/banner-<marca>-produto.webp). O slide do Allegra já existia (extraído da home).
+(src/assets/img/home/banner-<marca>-bg.webp) + embalagem em PNG transparente da pasta Links
+(src/assets/img/home/banner-<marca>-produto.webp). O slide do Allegra já existia (extraído da home).
 
 Uso:  python tools/extract_carousel_assets.py
 Dependências: pip install pymupdf pillow
@@ -14,7 +14,7 @@ from PIL import Image
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, 'Opella_G_Carrusel')
 AI = os.path.join(SRC, 'Opella G - Carrusel.ai')
-OUT = os.path.join(ROOT, 'static', 'img', 'home')
+OUT = os.path.join(ROOT, 'src', 'assets', 'img', 'home')
 
 # prancheta: (marca, retângulo do botão, arquivo da embalagem, largura exibida da embalagem)
 SLIDES = {

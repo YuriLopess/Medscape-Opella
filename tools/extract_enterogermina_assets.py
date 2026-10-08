@@ -13,7 +13,7 @@ from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 AI = os.path.join(ROOT, 'Opella_C_Enterogermina', 'Opella C - Enterogermina.ai')
-OUT = os.path.join(ROOT, 'static', 'img')
+OUT = os.path.join(ROOT, 'src', 'assets', 'img')
 
 
 def textless(n):

@@ -1,0 +1,9 @@
+/* Ordem importa: tokens → ícones → componentes comuns → temas → modelos de página */
+@import "./base.css";
+@import "./icons.css";
+@import "./components.css";
+@import "./themes.css";
+@import "./home.css";
+@import "./product.css";
+@import "./document.css";
+@import "./legal.css";

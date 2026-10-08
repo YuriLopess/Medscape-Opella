@@ -1,4 +1,4 @@
-﻿"""Gera static/css/icons.css com os SVGs de static/img/icons e static/img/brand
+"""Gera src/styles/icons.css com os SVGs de src/assets/img/icons e src/assets/img/brand
 embutidos como data-URI (funciona inclusive abrindo o HTML direto do disco).
 
 Uso:  python tools/build_icons.py
@@ -9,8 +9,8 @@ import re
 import urllib.parse
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-SOURCES = [ROOT / 'static/img/brand', ROOT / 'static/img/icons']
-OUT = ROOT / 'static/css/icons.css'
+SOURCES = [ROOT / 'src/assets/img/brand', ROOT / 'src/assets/img/icons']
+OUT = ROOT / 'src/styles/icons.css'
 
 
 def data_uri(svg: str) -> str:

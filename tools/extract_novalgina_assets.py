@@ -2,7 +2,7 @@
 
 Prancheta 0 = novalgina.html (landing) · prancheta 1 = página de documento ID13
 "Abordagem da Febre Aguda em Pediatria e Reflexões sobre a febre nas arboviroses".
-Tiles de Allegra, Enterogermina e Os-Cal já existem em static/img/areas.
+Tiles de Allegra, Enterogermina e Os-Cal já existem em src/assets/img/areas.
 
 Uso:  python tools/extract_novalgina_assets.py
 Dependências: pip install pymupdf pillow
@@ -13,7 +13,7 @@ from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 AI = os.path.join(ROOT, 'Opella_F_Novalgina', 'Opella F - Novalgina.ai')
-OUT = os.path.join(ROOT, 'static', 'img')
+OUT = os.path.join(ROOT, 'src', 'assets', 'img')
 
 
 def textless(n):

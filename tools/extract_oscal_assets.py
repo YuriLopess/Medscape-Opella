@@ -3,7 +3,7 @@
 Prancheta 0 = os-cal.html (landing) · prancheta 1 = página de documento
 "Saúde óssea feminina: o papel da suplementação de cálcio na prática clínica".
 O banner do documento é roxo liso (só cor, sem imagem).
-Tiles de Allegra e Novalgina são os mesmos da página do Enterogermina (já em static/img/areas).
+Tiles de Allegra e Novalgina são os mesmos da página do Enterogermina (já em src/assets/img/areas).
 
 Uso:  python tools/extract_oscal_assets.py
 Dependências: pip install pymupdf pillow
@@ -14,7 +14,7 @@ from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 AI = os.path.join(ROOT, 'Opella_D_Oscal', 'Opella D - Oscal.ai')
-OUT = os.path.join(ROOT, 'static', 'img')
+OUT = os.path.join(ROOT, 'src', 'assets', 'img')
 
 
 def textless(n):
