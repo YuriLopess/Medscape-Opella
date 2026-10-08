@@ -107,8 +107,9 @@ Até lá a Opella Sans é usada no lugar (`--font-allegra` em `base.css`). Ao re
 - Banner do Enterogermina na home aponta para `/enterogermina` até o ID12 chegar.
 - A busca do header ainda não tem destino.
 
-## Arquivos de origem (temporários)
+## Arquivos de origem
 
-`Assets/`, `Opella_*/` e o PDF de revisão ficam fora do git e podem ser apagados: tudo o que o site
-usa já está em `src/` e `public/`. Os scripts `tools/extract_*.py` só rodam enquanto essas pastas
-existirem. **Não** coloque arquivos do site em `Assets/`: no Windows, `assets` e `Assets` são a mesma pasta.
+Os arquivos de design (.ai, fontes e imagens originais) foram removidos do projeto: tudo o que o
+site usa já está em `src/` e `public/`. Os scripts `tools/extract_*.py` ficam como registro de como
+cada imagem foi extraída e só rodam se as pastas `Opella_*` forem colocadas de volta na raiz.
+**Não** coloque arquivos do site em `Assets/`: no Windows, `assets` e `Assets` são a mesma pasta.

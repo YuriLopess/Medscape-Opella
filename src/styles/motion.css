@@ -7,8 +7,8 @@
 :root {
   --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
   --ease-soft: cubic-bezier(0.25, 0.8, 0.25, 1);
-  --hover-dur: 0.38s;
-  --zoom-dur: 0.7s;
+  --hover-dur: 0.6s;
+  --zoom-dur: 1.2s;
   --lift: -6px;
   --shadow-soft: 0 2px 6px -2px rgba(4, 43, 10, 0.08);
   --shadow-hover: 0 22px 40px -22px rgba(4, 43, 10, 0.45), 0 6px 14px -8px rgba(4, 43, 10, 0.18);
@@ -16,18 +16,18 @@
 
 /* ---------- Entrada das páginas ---------- */
 @keyframes page-enter {
-  from { opacity: 0; transform: translateY(16px); }
+  from { opacity: 0; transform: translateY(28px); }
   to { opacity: 1; transform: none; }
 }
 
 @media (prefers-reduced-motion: no-preference) {
   /* cada bloco do conteúdo entra em sequência (cascata curta) */
   .page-enter > * {
-    animation: page-enter 0.6s var(--ease-out) both;
+    animation: page-enter 1.1s var(--ease-out) both;
   }
-  .page-enter > :nth-child(2) { animation-delay: 70ms; }
-  .page-enter > :nth-child(3) { animation-delay: 140ms; }
-  .page-enter > :nth-child(n + 4) { animation-delay: 200ms; }
+  .page-enter > :nth-child(2) { animation-delay: 140ms; }
+  .page-enter > :nth-child(3) { animation-delay: 280ms; }
+  .page-enter > :nth-child(n + 4) { animation-delay: 400ms; }
 }
 
 /* ---------- Hovers ---------- */
@@ -120,7 +120,7 @@
   }
 
   /* ---- números: o ícone sobe e escurece ---- */
-  .stat__icon { transition: transform 0.5s var(--ease-out), color var(--hover-dur) var(--ease-soft); }
+  .stat__icon { transition: transform 0.8s var(--ease-out), color var(--hover-dur) var(--ease-soft); }
   .stat:hover .stat__icon { transform: translateY(-4px) rotate(-4deg); color: var(--green-900); }
 
   /* ---- caixas de seção: borda e sombra discretas ---- */
@@ -133,15 +133,15 @@
   /* ---- banners: embalagem cresce de leve ---- */
   .promo__product { transition: transform 0.6s var(--ease-out); }
   .promo__box:hover .promo__product { transform: scale(1.05) rotate(-1.5deg); }
-  .promo__cta { transition: filter 0.25s ease, transform 0.25s var(--ease-soft), box-shadow 0.25s ease; }
+  .promo__cta { transition: filter 0.45s ease, transform 0.45s var(--ease-soft), box-shadow 0.45s ease; }
   .promo__cta:hover { box-shadow: 0 10px 22px -10px rgba(0, 0, 0, 0.45); }
 
   /* ---- botões das marcas ---- */
-  .btn-brand { transition: filter 0.25s ease, transform 0.25s var(--ease-soft), box-shadow 0.25s ease; }
+  .btn-brand { transition: filter 0.45s ease, transform 0.45s var(--ease-soft), box-shadow 0.45s ease; }
   .btn-brand:hover { transform: translateY(-2px); box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.45); }
 
   /* ---- produto: embalagem flutua ---- */
-  .p-product__media img { transition: transform 0.7s var(--ease-out); }
+  .p-product__media img { transition: transform 1s var(--ease-out); }
   .p-product__media:hover img { transform: translateY(-6px) scale(1.02); }
 
   /* ---- outras áreas (tiles) ---- */
@@ -170,30 +170,30 @@
     border-radius: 2px;
     background: currentColor;
     transform: scaleX(0);
-    transition: transform 0.35s var(--ease-out);
+    transition: transform 0.55s var(--ease-out);
   }
   .main-nav__link:hover::after { transform: scaleX(1); }
 
   /* ---- busca ---- */
-  .search__input { transition: border-color 0.25s ease, box-shadow 0.25s ease; }
+  .search__input { transition: border-color 0.45s ease, box-shadow 0.45s ease; }
   .search__input:hover { border-color: var(--sage-600); }
-  .search__submit { transition: transform 0.3s var(--ease-soft); }
+  .search__submit { transition: transform 0.8s var(--ease-soft); }
   .search__submit:hover { transform: translateY(-50%) scale(1.12); }
 
   /* ---- controles dos carrosséis ---- */
-  .carousel-dots button { transition: background-color 0.25s ease, transform 0.25s var(--ease-soft); }
+  .carousel-dots button { transition: background-color 0.45s ease, transform 0.45s var(--ease-soft); }
   .carousel-dots button:hover { transform: scale(1.25); }
-  .carousel-btn { transition: background-color 0.25s ease, transform 0.25s var(--ease-soft); }
+  .carousel-btn { transition: background-color 0.45s ease, transform 0.45s var(--ease-soft); }
   .carousel-btn--prev:hover { transform: translateX(-3px); }
   .carousel-btn--next:hover { transform: translateX(3px); }
 
   /* ---- dizeres legais ---- */
-  .legal__summary .i-chevron-up { transition: transform 0.3s var(--ease-soft), color 0.25s ease; }
+  .legal__summary .i-chevron-up { transition: transform 0.8s var(--ease-soft), color 0.45s ease; }
   .legal__summary:hover .i-chevron-up { color: var(--cream); }
 
   /* ---- rodapé: logo ---- */
   .site-footer__logo,
-  .site-header__logo { transition: opacity 0.25s ease; }
+  .site-header__logo { transition: opacity 0.45s ease; }
   .site-footer__logo:hover,
   .site-header__logo:hover { opacity: 0.75; }
 }

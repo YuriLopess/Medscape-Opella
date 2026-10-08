@@ -2,7 +2,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react
 import type { FocusEvent, KeyboardEvent, PointerEvent } from 'react';
 import { useReducedMotion } from './useReducedMotion';
 
-const DURATION = 450;
+const DURATION = 700;
 const EASING = 'cubic-bezier(.22,.61,.36,1)';
 
 interface Options {
