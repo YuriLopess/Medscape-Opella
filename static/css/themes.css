@@ -75,6 +75,87 @@
   --callout-bg: #def8d3;
 }
 
+/* ---------- Os-Cal ---------- */
+.theme-oscal {
+  --nav-active: #4c1bae;
+  --search-icon: #4b1bae;
+  --footer-bg: #f4f4f4;
+
+  --brand-font: var(--font-allegra);
+  --brand-bg: #4b1aae;
+  --brand-ink: #4c1bae;
+  --brand-accent: #4c1bae;
+  --brand-highlight: #4c1bae;
+  --brand-card-border: #f8efe7;
+  --brand-divider: #e5ded7;
+  --brand-button: #4b1bae;
+  --brand-rule: linear-gradient(90deg, #a6d6ea 0%, #bbe0ee 100%);
+
+  --hero-text-start: 53.3%;
+  --hero-art-mobile: 6% center;
+
+  --feature-bg: #596ec8;
+  /* no layout o rótulo sai em #4c789b sobre #596ec8 (ilegível); usamos um lilás claro */
+  --feature-label: #d9def5;
+
+  --video-bg: #f4f4f4;
+  --video-ink: #4c1bae;
+  --video-label: #596fc8;
+  --video-label-weight: 400;
+  --video-meta: #2c2a29;
+  --video-meta-weight: 400;
+  --video-text: #2c2a29;
+
+  --more-bg: #596ec8;
+  --more-heading: #ffffff;
+  --more-label: #596fc8;
+  --more-title: #610c6f;
+  --more-link: #4c1bae;
+  --more-media-ratio: 414.6 / 148.3;
+  --more-card-min-h: 289px;
+
+  --areas-bg: #f4f4f4;
+  --entero-tile-ink: #007ec6;
+
+  --reg-bg: #4b1aae;
+  --reg-title: #ffffff;
+  --reg-rule: transparent;
+
+  --doc-banner-bg: #4b1aae;
+  --doc-text: #2c2a29;
+  --doc-heading: #2c2a29;
+  --callout-bg: #f4f4f4;
+}
+
+.theme-oscal .p-video__name,
+.theme-oscal .p-product { color: #2c2a29; }
+.theme-oscal .p-video__avatar { background: #4b1bae; }
+.theme-oscal .p-product { --product-img-w: 401px; --product-img-ml: 100px; }
+.theme-oscal .p-more__grid--2 { gap: 42.8px; margin-top: 32px; }
+
+/* espaçamentos em que o layout do Os-Cal difere do modelo */
+.theme-oscal .p-hero__title { padding-bottom: 54px; }
+.theme-oscal .p-feature__source { margin-top: 34px; }
+.theme-oscal .p-feature .btn-brand { margin-top: 43px; }
+.theme-oscal .p-video__expert { margin-top: 21px; }
+.theme-oscal .p-video__text { margin-top: 19px; }
+.theme-oscal .p-video .btn-brand { margin-top: 15px; }
+.theme-oscal .p-video__body { padding-bottom: 27px; }
+.theme-oscal .p-more { padding-bottom: 41px; }
+.theme-oscal .p-product { --product-pt: 47px; --product-text-offset: 33px; }
+.theme-oscal .p-areas { --areas-mt: 44px; }
+.theme-oscal .p-refs { margin-top: 88px; }
+.theme-oscal .more-card__link { margin-top: 0; }
+.theme-oscal .doc-banner { padding-right: 80px; }
+.theme-oscal .aside-item__title { margin-top: 7px; }
+.theme-oscal .aside-list { gap: 46px; }
+.theme-oscal .aside-box:first-child { padding-bottom: 37px; }
+.theme-oscal .doc-content { --doc-measure: 960px; margin-top: 66px; }
+.theme-oscal .doc-content h2 { margin-top: 23px; }
+.theme-oscal .doc-content h2 + p { margin-top: 30px; }
+.theme-oscal .doc-callout { margin-top: 28px; }
+.theme-oscal .p-regulatory { min-height: 226px; margin: 63px 0 51px; }
+
 /* espaçamentos em que o layout do Enterogermina difere do modelo */
 .theme-enterogermina .p-feature__body { padding-bottom: 47px; }
 .theme-enterogermina .p-feature .btn-brand { margin-top: 42px; }

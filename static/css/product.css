@@ -77,6 +77,10 @@
   font-weight: var(--hero-weight, 400);
 }
 
+.p-hero__title strong {
+  font-weight: 900;
+}
+
 @media (max-width: 760px) {
   .p-hero { display: block; min-height: 0; }
   .p-hero__art { position: static; height: 150px; object-position: var(--hero-art-mobile, 12% center); }
@@ -274,7 +278,7 @@
   font-size: clamp(30px, 2.8vw, 40px);
   line-height: 1.2;
   font-weight: 900;
-  color: var(--brand-ink);
+  color: var(--more-heading, var(--brand-ink));
   text-align: center;
 }
 
@@ -283,6 +287,12 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 43px;
   margin: 43px 1px 0 2px;
+}
+
+/* menos de 3 cards: colunas na largura do card, centralizadas */
+.p-more__grid--2 {
+  grid-template-columns: repeat(2, minmax(0, 414.6px));
+  justify-content: center;
 }
 
 .more-card {
@@ -354,7 +364,8 @@
 }
 
 @media (max-width: 640px) {
-  .p-more__grid { grid-template-columns: minmax(0, 1fr); margin-inline: 0; }
+  .p-more__grid, .p-more__grid--2 { grid-template-columns: minmax(0, 1fr); margin-inline: 0; }
+  .more-card { min-height: 0; }
 }
 
 /* ---------- Bloco de produto ---------- */
@@ -391,12 +402,18 @@
 }
 
 .p-product__media img {
-  width: 100%;
+  width: min(var(--product-img-w, 100%), 100%);
   height: auto;
+  margin-left: var(--product-img-ml, 0);
+}
+
+.p-product__text + .p-product__text {
+  margin-top: 30px;
 }
 
 @media (max-width: 1100px) {
   .p-product { grid-template-columns: 1fr 42%; }
+  .p-product__media img { margin-inline: auto; }
   .p-product__title { font-size: 30px; line-height: 36px; }
   .p-product__text { margin-top: 24px; font-size: 20px; line-height: 27px; }
 }
@@ -405,6 +422,7 @@
   .p-product { grid-template-columns: 1fr; padding: 32px 0 0; }
   .p-product__body { margin-top: 0; }
   .p-product__media { order: -1; max-width: 420px; margin: 0 auto 16px; }
+  .p-product__media img { margin-left: 0; }
   .p-product__title { font-size: 26px; line-height: 32px; }
   .p-product__text { font-size: 18px; line-height: 25px; }
 }
@@ -459,7 +477,7 @@
   position: relative;
 }
 
-.area-tile--enterogermina { color: #215774; }
+.area-tile--enterogermina { color: var(--entero-tile-ink, #215774); }
 
 .area-tile:hover {
   transform: translateY(-2px);
@@ -536,7 +554,8 @@
   line-height: 16.8px;
 }
 
-.p-refs__list--numbered li + li {
+.p-refs__list--numbered li + li,
+.p-refs__list--compact li + li {
   margin-top: 0;
 }
 

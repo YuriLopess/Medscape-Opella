@@ -121,7 +121,7 @@
   width: 30px;
   height: 30px;
   transform: translateY(-50%);
-  color: var(--accent-orange);
+  color: var(--search-icon, var(--accent-orange));
   border-radius: 50%;
 }
 
