@@ -791,3 +791,12 @@
   .p-more__grid--2 .more-card { flex: none; min-height: 0; }
   .p-more__grid--2 .more-card__link { margin-top: 0; }
 }
+
+@media (max-width: 760px) {
+  /* referências em lista compacta: um respiro entre os itens no celular */
+  .p-refs__list--compact li + li { margin-top: 10px; }
+  /* título e texto regulatório mais próximos quando não há filete */
+  .p-regulatory__title { margin-bottom: 0; }
+  .p-regulatory__text { margin-top: 14px; }
+  .p-regulatory__text + .p-regulatory__text { margin-top: 16px; }
+}

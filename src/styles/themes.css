@@ -175,7 +175,8 @@
   --brand-rule: linear-gradient(90deg, #a6d6ea 0%, #8dd174 100%);
 
   --hero-text-start: 53.3%;
-  --hero-art-mobile: 8% center;
+  --hero-art-mobile: 6% 25%;
+  --hero-art-h-mobile: 112px;
 
   --feature-label: #ffffff;
 
