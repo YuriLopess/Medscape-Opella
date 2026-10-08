@@ -775,3 +775,19 @@
   .p-refs__list--numbered { padding-left: 18px; }
   .p-refs__list:not(.p-refs__list--numbered) { padding-left: 0; }
 }
+
+/* celular, só 2 conteúdos (Os-Cal): cards empilhados na largura toda,
+   em vez da faixa com rolagem (que centralizava e cortava os dois) */
+@media (max-width: 760px) {
+  .p-more__grid--2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    justify-content: stretch;
+    gap: 14px;
+    padding: 0 16px;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+  .p-more__grid--2 .more-card { flex: none; min-height: 0; }
+  .p-more__grid--2 .more-card__link { margin-top: 0; }
+}
