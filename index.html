@@ -318,15 +318,63 @@
       </div>
     </section>
 
-    <!-- ===================== Banner Allegra ===================== -->
-    <section class="promo" aria-label="Destaque Allegra">
+    <!-- ===================== Banners das marcas (carrossel) ===================== -->
+    <section class="promo" aria-roledescription="carrossel" aria-label="Destaques das marcas">
       <div class="container">
-        <div class="promo__box">
-          <img class="promo__product" src="static/img/home/banner-allegra-produto.webp" width="105" height="174"
-               alt="Embalagem de Allegra Pediátrico 150 mL com copinho" loading="lazy">
-          <p class="promo__title"><strong>Atualização SBP:</strong> Fexofenadina não impacta funções cognitivas e desempenho psicomotor.<sup>1</sup></p>
-          <a class="promo__cta" href="allegra.html">Saiba mais</a>
-          <p class="promo__legal"><strong>ALLEGRA®</strong> (cloridrato de fexofenadina). Indicações: é um anti-histamínico destinado ao tratamento das manifestações alérgicas, tais como sintomas de rinite alérgica (incluindo espirros, obstrução nasal, prurido, coriza, conjuntivite alérgica) e urticária (erupção avermelhada e pruriginosa na pele).</p>
+        <div class="promo__carousel" data-carousel data-carousel-single data-carousel-autoplay="7000">
+          <div class="promo__viewport" data-carousel-viewport>
+            <div class="promo__track" data-carousel-track>
+
+              <!-- Allegra -->
+              <div class="promo__box promo__box--allegra" role="group" aria-roledescription="slide" aria-label="1 de 4: Allegra">
+                <img class="promo__product" src="static/img/home/banner-allegra-produto.webp" width="105" height="174"
+                     alt="Embalagem de Allegra Pediátrico 150 mL com copinho" loading="lazy">
+                <p class="promo__title"><strong>Atualização SBP:</strong> Fexofenadina não impacta funções cognitivas e desempenho psicomotor.<sup>1</sup></p>
+                <a class="promo__cta" href="allegra.html">Saiba mais</a>
+                <p class="promo__legal"><strong>ALLEGRA®</strong> (cloridrato de fexofenadina). Indicações: é um anti-histamínico destinado ao tratamento das manifestações alérgicas, tais como sintomas de rinite alérgica (incluindo espirros, obstrução nasal, prurido, coriza, conjuntivite alérgica) e urticária (erupção avermelhada e pruriginosa na pele).</p>
+              </div>
+
+              <!-- Enterogermina -->
+              <div class="promo__box promo__box--enterogermina" role="group" aria-roledescription="slide" aria-label="2 de 4: Enterogermina">
+                <img class="promo__product" src="static/img/home/banner-enterogermina-produto.webp" width="214" height="125"
+                     alt="Embalagem de Enterogermina Criança e Adulto" loading="lazy">
+                <p class="promo__kicker">Sua prescrição está alinhada às últimas evidências?</p>
+                <div class="promo__copy">
+                  <p class="promo__title">Bacillus Clausii mostra redução significativa da Diarreia Associada a Antibióticos</p>
+                  <!-- TODO: vincular ao arquivo ID12 (Bacillus clausii e prevenção da DiAA) quando o documento chegar -->
+                  <a class="promo__cta" href="enterogermina.html" data-doc="ID12">Saiba mais aqui</a>
+                </div>
+                <p class="promo__legal">Enterogermina® - UM PRODUTO OPELLA<br>ENTEROGERMINA® / ENTEROGERMINA® PLUS / ENTEROGERMINA® ADULTO. “O Bacillus clausii O/C (CNCM-I276), SIN (CNCM-I-275), N/R (CNCM-I-274), T (CNCM-I-273) pode contribuir com a saúde do trato gastrointestinal.</p>
+              </div>
+
+              <!-- Os-Cal -->
+              <div class="promo__box promo__box--oscal" role="group" aria-roledescription="slide" aria-label="3 de 4: Os-Cal">
+                <img class="promo__product" src="static/img/home/banner-oscal-produto.webp" width="103" height="174"
+                     alt="Embalagem de Os-Cal Cálcio 500 mg" loading="lazy">
+                <p class="promo__title">Nova diretriz do MS: cálcio obrigatório no pré-natal.<sup>1</sup><br>
+                  <span class="promo__title-sub"><span class="promo__highlight">Veja as evidências</span> por trás da recomendação.</span></p>
+                <a class="promo__cta" href="os-cal.html">Saiba mais</a>
+                <p class="promo__legal">1. Ministério da saúde. Nota técnica conjunta n° 251/2024-coemm/ogesmu/dgci/saps,ms e cgan/deppros/saps/ms [internet] [atado 2025 nov 13]. Disponível em: https://www.govbr/saude os-cal* comprimidos. Contém glúten. Mat-br-2601211 - 1.0 - 04/2026.</p>
+              </div>
+
+              <!-- Novalgina -->
+              <div class="promo__box promo__box--novalgina" role="group" aria-roledescription="slide" aria-label="4 de 4: Novalgina">
+                <img class="promo__product" src="static/img/home/banner-novalgina-produto.webp" width="152" height="188"
+                     alt="Embalagens de Novalgina Infantil, solução oral" loading="lazy">
+                <p class="promo__title"><strong>A SBP atualizou a abordagem da febre em pediatria. Sua prática está alinhada?</strong></p>
+                <a class="promo__cta" href="novalgina-abordagem-da-febre-aguda.html" data-doc="ID13">Acesse aqui o novo guia</a>
+                <p class="promo__legal">4. Sociedade Brasileira de Pediatria (SBP). Abordagem da febre aguda em pediatria e reflexões sobre a febre nas arboviroses. Documento Científico nº 206, de 15 de maio de 2025.</p>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="promo__controls">
+            <div class="carousel-dots promo__dots" data-carousel-dots></div>
+            <button class="promo__toggle" type="button" data-carousel-toggle aria-pressed="false" aria-label="Pausar a troca automática">
+              <span class="promo__toggle-icon" aria-hidden="true"></span>
+            </button>
+          </div>
         </div>
       </div>
     </section>

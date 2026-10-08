@@ -6,6 +6,14 @@
  *     [data-carousel-prev] / [data-carousel-next]
  *     [data-carousel-viewport] > [data-carousel-track] > itens
  *     [data-carousel-dots]
+ *     [data-carousel-toggle]          (opcional) botão pausar/continuar
+ *
+ * Opções no elemento raiz:
+ *   data-carousel-single               um item por vez: os itens fora da tela ficam
+ *                                      inertes (sem foco nem leitor de tela)
+ *   data-carousel-autoplay="7000"      avança sozinho a cada N ms; pausa com o
+ *                                      mouse ou o foco dentro, com a aba oculta e
+ *                                      quando o usuário prefere menos movimento
  *
  * Cada avanço desloca um item; ao final da transição o item que saiu é
  * movido para a outra ponta, então o carrossel nunca "acaba". Um ponto
@@ -27,12 +35,77 @@
     this.index = 0;
     this.busy = false;
 
+    this.single = root.hasAttribute('data-carousel-single');
+    this.delay = parseInt(root.getAttribute('data-carousel-autoplay'), 10) || 0;
+    this.toggle = root.querySelector('[data-carousel-toggle]');
+    this.stopped = false;   // pausado pelo usuário (botão)
+    this.held = 0;          // pausas temporárias (mouse, foco)
+    this.timer = null;
+
     this.items.forEach(function (item, i) { item.dataset.carouselIndex = i; });
 
     this.buildDots();
     this.bind();
     this.update();
+    this.updateVisibility();
+    if (this.delay) this.bindAutoplay();
   }
+
+  /* ---------- autoplay ---------- */
+  Carousel.prototype.bindAutoplay = function () {
+    var self = this;
+    function hold() { self.held++; self.schedule(); }
+    function release() { self.held = Math.max(0, self.held - 1); self.schedule(); }
+
+    this.root.addEventListener('mouseenter', hold);
+    this.root.addEventListener('mouseleave', release);
+    this.root.addEventListener('focusin', function (e) {
+      if (!self.root.contains(e.relatedTarget)) hold();
+    });
+    this.root.addEventListener('focusout', function (e) {
+      if (!self.root.contains(e.relatedTarget)) release();
+    });
+    document.addEventListener('visibilitychange', function () { self.schedule(); });
+    reduceMotion.addEventListener('change', function () { self.schedule(); });
+
+    if (this.toggle) {
+      this.toggle.addEventListener('click', function () {
+        self.stopped = !self.stopped;
+        self.updateToggle();
+        self.schedule();
+      });
+    }
+    if (reduceMotion.matches) this.stopped = true;
+    this.updateToggle();
+    this.schedule();
+  };
+
+  Carousel.prototype.updateToggle = function () {
+    if (!this.toggle) return;
+    this.toggle.setAttribute('aria-pressed', this.stopped ? 'true' : 'false');
+    this.toggle.setAttribute('aria-label', this.stopped ? 'Continuar a troca automática' : 'Pausar a troca automática');
+  };
+
+  Carousel.prototype.schedule = function () {
+    var self = this;
+    clearTimeout(this.timer);
+    if (!this.delay || this.stopped || this.held || document.hidden) return;
+    this.timer = setTimeout(function () {
+      self.move(1);
+      self.schedule();
+    }, this.delay);
+  };
+
+  /* um item por vez: só o item visível recebe foco e é lido */
+  Carousel.prototype.updateVisibility = function () {
+    if (!this.single) return;
+    var first = this.track.children[0];
+    Array.prototype.forEach.call(this.track.children, function (item) {
+      var hidden = item !== first;
+      item.inert = hidden;
+      item.setAttribute('aria-hidden', hidden ? 'true' : 'false');
+    });
+  };
 
   Carousel.prototype.step = function () {
     var first = this.track.children[0];
@@ -89,6 +162,7 @@
   Carousel.prototype.reset = function () {
     this.track.style.transition = 'none';
     this.track.style.transform = 'translateX(0)';
+    this.updateVisibility();
   };
 
   // n > 0 avança, n < 0 volta
@@ -98,6 +172,10 @@
     var self = this;
     var step = this.step();
     var i;
+
+    if (this.single) {
+      Array.prototype.forEach.call(this.track.children, function (item) { item.inert = false; });
+    }
 
     if (n > 0) {
       this.animate(0, -step * n, function () {
@@ -115,6 +193,7 @@
 
     this.index = ((this.index + n) % this.count + this.count) % this.count;
     this.update();
+    if (this.delay) this.schedule(); // troca manual reinicia a contagem
   };
 
   Carousel.prototype.goTo = function (target) {

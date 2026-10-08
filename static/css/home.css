@@ -1,7 +1,7 @@
 /* ==========================================================================
    Home
    Hero · Áreas terapêuticas · Especialistas · Conteúdos em destaque ·
-   Números · Banner Allegra
+   Números · Banners das marcas (carrossel)
    ========================================================================== */
 
 /* ---------- Hero ---------- */
@@ -606,30 +606,48 @@
   .stat__icon { transform: scale(0.75); transform-origin: top left; margin-right: -16px; }
 }
 
-/* ---------- Banner Allegra ---------- */
+/* ---------- Banners das marcas (carrossel) ----------
+   Cada slide mede 1331x201 no desktop. Fundo = arte da marca; a embalagem é uma
+   imagem separada posicionada sobre ele; textos e botão são HTML. */
 .promo {
   padding-top: 59px;
 }
 
+/* os controles ocupam ~31px abaixo do banner: o bloco seguinte sobe o mesmo tanto */
+.promo + .legal {
+  padding-top: 20px;
+}
+
+.promo__viewport {
+  overflow: hidden;
+  margin-left: 1px;
+  touch-action: pan-y;
+}
+
+.promo__track {
+  display: flex;
+  will-change: transform;
+}
+
 .promo__box {
   position: relative;
+  flex: 0 0 100%;
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
   column-gap: 32px;
   min-height: 201px;
-  margin-left: 1px;
   padding: 27px 57px 28px 251px;
-  background: var(--allegra-banner) url("../img/home/banner-allegra-bg.webp") left center / auto 100% no-repeat;
-  color: var(--white);
+  background: var(--promo-bg, #870080) var(--promo-art) left center / auto 100% no-repeat;
+  color: var(--promo-ink, var(--white));
   overflow: hidden;
 }
 
 .promo__product {
   position: absolute;
-  left: 89px;
-  top: 12px;
-  width: 105px;
+  left: var(--product-x, 89px);
+  top: var(--product-y, 12px);
+  width: var(--product-w, 105px);
 }
 
 .promo__title {
@@ -651,20 +669,20 @@
 .promo__cta {
   display: inline-grid;
   place-items: center;
-  width: 150px;
+  width: var(--cta-w, 150px);
   height: 49px;
   align-self: start;
   margin-top: 38px;
   border-radius: 999px;
-  background: var(--allegra-button);
+  background: var(--cta-bg, var(--allegra-button));
   font-size: 17px;
   font-weight: 700;
   color: var(--white);
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition: filter 0.2s ease, transform 0.2s ease;
 }
 
 .promo__cta:hover {
-  background: #4a004b;
+  filter: brightness(0.88);
   transform: translateY(-1px);
 }
 
@@ -679,19 +697,204 @@
   font-weight: 700;
 }
 
+/* ---- Allegra ---- */
+.promo__box--allegra {
+  --promo-bg: var(--allegra-banner);
+  --promo-art: url("../img/home/banner-allegra-bg.webp");
+}
+
+/* ---- Enterogermina: pergunta | texto + botão | embalagem à direita ---- */
+.promo__box--enterogermina {
+  --promo-bg: #e1f2f3;
+  --promo-art: url("../img/home/banner-enterogermina-bg.webp");
+  --promo-ink: #4c7898;
+  --product-x: auto;
+  --product-y: 14px;
+  --product-w: 214px;
+  --cta-w: 170px;
+  --cta-bg: #1a66c5;
+  grid-template-columns: 333px minmax(0, 530px) minmax(0, 1fr);
+  align-items: start;
+  column-gap: 29px;
+  padding: 17px 99px 14px 72px;
+  background-position: center;
+  background-size: cover;
+}
+
+.promo__box--enterogermina .promo__product {
+  right: 99px;
+}
+
+.promo__kicker {
+  font-size: 34px;
+  line-height: 40.5px;
+  font-weight: 700;
+}
+
+.promo__box--enterogermina .promo__title {
+  font-size: 26px;
+  line-height: 32px;
+}
+
+.promo__box--enterogermina .promo__cta {
+  margin-top: 4px;
+}
+
+.promo__box--enterogermina .promo__legal {
+  margin-top: -3px;
+  padding-right: 20px;
+  line-height: 14.6px;
+}
+
+/* ---- Os-Cal: título em caixa alta em duas linhas, botão à direita ---- */
+.promo__box--oscal {
+  --promo-bg: #4b1cab;
+  --promo-art: url("../img/home/banner-oscal-bg.webp");
+  --product-x: 53px;
+  --product-y: 12px;
+  --product-w: 103px;
+  --cta-w: 152px;
+  --cta-bg: #5662c2;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  padding: 33px 42px 18px 222px;
+  background-size: cover;
+}
+
+.promo__box--oscal .promo__title {
+  font-size: 33px;
+  line-height: 39px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.promo__title-sub {
+  font-size: 31px;
+}
+
+.promo__highlight {
+  color: #c2d6fc;
+}
+
+.promo__box--oscal .promo__cta {
+  position: absolute;
+  right: 67px;
+  top: 85px;
+  margin: 0;
+}
+
+.promo__box--oscal .promo__legal {
+  margin: 38px 0 0 1px;
+}
+
+/* ---- Novalgina ---- */
+.promo__box--novalgina {
+  --promo-bg: #0b5a17;
+  --promo-art: url("../img/home/banner-novalgina-bg.webp");
+  --product-x: 51px;
+  --product-y: 8px;
+  --product-w: 152px;
+  --cta-w: 268px;
+  --cta-bg: #199d08;
+  padding-right: 28px;
+  background-size: cover;
+}
+
+.promo__box--novalgina {
+  align-items: start;
+  align-content: start;
+  padding-top: 30px;
+}
+
+.promo__box--novalgina .promo__cta {
+  margin-top: 38px;
+  text-transform: uppercase;
+}
+
+.promo__box--novalgina .promo__legal {
+  margin-top: 19px;
+}
+
+/* ---- Controles ---- */
+.promo__controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.promo__dots {
+  margin-top: 0;
+}
+
+.promo__toggle {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  color: var(--sage-600);
+}
+
+.promo__toggle:hover {
+  background: var(--cream);
+}
+
+/* pausa (duas barras) / play (triângulo) */
+.promo__toggle-icon {
+  width: 8px;
+  height: 10px;
+  border-left: 3px solid currentColor;
+  border-right: 3px solid currentColor;
+}
+
+.promo__toggle[aria-pressed="true"] .promo__toggle-icon {
+  width: 0;
+  height: 0;
+  margin-left: 3px;
+  border-style: solid;
+  border-width: 5px 0 5px 9px;
+  border-color: transparent transparent transparent currentColor;
+}
+
 @media (max-width: 1100px) {
   .promo__box { padding-left: 200px; padding-right: 32px; }
-  .promo__product { left: 50px; }
+  .promo__box--allegra { --product-x: 50px; }
+  .promo__box--novalgina { --product-x: 24px; --product-w: 130px; }
+  .promo__box--enterogermina { grid-template-columns: 1fr; padding: 24px 260px 20px 40px; }
+  .promo__box--enterogermina .promo__product { right: 24px; top: 24px; }
+  .promo__kicker { font-size: 28px; line-height: 34px; }
+  .promo__box--enterogermina .promo__copy { margin-top: 12px; }
+  .promo__box--oscal { padding-left: 190px; }
+  .promo__box--oscal .promo__title { font-size: 26px; line-height: 32px; }
+  .promo__title-sub { font-size: 24px; }
+  .promo__box--oscal .promo__cta { position: static; margin-top: 16px; }
+  .promo__box--oscal .promo__legal { margin-top: 16px; padding-right: 0; }
+  .promo__box--enterogermina .promo__legal { margin-top: 14px; }
+  /* a arte desses fundos foi desenhada para 200px de altura: com o slide mais alto
+     ela passaria por cima do texto, então fica só a cor da marca */
+  .promo__box--oscal { --promo-art: none; }
+  .promo__box--novalgina { --promo-art: linear-gradient(90deg, #15a709 0%, #0a4a12 100%); }
 }
 
 @media (max-width: 760px) {
-  .promo__box {
+  .promo__box,
+  .promo__box--enterogermina,
+  .promo__box--oscal {
     grid-template-columns: minmax(0, 1fr);
+    align-items: start;
     padding: 28px 20px 24px 124px;
-    background-size: auto 100%;
   }
-  .promo__product { left: 16px; top: 24px; width: 92px; }
+  .promo__box { --product-x: 16px; --product-y: 24px; --product-w: 92px; }
+  .promo__box--enterogermina .promo__product { right: auto; left: 16px; top: 28px; }
+  .promo__box--enterogermina { --product-w: 96px; }
+  .promo__kicker { font-size: 22px; line-height: 27px; }
+  .promo__box--enterogermina .promo__title { font-size: 19px; line-height: 24px; }
+  .promo__box--oscal .promo__title { font-size: 20px; line-height: 25px; }
+  .promo__title-sub { font-size: 18px; }
   .promo__cta { margin-top: 18px; justify-self: start; }
-  .promo__box { align-items: start; }
+  .promo__box--novalgina .promo__cta { width: auto; padding-inline: 20px; }
+  .promo__box--enterogermina .promo__legal { margin-top: 16px; padding-right: 0; }
   .promo__legal { margin-top: 16px; }
 }
