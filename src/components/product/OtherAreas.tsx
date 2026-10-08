@@ -10,17 +10,20 @@ export function OtherAreas({ areas }: { areas: AreaTile[] }) {
       <h2 className="p-areas__title" id="areas-title">
         Explore outras áreas terapêuticas
       </h2>
-      {areas.map((a) => {
-        const brand = brands[a.brand];
-        return (
-          <div key={a.brand} className="p-areas__item">
-            <Link className={`area-tile${a.brand === 'enterogermina' ? ' area-tile--enterogermina' : ''}`} to={brand.path}>
-              <img src={img(a.image)} width={a.width} height={a.height} alt={brand.name} loading="lazy" />
-              <span>{brand.area}</span>
-            </Link>
-          </div>
-        );
-      })}
+      {/* no desktop a lista não interfere no grid (display: contents); no celular vira faixa com rolagem */}
+      <div className="p-areas__list">
+        {areas.map((a) => {
+          const brand = brands[a.brand];
+          return (
+            <div key={a.brand} className="p-areas__item">
+              <Link className={`area-tile${a.brand === 'enterogermina' ? ' area-tile--enterogermina' : ''}`} to={brand.path}>
+                <img src={img(a.image)} width={a.width} height={a.height} alt={brand.name} loading="lazy" />
+                <span>{brand.area}</span>
+              </Link>
+            </div>
+          );
+        })}
+      </div>
     </nav>
   );
 }

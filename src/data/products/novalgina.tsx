@@ -29,11 +29,12 @@ export const novalgina: ProductPageData = {
       height: 493,
       alt: 'Ilustração de um cérebro com áreas destacadas em vermelho e descargas elétricas',
     },
+    // o espaço antes de cada <br /> evita palavras coladas quando as quebras somem no celular
     title: (
       <>
-        Abordagem da Febre Aguda
+        {'Abordagem da Febre Aguda '}
         <br />
-        em Pediatria e Reflexões sobre
+        {'em Pediatria e Reflexões sobre '}
         <br />a febre nas arboviroses
       </>
     ),

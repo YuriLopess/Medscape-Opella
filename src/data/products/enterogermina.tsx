@@ -31,7 +31,7 @@ export const enterogermina: ProductPageData = {
     },
     title: (
       <>
-        Uso de probióticos em
+        {'Uso de probióticos em '}
         <br />
         crianças com infecções comuns da infância e na prevenção de alergias
       </>

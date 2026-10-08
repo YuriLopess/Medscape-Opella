@@ -603,3 +603,109 @@
   .p-regulatory { padding: 20px 20px 28px; }
   .p-regulatory__text { text-align: left; font-size: 13px; line-height: 18px; }
 }
+
+.p-areas__list {
+  display: contents;
+}
+
+/* ==========================================================================
+   Responsivo — ajustes de tablet e celular (vale para todas as marcas)
+   ========================================================================== */
+@media (max-width: 1100px) {
+  .p-feature__title { font-size: 28px; line-height: 34px; }
+  .p-video__title { font-size: 30px; line-height: 36px; }
+  .p-video__text { font-size: 18px; line-height: 26px; }
+  .p-more__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .p-more__grid--2 { grid-template-columns: repeat(2, minmax(0, 414.6px)); }
+}
+
+/* tablet retrato: banner com a arte em cima e o título embaixo (evita o texto
+   sobre o logo) e vídeo com a imagem em cima */
+@media (max-width: 900px) {
+  .p-hero { display: block; min-height: 0; }
+  .p-hero__art { position: static; height: 190px; object-position: var(--hero-art-mobile, 12% center); }
+  .p-hero__title { max-width: none; padding: 22px 32px 26px; }
+  .p-video { grid-template-columns: minmax(0, 1fr); }
+  .p-video__media { order: -1; aspect-ratio: 16 / 9; }
+  .p-video__body { padding: 32px 36px 36px; }
+}
+
+/* celular */
+@media (max-width: 760px) {
+  .p-hero__art { height: 150px; }
+  .p-hero__title { padding: 18px 20px 22px; font-size: 21px; }
+  .p-feature__title { font-size: 24px; line-height: 30px; }
+
+  /* título com filete curto embaixo, em vez dos filetes laterais */
+  .ruled-title { flex-direction: column; gap: 12px; margin-top: 48px; font-size: 30px; }
+  .ruled-title::before { display: none; }
+  .ruled-title::after { flex: none; width: 72px; transform: none; }
+  .p-video { margin-top: 18px; }
+  .p-video__media { aspect-ratio: 4 / 3; }
+  .p-video__body { padding: 24px 20px 28px; }
+  .p-video__title { font-size: 24px; line-height: 30px; }
+  .p-video__expert { margin-top: 20px; }
+  .p-video__meta { font-size: 13px; line-height: 18px; }
+  .p-video__text { margin-top: 18px; font-size: 16px; line-height: 23px; }
+
+  /* conteúdo adicional: faixa com rolagem lateral, como na home */
+  .p-more { margin-top: 40px; padding: 28px 0 32px; }
+  .p-more > .container { padding-inline: 0; }
+  .p-more__title { padding-inline: 16px; font-size: 28px; }
+  .p-more__grid,
+  .p-more__grid--2 {
+    display: flex;
+    gap: 12px;
+    margin: 20px 0 0;
+    padding: 0 16px 6px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 16px;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+  .p-more__grid::-webkit-scrollbar { display: none; }
+  /* position: relative prende o texto oculto (.visually-hidden) dentro do card;
+     sem isso ele escapa do recorte da faixa e cria rolagem lateral na página */
+  .more-card { position: relative; flex: 0 0 min(80%, 300px); min-height: 0; scroll-snap-align: start; }
+
+  /* produto: embalagem em tamanho controlado */
+  .p-product { padding-top: 36px; }
+  .p-product__media { max-width: 280px; }
+  .p-product__media img { width: 100%; margin: 0; }
+
+  /* outras áreas: título à esquerda e tiles numa faixa com rolagem */
+  .p-areas { display: block; margin-top: 40px; padding: 24px 0 20px; }
+  .p-areas__title { max-width: none; margin: 0; padding-inline: 20px; font-size: 24px; line-height: 30px; text-align: left; }
+  .p-areas__list {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    padding: 0 20px 4px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 20px;
+    scrollbar-width: none;
+  }
+  .p-areas__list::-webkit-scrollbar { display: none; }
+  .p-areas__item,
+  .p-areas__item + .p-areas__item { flex: none; margin: 0; padding: 0; border: 0; scroll-snap-align: start; }
+  .area-tile { width: 180px; height: 107px; padding-bottom: 26px; font-size: 14px; line-height: 17px; }
+
+  .p-refs { margin-top: 44px; }
+  .p-regulatory { margin-block: 40px; }
+  .p-regulatory__title { padding-bottom: 14px; font-size: 24px; line-height: 1.2; }
+  .p-regulatory__text { margin-top: 18px; }
+}
+
+/* celular e tablet retrato: quebras de linha do layout desktop não se aplicam */
+@media (max-width: 900px) {
+  .p-feature__title br { display: none; }
+}
+
+@media (max-width: 760px) {
+  .p-refs__list--numbered { padding-left: 20px; }
+  /* embalagem limitada pela altura: as verticais (Os-Cal) não dominam a tela */
+  .p-product__media { display: flex; justify-content: center; max-width: none; }
+  .p-product__media img { width: auto; max-width: min(100%, 300px); max-height: 230px; margin: 0; }
+}
