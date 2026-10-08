@@ -39,7 +39,8 @@
   --hero-ink: #4c789b;
   --hero-weight: 900;
   --hero-text-start: 53.3%;
-  --hero-art-mobile: 4% center;
+  --hero-art-mobile: 4% 0%;
+  --hero-art-h-mobile: 124px;
 
   --feature-bg: #dcedeb;
   --feature-ink: #4c789b;
@@ -133,28 +134,30 @@
 .theme-oscal .p-product { --product-img-w: 401px; --product-img-ml: 100px; }
 .theme-oscal .p-more__grid--2 { gap: 42.8px; margin-top: 32px; }
 
-/* espaçamentos em que o layout do Os-Cal difere do modelo */
-.theme-oscal .p-hero__title { padding-bottom: 54px; }
-.theme-oscal .p-feature__source { margin-top: 34px; }
-.theme-oscal .p-feature .btn-brand { margin-top: 43px; }
-.theme-oscal .p-video__expert { margin-top: 21px; }
-.theme-oscal .p-video__text { margin-top: 19px; }
-.theme-oscal .p-video .btn-brand { margin-top: 15px; }
-.theme-oscal .p-video__body { padding-bottom: 27px; }
-.theme-oscal .p-more { padding-bottom: 41px; }
-.theme-oscal .p-product { --product-pt: 47px; --product-text-offset: 33px; }
-.theme-oscal .p-areas { --areas-mt: 44px; }
-.theme-oscal .p-refs { margin-top: 88px; }
-.theme-oscal .more-card__link { margin-top: 0; }
-.theme-oscal .doc-banner { padding-right: 80px; }
-.theme-oscal .aside-item__title { margin-top: 7px; }
-.theme-oscal .aside-list { gap: 46px; }
-.theme-oscal .aside-box:first-child { padding-bottom: 37px; }
-.theme-oscal .doc-content { --doc-measure: 960px; margin-top: 66px; }
-.theme-oscal .doc-content h2 { margin-top: 23px; }
-.theme-oscal .doc-content h2 + p { margin-top: 30px; }
-.theme-oscal .doc-callout { margin-top: 28px; }
-.theme-oscal .p-regulatory { min-height: 226px; margin: 63px 0 51px; }
+/* espaçamentos em que o layout do Os-Cal difere do modelo — calibrados no desktop; no celular valem as regras do modelo */
+@media (min-width: 761px) {
+  .theme-oscal .p-hero__title { padding-bottom: 54px; }
+  .theme-oscal .p-feature__source { margin-top: 34px; }
+  .theme-oscal .p-feature .btn-brand { margin-top: 43px; }
+  .theme-oscal .p-video__expert { margin-top: 21px; }
+  .theme-oscal .p-video__text { margin-top: 19px; }
+  .theme-oscal .p-video .btn-brand { margin-top: 15px; }
+  .theme-oscal .p-video__body { padding-bottom: 27px; }
+  .theme-oscal .p-more { padding-bottom: 41px; }
+  .theme-oscal .p-product { --product-pt: 47px; --product-text-offset: 33px; }
+  .theme-oscal .p-areas { --areas-mt: 44px; }
+  .theme-oscal .p-refs { margin-top: 88px; }
+  .theme-oscal .more-card__link { margin-top: 0; }
+  .theme-oscal .doc-banner { padding-right: 80px; }
+  .theme-oscal .aside-item__title { margin-top: 7px; }
+  .theme-oscal .aside-list { gap: 46px; }
+  .theme-oscal .aside-box:first-child { padding-bottom: 37px; }
+  .theme-oscal .doc-content { --doc-measure: 960px; margin-top: 66px; }
+  .theme-oscal .doc-content h2 { margin-top: 23px; }
+  .theme-oscal .doc-content h2 + p { margin-top: 30px; }
+  .theme-oscal .doc-callout { margin-top: 28px; }
+  .theme-oscal .p-regulatory { min-height: 226px; margin: 63px 0 51px; }
+}
 
 /* ---------- Novalgina ---------- */
 .theme-novalgina {
@@ -210,42 +213,51 @@
 .theme-novalgina .p-hero__title strong { font-weight: 900; }
 .theme-novalgina .p-product { --product-img-w: 547px; --product-img-ml: 12px; }
 
-/* espaçamentos em que o layout do Novalgina difere do modelo */
-.theme-novalgina .p-hero__title { padding-bottom: 34px; }
-.theme-novalgina .p-product__title { max-width: 680px; }
-.theme-novalgina .p-product { --product-text-offset: 73px; }
-.theme-novalgina .p-product__text { margin-top: 30px; }
-.theme-novalgina .p-areas { --areas-mt: 89px; }
-.theme-novalgina .p-refs { margin-top: 54px; }
-.theme-novalgina .p-regulatory { min-height: 307px; margin-top: 45px; }
-.theme-novalgina .p-feature .btn-brand { margin-top: 48px; }
-.theme-novalgina .p-video__expert { margin-top: 20px; }
-.theme-novalgina .p-video__text { margin-top: 29px; }
-.theme-novalgina .p-video .btn-brand { margin-top: 41px; }
-.theme-novalgina .doc-banner { padding-right: 80px; }
-.theme-novalgina .aside-item__title { margin-top: 7px; }
-.theme-novalgina .aside-list { gap: 44px; }
-.theme-novalgina .aside-box:first-child { padding-bottom: 47px; }
-.theme-novalgina .doc-content { --doc-measure: 960px; margin-top: 66px; }
-.theme-novalgina .doc-content h2 { margin-top: 23px; }
-.theme-novalgina .doc-content h2 + p { margin-top: 30px; }
-.theme-novalgina .doc-callout { margin-top: 28px; }
+/* espaçamentos em que o layout do Novalgina difere do modelo — calibrados no desktop; no celular valem as regras do modelo */
+@media (min-width: 761px) {
+  .theme-novalgina .p-hero__title { padding-bottom: 34px; }
+  .theme-novalgina .p-product__title { max-width: 680px; }
+  .theme-novalgina .p-product { --product-text-offset: 73px; }
+  .theme-novalgina .p-product__text { margin-top: 30px; }
+  .theme-novalgina .p-areas { --areas-mt: 89px; }
+  .theme-novalgina .p-refs { margin-top: 54px; }
+  .theme-novalgina .p-regulatory { min-height: 307px; margin-top: 45px; }
+  .theme-novalgina .p-feature .btn-brand { margin-top: 48px; }
+  .theme-novalgina .p-video__expert { margin-top: 20px; }
+  .theme-novalgina .p-video__text { margin-top: 29px; }
+  .theme-novalgina .p-video .btn-brand { margin-top: 41px; }
+  .theme-novalgina .doc-banner { padding-right: 80px; }
+  .theme-novalgina .aside-item__title { margin-top: 7px; }
+  .theme-novalgina .aside-list { gap: 44px; }
+  .theme-novalgina .aside-box:first-child { padding-bottom: 47px; }
+  .theme-novalgina .doc-content { --doc-measure: 960px; margin-top: 66px; }
+  .theme-novalgina .doc-content h2 { margin-top: 23px; }
+  .theme-novalgina .doc-content h2 + p { margin-top: 30px; }
+  .theme-novalgina .doc-callout { margin-top: 28px; }
+}
 
-/* espaçamentos em que o layout do Enterogermina difere do modelo */
-.theme-enterogermina .p-feature__body { padding-bottom: 47px; }
-.theme-enterogermina .p-feature .btn-brand { margin-top: 42px; }
-.theme-enterogermina .p-video__expert { margin-top: 35px; }
-.theme-enterogermina .p-video__text { margin-top: 23px; }
-.theme-enterogermina .p-video .btn-brand { margin-top: 29px; }
-.theme-enterogermina .p-more { margin-top: 31px; padding: 26px 0 85px; }
-.theme-enterogermina .p-more__grid { margin-top: 35px; }
-.theme-enterogermina .p-product { --product-pt: 55px; --product-text-offset: 14px; }
-.theme-enterogermina .p-areas { --areas-mt: 61px; }
-.theme-enterogermina .p-regulatory { margin-top: 52px; }
-.theme-enterogermina .p-refs { margin-top: 71px; }
-.theme-enterogermina .doc-banner { padding-right: 80px; }
-.theme-enterogermina .aside-item__title { margin-top: 7px; }
-.theme-enterogermina .doc-content { --doc-measure: 960px; margin-top: 66px; }
-.theme-enterogermina .doc-content h2 { margin-top: 23px; }
-.theme-enterogermina .doc-content h2 + p { margin-top: 30px; }
-.theme-enterogermina .doc-callout { margin-top: 28px; }
+/* espaçamentos em que o layout do Enterogermina difere do modelo — calibrados no desktop; no celular valem as regras do modelo */
+@media (min-width: 761px) {
+  .theme-enterogermina .p-feature__body { padding-bottom: 47px; }
+  .theme-enterogermina .p-feature .btn-brand { margin-top: 42px; }
+  .theme-enterogermina .p-video__expert { margin-top: 35px; }
+  .theme-enterogermina .p-video__text { margin-top: 23px; }
+  .theme-enterogermina .p-video .btn-brand { margin-top: 29px; }
+  .theme-enterogermina .p-more { margin-top: 31px; padding: 26px 0 85px; }
+  .theme-enterogermina .p-more__grid { margin-top: 35px; }
+  .theme-enterogermina .p-product { --product-pt: 55px; --product-text-offset: 14px; }
+  .theme-enterogermina .p-areas { --areas-mt: 61px; }
+  .theme-enterogermina .p-regulatory { margin-top: 52px; }
+  .theme-enterogermina .p-refs { margin-top: 71px; }
+  .theme-enterogermina .doc-banner { padding-right: 80px; }
+  .theme-enterogermina .aside-item__title { margin-top: 7px; }
+  .theme-enterogermina .doc-content { --doc-measure: 960px; margin-top: 66px; }
+  .theme-enterogermina .doc-content h2 { margin-top: 23px; }
+  .theme-enterogermina .doc-content h2 + p { margin-top: 30px; }
+  .theme-enterogermina .doc-callout { margin-top: 28px; }
+}
+
+/* Enterogermina: no desktop os dois parágrafos do produto ficam colados, como no layout */
+@media (min-width: 761px) {
+  .theme-enterogermina .p-product__text + .p-product__text { margin-top: 0; }
+}

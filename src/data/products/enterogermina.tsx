@@ -77,7 +77,8 @@ export const enterogermina: ProductPageData = {
       <>
         A antibioticoterapia pode alterar o equilíbrio da microbiota intestinal e estar associada a sintomas
         gastrointestinais, como a diarreia associada a antibióticos (DAA).<sup>3</sup>
-        <br />
+      </>,
+      <>
         Enterogermina<sup>®</sup>, com <em>Bacillus clausii</em> (O/C, SIN, N/R, T), contribui para o equilíbrio da flora
         intestinal.<sup>4</sup>
       </>,

@@ -758,3 +758,20 @@
   .area-tile:hover { transform: none; box-shadow: 0 6px 16px -10px rgba(0, 0, 0, 0.35); }
   .area-tile:hover::after { transform: translateX(3px); }
 }
+
+/* celular: banner com a arte mais baixa quando o logo ocupa só o topo,
+   e notas (¹ ²) do título no tamanho certo */
+@media (max-width: 900px) {
+  .p-hero__title sup { font-size: 0.55em; line-height: 0; vertical-align: 0.75em; }
+}
+
+@media (max-width: 760px) {
+  .p-hero__art { height: var(--hero-art-h-mobile, 150px); }
+}
+
+@media (max-width: 760px) {
+  /* nota avulsa alinhada com a lista numerada logo abaixo */
+  .p-refs__note { padding-left: 0; }
+  .p-refs__list--numbered { padding-left: 18px; }
+  .p-refs__list:not(.p-refs__list--numbered) { padding-left: 0; }
+}
