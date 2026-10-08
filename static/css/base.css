@@ -64,6 +64,8 @@
 
   /* Tipografia */
   --font-sans: "Opella Sans", "Helvetica Neue", Arial, sans-serif;
+  /* Nexa ainda não foi entregue: até lá a Opella Sans assume (ver README) */
+  --font-allegra: "Nexa", var(--font-sans);
 
   /* Layout */
   --container: 1332px;

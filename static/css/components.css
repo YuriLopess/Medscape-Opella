@@ -77,9 +77,10 @@
   color: var(--sage-600);
 }
 
+/* cada página de produto define --nav-active com a cor da marca */
 .main-nav__link[aria-current="page"] {
   font-weight: 700;
-  color: var(--sage-700);
+  color: var(--nav-active, var(--sage-700));
 }
 
 .search {

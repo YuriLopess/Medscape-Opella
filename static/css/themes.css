@@ -1,0 +1,22 @@
+/* ==========================================================================
+   Temas de produto — cores e fonte de cada marca
+   Aplicado no <body> (ex.: class="theme-allegra"). Usado por product.css e
+   document.css, que não conhecem cores de marca diretamente.
+   ========================================================================== */
+
+.theme-allegra {
+  --nav-active: var(--accent-orange);
+
+  --brand-font: var(--font-allegra);
+  --brand-bg: #610e6f;            /* fundos de cards e caixas */
+  --brand-ink: #611070;           /* títulos e texto corrido */
+  --brand-accent: #fd4f04;        /* rótulos, links "Ver conteúdo" */
+  --brand-highlight: #9c0463;     /* texto do destaque (callout) */
+  --brand-soft: #f9f4f8;          /* fundos claros de seção */
+  --brand-cream: #f8f1e9;         /* título sobre o roxo */
+  --brand-card-border: #f8f0e8;
+  --brand-divider: #e9e2dc;
+  --brand-explore-link: #ff74da;
+  --brand-button: linear-gradient(90deg, #ff5002 0%, #fd7109 50%, #fc8f09 100%);
+  --brand-rule: linear-gradient(90deg, #fc8f09 0%, #ff5502 50%, #611070 100%);
+}
