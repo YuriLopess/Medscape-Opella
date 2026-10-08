@@ -17,8 +17,10 @@ const slides: Slide[] = [
     label: 'Allegra',
     content: (
       <>
-        <img className="promo__product" src={img('home/banner-allegra-produto.webp')} width={105} height={174}
+        <div className="promo__media">
+          <img className="promo__product" src={img('home/banner-allegra-produto.webp')} width={105} height={174}
           alt="Embalagem de Allegra Pediátrico 150 mL com copinho" loading="lazy" />
+        </div>
         <p className="promo__title">
           <strong>Atualização SBP:</strong> Fexofenadina não impacta funções cognitivas e desempenho psicomotor.<sup>1</sup>
         </p>
@@ -36,8 +38,10 @@ const slides: Slide[] = [
     label: 'Enterogermina',
     content: (
       <>
-        <img className="promo__product" src={img('home/banner-enterogermina-produto.webp')} width={214} height={125}
+        <div className="promo__media">
+          <img className="promo__product" src={img('home/banner-enterogermina-produto.webp')} width={214} height={125}
           alt="Embalagem de Enterogermina Criança e Adulto" loading="lazy" />
+        </div>
         <p className="promo__kicker">Sua prescrição está alinhada às últimas evidências?</p>
         <div className="promo__copy">
           <p className="promo__title">Bacillus Clausii mostra redução significativa da Diarreia Associada a Antibióticos</p>
@@ -58,8 +62,10 @@ const slides: Slide[] = [
     label: 'Os-Cal',
     content: (
       <>
-        <img className="promo__product" src={img('home/banner-oscal-produto.webp')} width={103} height={174}
+        <div className="promo__media">
+          <img className="promo__product" src={img('home/banner-oscal-produto.webp')} width={103} height={174}
           alt="Embalagem de Os-Cal Cálcio 500 mg" loading="lazy" />
+        </div>
         <p className="promo__title">
           Nova diretriz do MS: cálcio obrigatório no pré-natal.<sup>1</sup>
           <br />
@@ -81,8 +87,10 @@ const slides: Slide[] = [
     label: 'Novalgina',
     content: (
       <>
-        <img className="promo__product" src={img('home/banner-novalgina-produto.webp')} width={152} height={188}
+        <div className="promo__media">
+          <img className="promo__product" src={img('home/banner-novalgina-produto.webp')} width={152} height={188}
           alt="Embalagens de Novalgina Infantil, solução oral" loading="lazy" />
+        </div>
         <p className="promo__title">
           <strong>A SBP atualizou a abordagem da febre em pediatria. Sua prática está alinhada?</strong>
         </p>

@@ -920,55 +920,126 @@
   border-color: transparent transparent transparent currentColor;
 }
 
-@media (max-width: 1100px) {
-  .promo__box { padding-left: 200px; padding-right: 32px; }
-  .promo__box--allegra { --product-x: 50px; }
-  .promo__box--novalgina { --product-x: 24px; --product-w: 130px; }
-  .promo__box--enterogermina { grid-template-columns: 1fr; padding: 24px 260px 20px 40px; }
-  .promo__box--enterogermina .promo__product { right: 24px; top: 24px; }
-  .promo__kicker { font-size: 28px; line-height: 34px; }
-  .promo__box--enterogermina .promo__copy { margin-top: 12px; }
-  .promo__box--oscal { padding-left: 190px; }
-  .promo__box--oscal .promo__title { font-size: 26px; line-height: 32px; }
-  .promo__title-sub { font-size: 24px; }
-  .promo__box--oscal .promo__cta { position: static; margin-top: 16px; }
-  .promo__box--oscal .promo__legal { margin-top: 16px; padding-right: 0; }
-  .promo__box--enterogermina .promo__legal { margin-top: 14px; }
-  /* a arte desses fundos foi desenhada para 200px de altura: com o slide mais alto
-     ela passaria por cima do texto, então fica só a cor da marca */
-  .promo__box--oscal { --promo-art: none; }
-  .promo__box--novalgina { --promo-art: linear-gradient(90deg, #15a709 0%, #0a4a12 100%); }
-  /* todos os slides têm a altura do mais alto: o conteúdo fica centralizado
-     verticalmente em vez de deixar um vão entre o título e o texto legal */
-  .promo__box { align-content: center; }
-  .promo__product { top: 50%; transform: translateY(-50%); }
+/* no desktop o wrapper da embalagem não existe para o layout: a imagem continua
+   posicionada sobre o banner como no design */
+.promo__media {
+  display: contents;
 }
 
-/* celular: embalagem em cima e texto na largura toda do banner */
-@media (max-width: 760px) {
+/* ---- tablet: embalagem numa coluna à esquerda, texto + botão + legal à direita ---- */
+@media (max-width: 1100px) {
   .promo__box,
   .promo__box--enterogermina,
-  .promo__box--oscal {
-    grid-template-columns: minmax(0, 1fr);
+  .promo__box--oscal,
+  .promo__box--novalgina {
+    grid-template-columns: 150px minmax(0, 1fr);
     align-items: start;
-    align-content: start;
-    padding: 24px 20px;
+    align-content: center;
+    column-gap: 32px;
+    padding: 28px 40px 28px 32px;
+  }
+  .promo__box > :not(.promo__media) { grid-column: 2; }
+  .promo__media {
+    display: flex;
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    align-self: center;
+    justify-content: center;
   }
   .promo__product,
   .promo__box--enterogermina .promo__product {
     position: static;
-    transform: none;
-    width: var(--product-w-mobile, 64px);
-    margin-bottom: 16px;
+    width: auto;
+    max-width: 100%;
+    max-height: 150px;
   }
-  .promo__box--enterogermina { --product-w-mobile: 150px; }
-  .promo__box--novalgina { --product-w-mobile: 96px; }
-  .promo__kicker { font-size: 22px; line-height: 27px; }
-  .promo__box--enterogermina .promo__title { font-size: 19px; line-height: 24px; }
-  .promo__box--oscal .promo__title { font-size: 20px; line-height: 25px; }
-  .promo__title-sub { font-size: 18px; }
-  .promo__cta { margin-top: 18px; justify-self: start; }
-  .promo__box--novalgina .promo__cta { width: auto; padding-inline: 20px; }
-  .promo__box--enterogermina .promo__legal { margin-top: 16px; padding-right: 0; }
-  .promo__legal { margin-top: 16px; }
+  .promo__title,
+  .promo__box--enterogermina .promo__title,
+  .promo__box--oscal .promo__title { font-size: 26px; line-height: 32px; }
+  .promo__title-sub { font-size: 24px; }
+  .promo__kicker { font-size: 26px; line-height: 32px; }
+  .promo__box--enterogermina .promo__title { font-size: 21px; line-height: 27px; margin-top: 8px; }
+  .promo__cta,
+  .promo__box--enterogermina .promo__cta,
+  .promo__box--oscal .promo__cta,
+  .promo__box--novalgina .promo__cta {
+    position: static;
+    justify-self: start;
+    width: auto;
+    min-width: 150px;
+    margin: 18px 0 0;
+    padding-inline: 24px;
+  }
+  .promo__legal,
+  .promo__box--enterogermina .promo__legal,
+  .promo__box--oscal .promo__legal,
+  .promo__box--novalgina .promo__legal { margin: 18px 0 0; padding: 0; }
+  /* a arte desses fundos foi desenhada para 200px de altura: com o slide mais alto
+     ela passaria por cima do texto, então fica só a cor da marca */
+  .promo__box--oscal { --promo-art: none; }
+  .promo__box--novalgina { --promo-art: linear-gradient(90deg, #15a709 0%, #0a4a12 100%); }
+}
+
+/* ---- celular: card com a embalagem em destaque no topo ---- */
+@media (max-width: 760px) {
+  .promo__box,
+  .promo__box--enterogermina,
+  .promo__box--oscal,
+  .promo__box--novalgina {
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 20px;
+  }
+  .promo__box > :not(.promo__media) { margin-inline: 20px; }
+  .promo__media {
+    flex: none;
+    align-items: center;
+    height: 176px;
+    margin-bottom: 20px;
+    background: radial-gradient(closest-side, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0) 100%);
+  }
+  .promo__box--enterogermina .promo__media {
+    background: radial-gradient(closest-side, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0) 100%);
+  }
+  .promo__product,
+  .promo__box--enterogermina .promo__product { max-height: 140px; }
+  .promo__box--enterogermina .promo__product { max-width: 78%; max-height: 120px; }
+
+  .promo__title,
+  .promo__box--oscal .promo__title { font-size: 22px; line-height: 28px; }
+  .promo__title-sub { font-size: 19px; }
+  .promo__kicker { font-size: 22px; line-height: 28px; }
+  .promo__box--enterogermina .promo__title { font-size: 17px; line-height: 23px; }
+
+  .promo__cta,
+  .promo__box--enterogermina .promo__cta,
+  .promo__box--oscal .promo__cta,
+  .promo__box--novalgina .promo__cta {
+    align-self: stretch;
+    width: auto;
+    height: 48px;
+    margin-top: 20px;
+    font-size: 16px;
+  }
+  .promo__box--enterogermina .promo__copy .promo__cta { width: 100%; }
+
+  /* texto legal sempre no pé do card, separado por um filete */
+  .promo__legal,
+  .promo__box--enterogermina .promo__legal,
+  .promo__box--oscal .promo__legal,
+  .promo__box--novalgina .promo__legal {
+    margin-top: auto;
+    padding-top: 22px;
+    font-size: 11px;
+    line-height: 14px;
+    opacity: 0.88;
+  }
+  .promo__legal::before {
+    content: "";
+    display: block;
+    height: 1px;
+    margin-bottom: 12px;
+    background: currentColor;
+    opacity: 0.25;
+  }
 }
