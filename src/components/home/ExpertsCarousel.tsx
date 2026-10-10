@@ -1,4 +1,3 @@
-import { Link } from 'react-router';
 import { experts } from '../../data/home';
 import { useCarousel } from '../../hooks/useCarousel';
 import { img } from '../../lib/assets';
@@ -34,9 +33,10 @@ export function ExpertsCarousel() {
                       <h3 className="expert-card__name">{e.name}</h3>
                       <p className="expert-card__meta">{e.meta}</p>
                       <p className="expert-card__bio">{e.bio}</p>
-                      <Link className="expert-card__link" to={e.to}>
+                      <a className="expert-card__link" href={e.profile} target="_blank" rel="noopener noreferrer">
                         Ver publicações →
-                      </Link>
+                        <span className="visually-hidden"> de {e.name} no Currículo Lattes (abre em nova aba)</span>
+                      </a>
                     </div>
                   </li>
                 );

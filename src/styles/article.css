@@ -1,0 +1,756 @@
+/* ==========================================================================
+   Artigo (ID01–ID12) — replica o layout dos PDFs enviados (portal Opella+):
+   fundo bege, card central com borda, etiquetas, título grande, imagem à
+   direita e corpo de texto em 18/29. Medidas tiradas das capturas 1:1.
+   ========================================================================== */
+
+.article-page {
+  --art-bg: #f7eee5;
+  --art-ink: #042b0b;
+  --art-border: #869487;
+  --art-panel: #e7f0f7;
+  --art-blue: #00b0eb;
+  --art-blue-dark: #0a97cd;
+  background: var(--art-bg);
+  color: var(--art-ink);
+  padding: 56px 0 72px;
+}
+
+.art-card {
+  max-width: 1251px;
+  margin: 0 auto;
+  padding: 96px 96px 100px;
+  border: 1px solid var(--art-border);
+  border-radius: 12px;
+  font-size: 19.5px;
+  line-height: 29px;
+}
+
+.art-card--loading { min-height: 100vh; }
+
+/* ---------- topo ---------- */
+.art-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 505px;
+  align-items: start;
+  column-gap: 48px;
+}
+
+.art-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.art-tag {
+  display: inline-flex;
+  align-items: center;
+  height: 39px;
+  padding: 0 13px;
+  border: 1px solid var(--art-border);
+  border-radius: 4px;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.art-title {
+  margin-top: 30px;
+  font-size: 53.5px;
+  line-height: 65px;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+}
+
+.art-lead {
+  margin-top: 18px;
+  font-size: 24px;
+  line-height: 29.5px;
+}
+
+.art-hero img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+/* ---------- corpo ---------- */
+.art-body {
+  margin-top: 92px;
+}
+
+.art-body > * + * {
+  margin-top: 38px;
+}
+
+.art-body p + p { margin-top: 0; }
+
+.art-body a {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.art-body a:hover { color: var(--art-blue-dark); }
+
+.art-body sup {
+  font-size: 0.62em;
+  line-height: 0;
+}
+
+.art-body strong { font-weight: 700; }
+
+/* termos que no portal original eram links internos: mesmo visual, sem navegação */
+.art-u {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.art-h2 {
+  font-size: 47.5px;
+  line-height: 1.12;
+  font-weight: 700;
+}
+
+.art-h2 + p { margin-top: 8px; }
+
+.art-h3 {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 47.5px;
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.art-h3 img {
+  flex: none;
+  width: 55px;
+  height: 57px;
+  border-radius: 50%;
+}
+
+.art-h3 + p { margin-top: 40px; }
+
+.art-panel {
+  padding: 14px 0 30px;
+  background: var(--art-panel);
+}
+
+.art-panel--pad { padding: 28px 32px; }
+
+/* faixa colorida sem recuo lateral (ex.: "Conclusões" do ID02) */
+.art-band { padding-bottom: 12px; }
+.art-band > .art-h2 + p { margin-top: 0; }
+
+/* listas numeradas: marcadores pendurados à esquerda do texto, como no portal */
+.art-body ol:not(.art-refs ol) {
+  padding-left: 0;
+  list-style: decimal outside;
+}
+
+.art-body p + ol,
+.art-body ol + p { margin-top: 0; }
+
+/* texto + figura lado a lado */
+.art-split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+}
+
+.art-split--rev .art-split__text { order: 2; }
+.art-split--rev ol { margin-left: 28px; }
+
+.art-fig img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.art-fig figcaption {
+  padding-top: 4px;
+  font-size: 16.4px;
+  line-height: 29px;
+  text-align: center;
+}
+
+.art-fig figcaption b { font-weight: 700; }
+
+/* URLs longas nas legendas e no texto não podem estourar a largura no celular */
+.art-body figcaption,
+.art-body p,
+.art-body li { overflow-wrap: anywhere; }
+
+.art-fig--center img {
+  width: auto;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+/* ---------- modelo 2026 do portal (ID03 em diante): texto maior, subtítulos menores ---------- */
+.art-card--2026 .art-body {
+  margin-top: 88px;
+  font-size: 24px;
+  line-height: 36px;
+}
+
+.art-card--2026 .art-body > * + *,
+.art-card--2026 .art-body p + p { margin-top: 30px; }
+
+.art-card--2026 .art-body > .art-h2 { margin-top: 38px; }
+
+.art-card--2026 .art-h2 {
+  font-size: 25.5px;
+  line-height: 36px;
+}
+
+.art-card--2026 .art-h2 + * { margin-top: 32px; }
+
+.art-card--2026 .art-body > .art-fig { margin-top: 40px; }
+.art-card--2026 .art-body > .art-fig + * { margin-top: 36px; }
+
+.art-card--2026 .art-fig figcaption {
+  padding-top: 0;
+  margin-top: 34px;
+  font-size: 19.4px;
+  line-height: 29px;
+}
+
+.art-card--2026 .art-refs { margin-right: 0; }
+
+.art-card--2026 .art-refs__title {
+  font-size: 22.5px;
+  font-weight: 700;
+}
+
+.art-card--2026 .art-refs ol { list-style-position: inside; }
+.art-list {
+  padding-left: 0;
+  list-style: disc outside;
+}
+
+.art-body p + .art-list { margin-top: 0; }
+
+.art-sub-strong { font-weight: 700; }
+
+.art-card--2026 .art-refs--large { font-size: 24px; line-height: 36px; }
+.art-card--2026 .art-refs--large .art-refs__title { font-size: inherit; font-weight: 400; }
+
+.art-card--2026 .art-refs--plain-title .art-refs__title { font-size: 24px; line-height: 36px; font-weight: 400; }
+
+/* listas com marcador pendurado fora da coluna de texto (como no portal) */
+.art-list--hang { padding-left: 0; }
+ol.art-list--hang { list-style: decimal outside; }
+
+.art-body p + .art-list--hang,
+.art-body .art-h2 + .art-list--hang { margin-top: 0; }
+
+.art-refs--wide-marker li::marker { content: counter(list-item) ".  "; }
+
+.art-fig--left img {
+  width: auto;
+  max-width: 100%;
+}
+
+.art-fig--cap-left figcaption { text-align: left; }
+
+/* padding (e não margin) para não colapsar com a margem do .art-body */
+.art-card--2026 .art-author { padding-top: 44px; }
+
+.art-author img {
+  display: block;
+  width: 348px;
+  max-width: 100%;
+  height: auto;
+}
+
+.art-card--2026 .art-mat {
+  margin-top: 4px !important;
+  font-size: 25.5px;
+  line-height: 36px;
+}
+
+.art-panel > * + * { margin-top: 42px; }
+
+/* fontes de cálcio (ID01) e similares: ícone redondo + rótulo */
+.art-icons {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr));
+  gap: 24px;
+  padding: 18px 16px 24px;
+  background: var(--art-panel);
+  text-align: center;
+}
+
+.art-icons img {
+  width: 197px;
+  max-width: 100%;
+  aspect-ratio: 1;
+  margin: 0 auto;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.art-icons span {
+  display: block;
+  margin-top: 8px;
+  font-size: 32px;
+  line-height: 1.05;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* tabela azul (duas colunas separadas, como na arte) */
+.art-table {
+  width: min(100%, 716px);
+  margin-inline: auto;
+  border-collapse: separate;
+  border-spacing: 14px 0;
+  font-size: 23px;
+  letter-spacing: 0.03em;
+  text-align: center;
+}
+
+.art-table th {
+  height: 115px;
+  padding: 0 16px;
+  background: linear-gradient(90deg, var(--art-blue-dark), #42b9eb);
+  color: var(--white);
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.art-table th:first-child { border-top-left-radius: 34px; }
+
+.art-table td {
+  height: 62px;
+  background: #f7f7f7;
+}
+
+.art-table tr:nth-child(even) td {
+  background: linear-gradient(90deg, var(--art-blue-dark), #42b9eb);
+  color: var(--white);
+}
+
+.art-table tr:last-child td:last-child { border-bottom-right-radius: 34px; }
+
+.art-note {
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+}
+
+/* chamada com ícone grande (ex.: calculadora) */
+.art-cta {
+  display: grid;
+  grid-template-columns: 258px minmax(0, 1fr);
+  align-items: center;
+  column-gap: 32px;
+  padding: 0 0 0 135px;
+  background: var(--art-panel);
+  color: inherit;
+  text-decoration: none !important;
+  font-weight: 400 !important;
+  transition: background-color 0.45s ease;
+}
+
+.art-cta img {
+  width: 258px;
+  height: 258px;
+  border-radius: 50%;
+}
+
+.art-cta > span { max-width: 460px; }
+
+.art-cta strong {
+  display: block;
+  font-size: 47.5px;
+  line-height: 1.2;
+}
+
+.art-cta small {
+  display: block;
+  margin-top: 6px;
+  font-size: 18px;
+  line-height: 29px;
+}
+
+.art-cta:hover { background: #dbe8f3; color: inherit !important; }
+
+/* produto (ex.: Os-Cal 500 + D) */
+.art-sub {
+  font-size: 24px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* a imagem do produto na arte original não carregava: o título mantém o recuo dela */
+.art-product {
+  max-width: 300px;
+}
+
+.art-product h4 {
+  max-width: 160px;
+  margin-left: 128px;
+  font-size: 58px;
+  line-height: 64px;
+  font-weight: 700;
+}
+
+.art-product h4 + p {
+  margin-top: 8px;
+  font-size: 24px;
+  line-height: 36px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.art-product p {
+  font-size: 18px;
+  line-height: 29px;
+}
+
+/* referências */
+/* no portal a lista de referências avança ~50px além da coluna de texto */
+.art-refs {
+  margin-right: -49px;
+  font-size: 19.5px;
+  line-height: 29px;
+}
+
+.art-refs ol {
+  margin-top: 0;
+  padding-left: 0;
+  list-style: decimal;
+  list-style-position: outside;
+  margin-left: -1px;
+}
+
+.art-refs li { margin-left: 0; }
+
+.art-body > .art-refs--spaced { margin-top: 66px; }
+
+.art-refs a { font-weight: 400; text-decoration: none; word-break: break-word; }
+.art-refs a:hover { text-decoration: underline; }
+
+.art-mat {
+  margin-top: 48px !important;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.art-mat--lg {
+  margin-top: 42px !important;
+  font-size: 25.5px;
+  line-height: 36px;
+}
+
+/* código do material fora do card (rodapé da arte) */
+.art-page-code {
+  margin-top: 110px;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* vídeo incorporado */
+.art-video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #000;
+}
+
+.art-video iframe,
+.art-video video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* capa do vídeo (o player só carrega no clique) */
+.art-video--cover {
+  display: block;
+  width: min(100%, 836px);
+  padding: 0;
+  border: 0;
+  border-left: 3px solid #8a8a8a;
+  border-radius: 0;
+  color: var(--white);
+  text-align: left;
+  font: inherit;
+}
+
+button.art-video--cover { cursor: pointer; }
+
+.art-video--cover img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.art-video__title {
+  position: absolute;
+  inset: 0 0 auto;
+  padding: 22px 56px 40px 116px;
+  background: linear-gradient(rgb(0 0 0 / 0.65), transparent);
+  font-size: 26px;
+  line-height: 1.2;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.art-video__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 68px;
+  height: 48px;
+  margin: -24px 0 0 -34px;
+  border-radius: 12px;
+  background: #f03;
+  transition: transform 0.3s ease;
+}
+
+.art-video__play::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -10px 0 0 -7px;
+  border-style: solid;
+  border-width: 10px 0 10px 18px;
+  border-color: transparent transparent transparent #fff;
+}
+
+button.art-video--cover:hover .art-video__play { transform: scale(1.08); }
+
+/* autor com nome acima da foto (ID08) */
+.art-author--inline img {
+  width: 221px;
+  border-radius: 6px;
+}
+
+.art-card--2026 .art-author--inline { padding-top: 54px; }
+
+/* referências do ID08: notas com asterisco e lista numerada justificada */
+.art-card--2026 .art-refs--id08 { font-size: 19.5px; line-height: 29.3px; }
+.art-refs--id08 .art-refs__title { font-size: 25.5px !important; line-height: 36px; font-weight: 700; }
+.art-card--2026 .art-refs--id08 ol { list-style: decimal outside; text-align: justify; }
+.art-card--2026 .art-refs--id08 p + p,
+.art-card--2026 .art-refs--id08 p + ol { margin-top: 0; }
+.art-card--2026 .art-body > .art-refs--id08 { margin-top: 44px; }
+.art-card--2026 .art-refs--id08 + .art-mat { margin-top: 10px !important; }
+
+/* texto justificado (ID08, ID10) */
+.art-justify p,
+.art-justify .art-list,
+.art-refs--justify li { text-align: justify; }
+
+.art-justify .art-fig figcaption,
+.art-justify .art-center { text-align: center; }
+
+/* ID10: entrelinha mais curta (33,8px) e ritmo vertical menor */
+.art-card--2026 .art-dense { font-size: 23.7px; line-height: 33.8px; }
+.art-card--2026 .art-dense > * + *,
+.art-card--2026 .art-dense p + p { margin-top: 26px; }
+.art-card--2026 .art-dense .art-h2 + * { margin-top: 26px; }
+
+/* subtítulo menor dentro do h2 ("Causas e mecanismo de ação") */
+.art-h2__sub {
+  display: block;
+  font-size: 0.86em;
+  line-height: 34px;
+}
+
+.art-fig__lg { font-size: 24px; line-height: 33px; }
+
+/* ID12: subtítulos colados ao parágrafo, autor empilhado, marcadores "•" no texto */
+.art-card--2026 .art-compact .art-h2 + p { margin-top: 2px; }
+.art-card--2026 .art-compact { margin-top: 40px; }
+
+.art-sub-lg { font-size: 25.5px; line-height: 36px; }
+
+.art-author--stack img { width: 257px; }
+.art-card--2026 .art-author--stack > * + * { margin-top: 0; }
+
+.art-bullets li::before { content: "• "; }
+.art-bullets { margin-top: 2px; }
+
+.art-card--2026 .art-refs--tight { font-size: 19.5px; line-height: 29.3px; }
+.art-card--2026 .art-refs--tight .art-refs__title + ol { margin-top: 2px; }
+.art-card--2026 .art-refs--tight ol { list-style-position: inside; }
+
+.art-mat--stack { margin-top: 70px !important; font-size: 25.5px; line-height: 36px; }
+
+/* título "Referências" no tamanho de subtítulo (ID11) */
+.art-card--2026 .art-refs--h2-title .art-refs__title { font-size: 25.5px; line-height: 36px; }
+
+.art-note-lg { font-size: 26.8px; line-height: 34px; }
+
+/* documentos relacionados (download) */
+.art-docs { margin-top: 56px !important; }
+
+.art-docs h2 + ul { margin-top: 26px; }
+
+.art-docs li {
+  font-size: 22.9px;
+  font-weight: 700;
+}
+
+/* documento citado no original, mas ainda não enviado pelo cliente */
+.art-docs__pending {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  cursor: not-allowed;
+}
+
+.art-docs__pending::after {
+  content: "";
+  width: 22px;
+  height: 22px;
+  background: #ee82c8;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3v12M6.5 9.5 12 15l5.5-5.5M3 15v5h18v-5'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3v12M6.5 9.5 12 15l5.5-5.5M3 15v5h18v-5'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.art-docs h2 {
+  font-size: 54px;
+  line-height: 1.12;
+  font-weight: 700;
+}
+
+.art-docs ul { margin-top: 8px; }
+
+.art-docs a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.art-docs a::after {
+  content: "⤓";
+  color: #e05aa8;
+  font-weight: 400;
+}
+
+/* ---------- responsivo ---------- */
+@media (max-width: 1100px) {
+  .art-card { padding: 64px 48px 56px; }
+  .art-top { grid-template-columns: minmax(0, 1fr) 42%; column-gap: 40px; }
+  .art-title { font-size: 44px; line-height: 52px; }
+  .art-lead { font-size: 21px; }
+  .art-body { margin-top: 64px; }
+  .art-h2, .art-h3, .art-cta strong, .art-docs h2, .art-product h4 { font-size: 38px; }
+  .art-icons span { font-size: 28px; }
+  .art-cta { grid-template-columns: 180px minmax(0, 1fr); padding-left: 48px; }
+  .art-cta img { width: 180px; height: 180px; }
+  .art-refs { margin-right: 0; }
+  .art-split { column-gap: 28px; }
+  .art-split[style] { padding: 20px 0 20px 20px; }
+  .art-split--rev ol { margin-left: 24px; }
+}
+
+@media (max-width: 760px) {
+  .article-page { padding: 24px 0 48px; }
+  .art-card { padding: 28px 20px 36px; border-radius: 10px; font-size: 16px; line-height: 25px; }
+  .art-top { grid-template-columns: minmax(0, 1fr); row-gap: 24px; }
+  .art-hero { order: -1; }
+  .art-title { margin-top: 18px; font-size: 32px; line-height: 38px; }
+  .art-lead { font-size: 18px; line-height: 25px; }
+  .art-body { margin-top: 36px; }
+  .art-body > * + * { margin-top: 22px; }
+  .art-h2, .art-docs h2, .art-product h4 { font-size: 28px; }
+  .art-product h4 { margin-left: 0; max-width: none; }
+  .art-h3 { font-size: 22px; }
+  .art-h3 img { width: 40px; height: 41px; }
+  .art-icons { --cols: 2 !important; gap: 16px; }
+  .art-icons img { width: 110px; }
+  .art-icons span { font-size: 18px; }
+  .art-table { font-size: 15px; border-spacing: 6px 0; }
+  .art-table th { height: 80px; padding: 0 8px; }
+  .art-table td { height: 46px; }
+  .art-cta { grid-template-columns: 96px minmax(0, 1fr); column-gap: 16px; padding: 16px; }
+  .art-cta img { width: 96px; height: 96px; }
+  .art-cta strong { font-size: 22px; }
+  .art-cta small { font-size: 14px; line-height: 20px; }
+  .art-refs { font-size: 14px; line-height: 21px; }
+  .art-refs ol { padding-left: 20px; }
+  .art-page-code { margin-top: 48px; }
+  .art-video__title { padding: 12px 16px 24px; font-size: 15px; }
+  .art-body ol:not(.art-refs ol) { padding-left: 20px; }
+  .art-split { grid-template-columns: minmax(0, 1fr); row-gap: 20px; }
+  .art-split--rev .art-split__text { order: 0; }
+  .art-split--rev ol { margin-left: 0; }
+  .art-split[style] { padding: 20px 16px; }
+  .art-split[style] .art-fig img { border-radius: 8px; }
+  .art-fig figcaption { font-size: 13px; line-height: 19px; }
+  .art-band { padding: 16px; }
+}
+
+/* ---------- responsivo do modelo 2026 (ID03 em diante) ---------- */
+@media (max-width: 1100px) {
+  .art-card--2026 .art-body,
+  .art-card--2026 .art-dense,
+  .art-card--2026 .art-refs--large { font-size: 20px; line-height: 31px; }
+  .art-card--2026 .art-h2,
+  .art-card--2026 .art-mat,
+  .art-mat--lg,
+  .art-mat--stack { font-size: 23px; line-height: 32px; }
+  .art-card--2026 .art-fig figcaption,
+  .art-fig__lg { font-size: 17px; line-height: 26px; }
+  .art-note-lg { font-size: 22px; line-height: 30px; }
+  .art-docs h2 { font-size: 42px; }
+}
+
+@media (max-width: 760px) {
+  .art-card--2026 .art-body,
+  .art-card--2026 .art-dense,
+  .art-card--2026 .art-refs--large,
+  .art-card--2026 .art-refs--plain-title .art-refs__title { font-size: 16px; line-height: 25px; }
+  .art-card--2026 .art-body { margin-top: 32px; }
+  .art-card--2026 .art-body > * + *,
+  .art-card--2026 .art-dense > * + *,
+  .art-card--2026 .art-body p + p { margin-top: 18px; }
+  .art-card--2026 .art-h2 + * { margin-top: 12px; }
+  .art-card--2026 .art-body > .art-fig,
+  .art-card--2026 .art-body > .art-fig + * { margin-top: 24px; }
+  /* espaçamentos copiados do desktop (style inline) ficam proporcionais no celular */
+  .art-card--2026 .art-body [style*="margin-top"] { margin-top: 24px !important; }
+  .art-card--2026 .art-h2,
+  .art-card--2026 .art-mat,
+  .art-card--2026 .art-refs__title,
+  .art-mat--lg,
+  .art-mat--stack,
+  .art-sub-lg { font-size: 19px; line-height: 26px; }
+  .art-card--2026 .art-fig figcaption,
+  .art-fig__lg { margin-top: 12px; font-size: 13px; line-height: 19px; }
+  .art-note-lg { font-size: 16px; line-height: 24px; }
+  .art-card--2026 .art-refs,
+  .art-card--2026 .art-refs--id08,
+  .art-card--2026 .art-refs--tight { font-size: 13px; line-height: 20px; }
+  /* texto justificado abre buracos em colunas estreitas */
+  .art-justify p,
+  .art-justify .art-list,
+  .art-refs--justify li,
+  .art-refs--id08 ol { text-align: left; }
+  .art-list,
+  .art-list--hang,
+  ol.art-list--hang { padding-left: 20px; }
+  .art-author img,
+  .art-author--stack img { width: 180px; }
+  .art-author--inline img { width: 140px; }
+  .art-docs h2 { font-size: 30px; }
+  .art-docs li { font-size: 17px; }
+}

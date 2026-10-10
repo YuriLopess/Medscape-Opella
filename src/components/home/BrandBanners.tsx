@@ -4,6 +4,7 @@ import { routes } from '../../data/brands';
 import { useCarousel } from '../../hooks/useCarousel';
 import { img } from '../../lib/assets';
 import { CarouselDots } from '../ui/CarouselDots';
+import { DocLink } from '../ui/DocLink';
 
 interface Slide {
   id: string;
@@ -45,8 +46,7 @@ const slides: Slide[] = [
         <p className="promo__kicker">Sua prescrição está alinhada às últimas evidências?</p>
         <div className="promo__copy">
           <p className="promo__title">Bacillus Clausii mostra redução significativa da Diarreia Associada a Antibióticos</p>
-          {/* TODO: vincular ao arquivo ID12 (Bacillus clausii e prevenção da DiAA) quando o documento chegar */}
-          <Link className="promo__cta" to="/enterogermina" data-doc="ID12">Saiba mais aqui</Link>
+          <DocLink className="promo__cta" doc="ID12">Saiba mais aqui</DocLink>
         </div>
         <p className="promo__legal">
           Enterogermina® - UM PRODUTO OPELLA

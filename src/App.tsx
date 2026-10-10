@@ -1,8 +1,10 @@
 import { Route, Routes } from 'react-router';
 import { ScrollToTop } from './components/layout/ScrollToTop';
 import { brandOrder, brands, routes } from './data/brands';
+import { articles } from './data/articles';
 import { documents } from './data/documents';
 import { products } from './data/products';
+import { ArticleRoute } from './pages/ArticlePage';
 import { DocumentPage } from './pages/DocumentPage';
 import { HomePage } from './pages/HomePage';
 import { LegalPage } from './pages/LegalPage';
@@ -14,6 +16,7 @@ import { ProductPage } from './pages/ProductPage';
  *   /                              home
  *   /<marca>                       página da marca (data/products)
  *   /<marca>/<documento>           documento científico (data/documents)
+ *   /<marca>/<artigo>              artigo ID01–ID12 no layout dos PDFs (data/articles, carregado sob demanda)
  *   /politica-de-privacidade, /termos-de-uso
  */
 export function App() {
@@ -29,6 +32,10 @@ export function App() {
 
         {documents.map((doc) => (
           <Route key={doc.slug} path={`${brands[doc.brand].path}/${doc.slug}`} element={<DocumentPage data={doc} />} />
+        ))}
+
+        {articles.map((a) => (
+          <Route key={a.id} path={`${brands[a.brand].path}/${a.slug}`} element={<ArticleRoute entry={a} />} />
         ))}
 
         <Route path={routes.privacy} element={<LegalPage page="privacy" />} />

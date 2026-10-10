@@ -1,7 +1,7 @@
 /**
  * Conteúdos científicos citados em "Conteúdo adicional" (cards da landing e
- * miniaturas da barra lateral dos documentos). Um conteúdo sem `to` ainda não
- * tem página: o link fica pendente com o ID do arquivo pedido pela revisão.
+ * miniaturas da barra lateral dos documentos). Sem `to`, o `doc` de um artigo
+ * (ID01–ID12) leva à página dele (ver DocLink); os demais ficam pendentes.
  */
 import type { ContentItem } from '../lib/types';
 

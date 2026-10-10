@@ -166,7 +166,7 @@ export const documents: DocumentPageData[] = [
       height: 641,
       alt: 'Três gerações de mulheres sorrindo, lado a lado',
     },
-    // TODO: vincular ao arquivo ID02 — Menopausa e saúde óssea
+    // a fonte leva ao artigo ID02 (Menopausa e saúde óssea)
     source: <DocLink doc="ID02">Saúde óssea feminina: o papel da suplementação de cálcio na prática clínica</DocLink>,
     content: <PlaceholderContent />,
     aside: ['saude-ossea-da-mulher', 'desafio-osteoporose'],

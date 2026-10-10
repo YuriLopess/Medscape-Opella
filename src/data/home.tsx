@@ -62,12 +62,20 @@ export const therapeuticAreas: TherapeuticArea[] = [
 ];
 
 // ---------- Especialistas ----------
+/** Perfis enviados pelo cliente para o CTA "Ver publicações". */
+const LATTES = {
+  flavio: 'http://lattes.cnpq.br/7376017345403747',
+  carlos: 'http://lattes.cnpq.br/3646363034328241',
+  lucia: 'http://lattes.cnpq.br/7268850205181193',
+};
+
 export interface ExpertCard {
   name: string;
   photo: string;
   meta: ReactNode;
   bio: string;
-  to: string;
+  /** currículo Lattes do especialista (link externo, abre em nova aba) */
+  profile: string;
 }
 
 export const experts: ExpertCard[] = [
@@ -76,28 +84,28 @@ export const experts: ExpertCard[] = [
     photo: 'experts/flavio-melo.webp',
     meta: <>Médico Pediatra<br />Hospital Regional de Guarabira<br />CRM-PB: 5239<br />RQE: 3065</>,
     bio: 'Pediatra com experiência em saúde infantil, aborda o manejo da febre e da dor.',
-    to: '/novalgina',
+    profile: LATTES.flavio,
   },
   {
     name: 'Dr. Carlos Maurício',
     photo: 'experts/carlos-mauricio.webp',
     meta: <>Médico Otorrinolaringologista<br />CLIAOD (Clínica de Otorrinolaringologia e Fonoaudiologia)<br />CRM-DF: 15474<br />RQE: 15338</>,
     bio: 'Otorrinolaringologista, aborda o manejo das doenças alérgicas e o papel dos anti-histamínicos no controle dos sintomas.',
-    to: '/allegra',
+    profile: LATTES.carlos,
   },
   {
     name: 'Dr. Flávio Melo',
     photo: 'experts/flavio-melo.webp',
     meta: <>Médico Pediatra<br />Hospital Regional de Guarabira<br />CRM-PB: 5239<br />RQE: 3065</>,
     bio: 'Especialista em Pediatria, compartilha orientações sobre a saúde da microbiota intestinal.',
-    to: '/enterogermina',
+    profile: LATTES.flavio,
   },
   {
     name: 'Dra. Lucia Costa Paiva',
     photo: 'experts/lucia-costa-paiva.webp',
     meta: <>Médica Ginecologista<br />UNICAMP<br />CRM-SP: 52.252<br />RQE: 129.821</>,
     bio: 'Ginecologista, aborda a importância do cálcio na saúde da mulher, da prevenção da perda óssea à suplementação durante a gestação.',
-    to: '/os-cal',
+    profile: LATTES.lucia,
   },
 ];
 

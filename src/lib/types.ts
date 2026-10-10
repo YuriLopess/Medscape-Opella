@@ -85,6 +85,37 @@ export interface ProductPageData {
   regulatory: ReactNode[];
 }
 
+/**
+ * Artigo (ID01–ID12) — replica o layout dos PDFs enviados pelo cliente.
+ * A rota é `${brand.path}/${slug}`.
+ */
+export interface ArticleData extends ArticleContent {
+  id: string; // ex.: "ID01"
+  brand: BrandId;
+  slug: string;
+}
+
+/** Conteúdo de um artigo (id, marca e slug ficam no registro em data/articles). */
+export interface ArticleContent {
+  title: string; // <title> e etiqueta de acessibilidade
+  heading: ReactNode;
+  description: string;
+  tags: string[];
+  lead: ReactNode;
+  hero: Picture;
+  /** substitui a imagem do topo (ex.: vídeo do ID08) */
+  heroMedia?: ReactNode;
+  body: ReactNode;
+  /** código do material ao fim do card (ex.: "MAT-BR-2303002") */
+  mat?: string;
+  /** código da página, abaixo do card */
+  pageCode?: string;
+  /** "2026": modelo mais novo do portal (texto 24/36, subtítulos menores, MAT grande) */
+  layout?: '2026';
+  /** classe extra no corpo (ex.: "art-justify") */
+  bodyClass?: string;
+}
+
 export interface DocumentPageData {
   brand: BrandId;
   slug: string;
