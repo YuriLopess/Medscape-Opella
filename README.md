@@ -26,7 +26,8 @@ npm run preview    # serve o build de dist/ em http://localhost:4173
 **Hospedagem:** como é uma SPA, o servidor precisa devolver o `index.html` nas rotas (senão um F5
 em `/allegra` dá 404). O `npm run build` gera `dist/.htaccess` para Apache (tools/postbuild.mjs): rotas
 conhecidas com status 200, o resto com 404, arquivos com ponto bloqueados e cache dos assets.
-**Publicação (servidor da Medscape):** `VPS=usuario@ip bash tools/deploy.sh` — build local, envio à VPS
+**Publicação (servidor da Medscape):** no ar em https://opellahub.medscapegrupo.com (raiz `site/public`).
+`VPS=root@179.236.232.166 VPS_KEY=~/.ssh/hpn_deploy bash tools/deploy.sh` — build local, envio à VPS
 liberada e FTP (lftp) de lá; as senhas ficam só em `~/.opella.env` na VPS. Use `--dry-run` para simular.
 
 ## Estrutura

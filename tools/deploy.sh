@@ -10,7 +10,10 @@
 #   FTP_HOST=ftp.exemplo.com
 #   FTP_USER=usuario
 #   FTP_PASS='senha'
-#   FTP_DIR=/caminho/da/raiz/publica      (descoberto no passo 3 do guia; ex.: site/public)
+#   FTP_DIR=site/public                   (raiz pública confirmada com arquivo de teste)
+#
+# Opella Hub: https://opellahub.medscapegrupo.com — VPS root@179.236.232.166 (chave ~/.ssh/hpn_deploy).
+# dns:order inet força IPv4: a Medscape libera o IPv4 da VPS, que também tem IPv6.
 #
 # Uso:  VPS=usuario@ip-da-vps [VPS_KEY=~/.ssh/chave] bash tools/deploy.sh [--dry-run]
 #   --dry-run  mostra o que o lftp enviaria/apagaria, sem mudar nada no servidor.
@@ -51,7 +54,9 @@ tar -xzf "/tmp/$PKG" -C "$WORK"
 # a senha vai por variável de ambiente (--env-password), não aparece na lista de processos
 export LFTP_PASSWORD="$FTP_PASS"
 lftp --env-password -u "$FTP_USER" "$FTP_HOST" <<LFTP
+set dns:order "inet"
 set ftp:ssl-allow yes
+set ssl:verify-certificate no
 set net:max-retries 2
 set net:timeout 20
 mirror -R --delete --verbose=1 --parallel=4 $DRY \
@@ -59,5 +64,5 @@ mirror -R --delete --verbose=1 --parallel=4 $DRY \
   "$WORK/" "$FTP_DIR/"
 bye
 LFTP
-echo "ok: publicado em $FTP_DIR"
+echo "ok: ${DRY:+simulação de }publicação em $FTP_DIR"
 REMOTE
