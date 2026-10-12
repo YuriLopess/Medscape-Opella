@@ -23,10 +23,11 @@ npm run preview    # serve o build de dist/ em http://localhost:4173
 | `/politica-de-privacidade`, `/termos-de-uso` | Textos legais |
 | qualquer outra | Página não encontrada |
 
-**Hospedagem:** como é uma SPA, o servidor precisa devolver o `index.html` para qualquer rota
-(senão um F5 em `/allegra` dá 404). Exemplos: Netlify → arquivo `public/_redirects` com
-`/* /index.html 200`; Vercel → `rewrites` para `/index.html`; Nginx → `try_files $uri /index.html`.
-O `npm run preview` já faz isso.
+**Hospedagem:** como é uma SPA, o servidor precisa devolver o `index.html` nas rotas (senão um F5
+em `/allegra` dá 404). O `npm run build` gera `dist/.htaccess` para Apache (tools/postbuild.mjs): rotas
+conhecidas com status 200, o resto com 404, arquivos com ponto bloqueados e cache dos assets.
+**Publicação (servidor da Medscape):** `VPS=usuario@ip bash tools/deploy.sh` — build local, envio à VPS
+liberada e FTP (lftp) de lá; as senhas ficam só em `~/.opella.env` na VPS. Use `--dry-run` para simular.
 
 ## Estrutura
 
