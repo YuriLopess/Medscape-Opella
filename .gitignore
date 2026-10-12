@@ -8,6 +8,8 @@ dist/
 /Assets/
 /Opella_*/
 /*.pdf
+# PDFs de origem enviados pelo cliente (ID01–ID15, revisão): usados só pelos scripts de tools/
+/fontes/
 *.ai
 *.psd
 

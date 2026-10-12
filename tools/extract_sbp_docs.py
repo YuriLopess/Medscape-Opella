@@ -7,13 +7,14 @@ Para cada PDF:
   - tabelas viram <table> (com colspan/rowspan), figuras vetoriais/raster viram imagem recortada do PDF;
   - grava src/data/docs/<id>.tsx e as figuras em src/assets/img/documentos/<id>/.
 
-Uso:  python tools/extract_sbp_docs.py [ID13 ID14 ID15]      (requer os PDFs "IDxx - ….pdf" na raiz)
+Uso:  python tools/extract_sbp_docs.py [ID13 ID14 ID15]      (requer os PDFs "IDxx - ….pdf" em fontes/)
 """
 import collections, glob, html, os, re, sys
 import pymupdf
 from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SRC = os.path.join(ROOT, 'fontes')  # PDFs de origem (fora do Git, ver .gitignore)
 OUT_PDF = os.path.join(ROOT, 'public', 'documentos')
 # nome do PDF oferecido para download em cada página de documento
 PDF_NAMES = {
@@ -322,7 +323,7 @@ def page_lines_clip(page, rect, size_main):
 
 # ---------------------------------------------------------------- documento ----------------
 def convert(tag):
-    pdf = sorted(glob.glob(os.path.join(ROOT, f'{tag} - *.pdf')))[0]
+    pdf = sorted(glob.glob(os.path.join(SRC, f'{tag} - *.pdf')))[0]
     doc = pymupdf.open(pdf)
     words = word_counts(doc)
     figs = FIGURES.get(tag, [])
@@ -529,13 +530,13 @@ def build(tag):
         else:
             out.append(f'<p>{runs_to_jsx(runs)}</p>')
     body = '\n'.join(out)
-    pdfname = os.path.basename(sorted(glob.glob(os.path.join(ROOT, f'{tag} - *.pdf')))[0])
+    pdfname = os.path.basename(sorted(glob.glob(os.path.join(SRC, f'{tag} - *.pdf')))[0])
     tsx = (f'/* {tag} — gerado por tools/extract_sbp_docs.py a partir de "{pdfname}". Não editar à mão: rode o script. */\n'
            "import { img } from '../../lib/assets';\n\n"
            'const content = (\n  <>\n' + '\n'.join('    ' + ln for ln in body.split('\n')) + '\n  </>\n);\n\n'
            'export default content;\n')
     # links das referências: usa a URL completa da anotação do PDF quando o texto visível estiver truncado
-    for u in export_pdf(tag, pymupdf.open(sorted(glob.glob(os.path.join(ROOT, f'{tag} - *.pdf')))[0])):
+    for u in export_pdf(tag, pymupdf.open(sorted(glob.glob(os.path.join(SRC, f'{tag} - *.pdf')))[0])):
         for href in set(re.findall(r'href="([^"]+)"', tsx)):
             same = href.split('?')[0] == u.split('?')[0] or href.replace('-', '') == u.replace('-', '')
             if href != u and (u.startswith(href) or same):

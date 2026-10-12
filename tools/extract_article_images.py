@@ -5,7 +5,7 @@ as regiões listadas em CROPS (coordenadas do rolo, em px) são recortadas, apar
 fundo bege e salvas em src/assets/img/artigos/<id>/<nome>.webp.
 
 Uso:  python tools/extract_article_images.py [ID01 ID02 ...]
-Requer os PDFs "IDxx - ….pdf" na raiz do projeto.  Dependências: pip install pymupdf pillow numpy
+Requer os PDFs "IDxx - ….pdf" em fontes/.  Dependências: pip install pymupdf pillow numpy
 """
 import glob, os, sys
 import numpy as np
@@ -13,6 +13,7 @@ import pymupdf
 from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SRC = os.path.join(ROOT, 'fontes')  # PDFs de origem (fora do Git, ver .gitignore)
 OUT = os.path.join(ROOT, 'src', 'assets', 'img', 'artigos')
 BG = np.array([0xf7, 0xee, 0xe5])
 
@@ -22,7 +23,7 @@ CROPS: dict[str, dict[str, tuple]] = {}
 
 
 def roll(tag: str) -> Image.Image:
-    f = sorted(glob.glob(os.path.join(ROOT, f'{tag} - *.pdf')))[0]
+    f = sorted(glob.glob(os.path.join(SRC, f'{tag} - *.pdf')))[0]
     d = pymupdf.open(f)
     pages = []
     for p in d:

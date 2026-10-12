@@ -119,4 +119,6 @@ Até lá a Opella Sans é usada no lugar (`--font-allegra` em `base.css`). Ao re
 Os arquivos de design (.ai, fontes e imagens originais) foram removidos do projeto: tudo o que o
 site usa já está em `src/` e `public/`. Os scripts `tools/extract_*.py` ficam como registro de como
 cada imagem foi extraída e só rodam se as pastas `Opella_*` forem colocadas de volta na raiz.
+Os PDFs do cliente (ID01–ID15 e o PDF de revisão) ficam em `fontes/`, fora do Git; os scripts
+`extract_article_images.py` e `extract_sbp_docs.py` leem de lá.
 **Não** coloque arquivos do site em `Assets/`: no Windows, `assets` e `Assets` são a mesma pasta.
