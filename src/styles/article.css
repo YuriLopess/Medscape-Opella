@@ -495,6 +495,38 @@ button.art-video--cover { cursor: pointer; }
   background: transparent;
 }
 
+/* vídeo ainda sem link: capa esmaecida + selo "Em breve" (sem cursor de clique) */
+.art-video--soon { cursor: default; }
+
+.art-video--soon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 0.35);
+}
+
+.art-video__soon {
+  position: absolute;
+  z-index: 1;
+  top: 51%; /* sobre o botão de play que está na própria imagem */
+  left: 51%;
+  transform: translate(-50%, -50%);
+  padding: 28px 40px;
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--art-ink, #042b0b);
+  font-size: 22px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  box-shadow: 0 6px 20px rgb(0 0 0 / 0.25);
+}
+
+@media (max-width: 760px) {
+  .art-video__soon { padding: 12px 20px; font-size: 14px; }
+}
+
 .art-video--cover img {
   position: absolute;
   inset: 0;

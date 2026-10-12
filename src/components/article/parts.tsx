@@ -234,8 +234,11 @@ export function Video({
       {cover}
     </button>
   ) : (
-    <figure className={cls} aria-label={`${title} (vídeo em breve)`}>
+    <figure className={`${cls} art-video--soon`} aria-label={`${title} (vídeo em breve)`}>
       {cover}
+      <span className="art-video__soon" aria-hidden="true">
+        Em breve
+      </span>
     </figure>
   );
 }
