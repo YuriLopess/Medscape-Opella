@@ -17,8 +17,9 @@ npm run preview    # serve o build de dist/ em http://localhost:4173
 | `/allegra`, `/enterogermina`, `/os-cal`, `/novalgina` | Página de cada marca |
 | `/allegra/anti-histaminicos-em-doencas-alergicas` | Documento ID14 |
 | `/enterogermina/uso-de-probioticos-em-criancas` | Documento ID15 |
-| `/os-cal/saude-ossea-feminina` | Documento (vídeo em destaque do Os-Cal) |
+| `/os-cal/saude-ossea-feminina` | Documento com o texto do ID02 (vídeo em destaque do Os-Cal) |
 | `/novalgina/abordagem-da-febre-aguda` | Documento ID13 |
+| `/<marca>/<slug>` | Artigos ID01–ID12 (lista em `data/articles/index.ts`) |
 | `/politica-de-privacidade`, `/termos-de-uso` | Textos legais |
 | qualquer outra | Página não encontrada |
 
@@ -33,6 +34,7 @@ O `npm run preview` já faz isso.
 index.html                 Entrada do Vite (fontes pré-carregadas, favicon)
 public/
   fonts/                   Opella Sans (woff2), servidas como /fonts/…
+  documentos/              PDFs da SBP (ID13–ID15) para download, com os links limpos
   favicon.svg
 src/
   main.tsx                 Monta o app com o roteador e os estilos globais
@@ -51,7 +53,9 @@ src/
   data/                    TODO o conteúdo do site
     brands.ts              Marcas: nome, rota, tema, área terapêutica + rotas fixas
     products/<marca>.tsx   Conteúdo de cada página de marca
-    documents.tsx          Conteúdo das páginas de documento
+    documents.tsx          Páginas de documento (banner, fonte, barra lateral)
+    docs/                  Corpo dos documentos, carregado sob demanda (id13–15 GERADOS, id02 à mão)
+    articles/              Artigos ID01–ID12, carregados sob demanda
     contents.tsx           Conteúdos de "Conteúdo adicional" (card + miniatura + link)
     home.tsx               Conteúdo da home
     legal/*.html           Política de Privacidade e Termos de Uso
@@ -65,12 +69,15 @@ src/
     themes.css             Cores e ajustes finos de cada marca (.theme-<marca>)
     home.css / product.css / document.css / legal.css
   assets/img/              Imagens (o Vite gera nomes com hash no build)
-tools/                     Scripts Python de apoio (ícones e extração de assets dos .ai)
+tools/                     Scripts Python de apoio (ícones, imagens dos .ai e dos PDFs, documentos da SBP)
 ```
 
 ## Como fazer…
 
 - **Mudar um texto, imagem ou link:** edite o arquivo em `src/data/`. Os componentes não têm conteúdo.
+- **Atualizar um documento da SBP (ID13–ID15):** troque o PDF na raiz e rode
+  `python tools/extract_sbp_docs.py` (regera `src/data/docs/id1x.tsx`, as figuras e o PDF de download).
+  Não edite esses `.tsx` à mão; correções pontuais vão em `FIXES` no script.
 - **Ligar um documento que chegou:** crie a entrada em `data/documents.tsx` (a rota é criada sozinha)
   e, nos lugares que apontam para ele, troque `{ doc: 'IDxx' }` por `{ to: '/rota', doc: 'IDxx' }`.
   Links sem `to` ficam pendentes (`href="#"`, não navegam); busque por `doc: 'ID` para achar todos.
@@ -94,17 +101,16 @@ Até lá a Opella Sans é usada no lugar (`--font-allegra` em `base.css`). Ao re
 
 ## Pendências de conteúdo
 
-- Links para documentos ainda não entregues (ID01 a ID12) ficam pendentes; ID13, ID14 e ID15 já têm página.
-- Vídeos: nenhum "Ver vídeo" tem arquivo/URL ainda (o conteúdo ID08 também tem vídeo).
-- Corpo em lorem ipsum (do próprio layout): documentos ID13, ID15 e `/os-cal/saude-ossea-feminina`;
-  "Informações Regulatórias" do Os-Cal.
+- Vídeos: nenhum "Ver vídeo" tem arquivo/URL ainda. O ID08 mostra o quadro do vídeo; com o link,
+  preencha `youtubeId` no `<Video>` de `data/articles/id08.tsx`.
+- ID09: o PDF "Allegra D Mais que um descongestionante" (Documentos Relacionados) não foi entregue.
+- Lorem ipsum (do próprio layout): só "Informações Regulatórias" do Os-Cal.
 - `/os-cal/saude-ossea-feminina` ainda não tem link de entrada: definir de onde é acessada.
 - Prévias da Shutterstock com marca d'água — trocar pela versão licenciada: card "Allegra D®"
   (stock-photo-…-2715886517) e card "Febre na Pediatria" (stock-photo-…-2537922789).
 - Os-Cal: no layout o rótulo "DOCUMENTO CIENTÍFICO" do destaque sai azul sobre azul (ilegível);
   usado um lilás claro (`--feature-label` em themes.css).
 - Novalgina: no .ai o ícone da busca é roxo (herdado do Os-Cal); mantido o laranja da Opella.
-- Banner do Enterogermina na home aponta para `/enterogermina` até o ID12 chegar.
 - A busca do header ainda não tem destino.
 
 ## Arquivos de origem

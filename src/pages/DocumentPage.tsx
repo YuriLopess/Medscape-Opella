@@ -1,9 +1,22 @@
+import { Suspense, use, type ReactNode } from 'react';
 import { PageShell } from '../components/layout/PageShell';
 import { DocumentBanner } from '../components/document/DocumentBanner';
 import { DocumentAside } from '../components/document/DocumentAside';
 import { brands } from '../data/brands';
 import type { DocumentPageData } from '../lib/types';
 import { img } from '../lib/assets';
+
+// um carregamento por documento, reaproveitado ao voltar para a mesma página
+const loaded = new Map<string, Promise<{ default: ReactNode }>>();
+
+function LoadedContent({ id, load }: { id: string; load: () => Promise<{ default: ReactNode }> }) {
+  let promise = loaded.get(id);
+  if (!promise) {
+    promise = load();
+    loaded.set(id, promise);
+  }
+  return <>{use(promise).default}</>;
+}
 
 /** Página de documento científico de uma marca; o conteúdo vem de data/documents. */
 export function DocumentPage({ data }: { data: DocumentPageData }) {
@@ -25,7 +38,21 @@ export function DocumentPage({ data }: { data: DocumentPageData }) {
               <p>{data.source}</p>
             </div>
 
-            <div className="doc-content">{data.content}</div>
+            {data.download && (
+              <a className="doc-download" href={data.download.href} download>
+                {data.download.label}
+                <span className="visually-hidden"> (PDF)</span>
+              </a>
+            )}
+
+            <div className="doc-content">
+              {data.content}
+              {data.loadContent && (
+                <Suspense fallback={<p className="doc-loading" aria-busy="true">Carregando o documento…</p>}>
+                  <LoadedContent id={data.slug} load={data.loadContent} />
+                </Suspense>
+              )}
+            </div>
           </article>
 
           <DocumentAside contentIds={data.aside} areas={data.asideAreas} />

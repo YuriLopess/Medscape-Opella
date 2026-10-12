@@ -125,7 +125,11 @@ export interface DocumentPageData {
   banner?: string; // arte do banner (sem arte = cor do tema)
   image: Picture;
   source: ReactNode;
-  content: ReactNode;
+  /** corpo da página; documentos longos usam `loadContent` (baixado só quando a página abre) */
+  content?: ReactNode;
+  loadContent?: () => Promise<{ default: ReactNode }>;
+  /** PDF original oferecido para download (em public/) */
+  download?: { href: string; label: string };
   aside: string[]; // ids de data/contents
   asideAreas: AsideArea[];
 }

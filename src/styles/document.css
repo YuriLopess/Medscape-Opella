@@ -180,6 +180,166 @@
   left: 0;
 }
 
+/* ---------- documentos completos (ID02, ID13–ID15) ---------- */
+.doc-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 28px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: var(--brand-ink);
+  color: var(--white);
+  font-size: 16px;
+  font-weight: 700;
+  transition: background-color var(--hover-dur, 0.4s) ease;
+}
+
+.doc-download::after {
+  content: "";
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3v12M6.5 9.5 12 15l5.5-5.5M3 15v5h18v-5'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3v12M6.5 9.5 12 15l5.5-5.5M3 15v5h18v-5'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.doc-download:hover { background: var(--brand-highlight, var(--brand-ink)); }
+
+.doc-loading { min-height: 60vh; }
+
+.doc-content > * + h2 { margin-top: 44px; }
+.doc-content > * + :is(h3, h4) { margin-top: 32px; }
+
+.doc-content h3 {
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 900;
+  color: var(--doc-heading, var(--brand-ink));
+}
+
+.doc-content h4 {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.doc-content :is(h3, h4) + :is(p, ul, ol) { margin-top: 12px; }
+
+.doc-content > :is(ul, ol, .doc-table-wrap, .doc-figure, .doc-caption) { margin-top: 20px; }
+.doc-content > :is(ul, ol) + p,
+.doc-content > :is(.doc-table-wrap, .doc-figure, .doc-source-note) + :is(p, ul, ol) { margin-top: 24px; }
+
+.doc-content li + li { margin-top: 8px; }
+.doc-content li ul { margin-top: 8px; }
+.doc-content li li::before { content: "–"; }
+
+.doc-content ol {
+  padding-left: 26px;
+  list-style: decimal outside;
+}
+
+.doc-content ol.doc-list-alpha { list-style-type: lower-alpha; }
+
+.doc-content sup,
+.doc-content sub { font-size: 0.68em; line-height: 0; }
+
+.doc-content strong { font-weight: 700; }
+
+.doc-content a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  overflow-wrap: anywhere;
+}
+
+.doc-caption {
+  font-size: 17px;
+  line-height: 23px;
+}
+
+.doc-caption + :is(.doc-table-wrap, .doc-figure) { margin-top: 12px !important; }
+
+.doc-source-note {
+  margin-top: 10px !important;
+  font-size: 14px;
+  line-height: 20px;
+  opacity: 0.85;
+}
+
+.doc-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  background: var(--white);
+}
+
+.doc-figure--narrow img { max-width: 531px; margin-inline: auto; }
+
+.doc-figure figcaption {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.doc-table-wrap {
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--brand-ink) 25%, transparent);
+}
+
+.doc-table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: 15px;
+  line-height: 21px;
+}
+
+.doc-table :is(th, td) {
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, var(--brand-ink) 18%, transparent);
+  text-align: left;
+  vertical-align: top;
+}
+
+.doc-table thead th {
+  background: var(--brand-soft);
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+.doc-table tbody th { font-weight: 700; }
+
+.doc-table tbody tr:nth-child(even) :is(td, th) {
+  background: color-mix(in srgb, var(--brand-soft) 35%, transparent);
+}
+
+.doc-refs {
+  font-size: 15px;
+  line-height: 22px;
+}
+
+.doc-refs li + li { margin-top: 6px; }
+
+.doc-lead {
+  font-size: 20px;
+  line-height: 27px;
+  font-weight: 700;
+}
+
+.doc-callout--text {
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: 400;
+  color: inherit;
+}
+
+.doc-callout--text h2 { margin-top: 0; }
+.doc-callout--text p + p { margin-top: 16px; }
+
 @media (max-width: 640px) {
   .doc-body { font-size: 16px; line-height: 22px; }
   .doc-source { grid-template-columns: 44px 1fr; column-gap: 14px; font-size: 17px; line-height: 21px; }
@@ -187,6 +347,13 @@
   .doc-content { margin-top: 32px; }
   .doc-content h2 { font-size: 21px; line-height: 26px; }
   .doc-callout { padding: 20px; font-size: 17px; line-height: 22px; }
+  .doc-content h3 { font-size: 18px; line-height: 24px; }
+  .doc-content h4 { font-size: 16px; line-height: 22px; }
+  .doc-caption, .doc-lead { font-size: 16px; line-height: 22px; }
+  .doc-table { font-size: 13px; line-height: 18px; }
+  .doc-table :is(th, td) { padding: 8px; }
+  .doc-refs { font-size: 13px; line-height: 19px; }
+  .doc-download { font-size: 15px; padding: 10px 18px; }
 }
 
 /* ---------- Barra lateral ---------- */
