@@ -191,8 +191,19 @@ export function Ext({ href, children }: { href: string; children: ReactNode }) {
 /**
  * Vídeo do YouTube que só carrega o player ao clicar (a capa vem do próprio PDF).
  * Sem `youtubeId` mostra apenas a capa: o link do vídeo ainda não foi enviado pelo cliente.
+ * `framed`: a capa já traz a interface do player (título, botão de play), então não desenha a nossa por cima.
  */
-export function Video({ poster, title, youtubeId }: { poster: string; title: string; youtubeId?: string }) {
+export function Video({
+  poster,
+  title,
+  youtubeId,
+  framed,
+}: {
+  poster: string;
+  title: string;
+  youtubeId?: string;
+  framed?: boolean;
+}) {
   const [playing, setPlaying] = useState(false);
   if (youtubeId && playing) {
     return (
@@ -208,17 +219,22 @@ export function Video({ poster, title, youtubeId }: { poster: string; title: str
   }
   const cover = (
     <>
-      <img src={img(poster)} alt="" width={836} height={470} loading="lazy" />
-      <span className="art-video__title">{title}</span>
-      <span className="art-video__play" aria-hidden="true" />
+      <img src={img(poster)} alt="" width={840} height={471} loading="lazy" />
+      {!framed && (
+        <>
+          <span className="art-video__title">{title}</span>
+          <span className="art-video__play" aria-hidden="true" />
+        </>
+      )}
     </>
   );
+  const cls = `art-video art-video--cover${framed ? ' art-video--framed' : ''}`;
   return youtubeId ? (
-    <button type="button" className="art-video art-video--cover" onClick={() => setPlaying(true)} aria-label={`Assistir: ${title}`}>
+    <button type="button" className={cls} onClick={() => setPlaying(true)} aria-label={`Assistir: ${title}`}>
       {cover}
     </button>
   ) : (
-    <figure className="art-video art-video--cover" aria-label={`${title} (vídeo em breve)`}>
+    <figure className={cls} aria-label={`${title} (vídeo em breve)`}>
       {cover}
     </figure>
   );

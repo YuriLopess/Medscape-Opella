@@ -81,6 +81,8 @@ CROPS = {
         # quadro do vídeo usado no topo do original (sem a interface do YouTube)
         'hero': (978, 333, 1483, 617, False),
         'autor-tati-mota': (425, 1487, 646, 1707, False),
+        # quadro do vídeo do YouTube como aparece no original (com a interface do player)
+        'video-capa': (425, 2515, 1265, 2986, False),
     },
     'ID09': {
         'hero': (978, 333, 1483, 599, False),

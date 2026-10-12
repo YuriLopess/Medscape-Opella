@@ -74,7 +74,8 @@ const article: ArticleContent = {
         <strong>atenção</strong>, o <strong>aprendizado</strong> e o <strong>desempenho escolar</strong>.
       </p>
       <Video
-        poster="artigos/id08/hero.webp"
+        framed
+        poster="artigos/id08/video-capa.webp"
         title="Muito além da sonolência: veja os efeitos dos antialérgicos de 1ª geração em crianças"
       />
 
