@@ -49,7 +49,7 @@ export const oscal: ProductPageData = {
         </>
       ),
     },
-    text: 'Referência na área, a especialista discute recomendações e evidências sobre a suplementação de cálcio ao longo da vida da mulher, incluindo seu papel na saúde óssea e na redução do risco de pré-eclâmpsia',
+    text: 'Referência na área, a especialista discute recomendações e evidências sobre a suplementação de cálcio ao longo da vida da mulher.',
     image: {
       src: 'oscal/video-saude-ossea-feminina.webp',
       width: 665,

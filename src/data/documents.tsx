@@ -100,7 +100,7 @@ export const documents: DocumentPageData[] = [
       </>
     ),
     description:
-      'Recomendações e evidências sobre a suplementação de cálcio ao longo da vida da mulher, incluindo seu papel na saúde óssea.',
+      'Recomendações e evidências sobre a suplementação de cálcio ao longo da vida da mulher.',
     image: {
       src: 'conteudos/saude-ossea-feminina.webp',
       width: 961,
