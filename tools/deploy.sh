@@ -7,7 +7,7 @@
 #   3. na VPS, o lftp espelha os arquivos na raiz pública da Medscape (apaga o que sobrou de versões antigas).
 #
 # As senhas do FTP ficam SÓ na VPS, em ~/.opella.env (chmod 600), e nunca passam por este computador:
-#   FTP_HOST=ftp.exemplo.com
+#   FTP_HOST=194.224.158.215              (IP do servidor: o domínio passa pela Cloudflare, que não repassa FTP)
 #   FTP_USER=usuario
 #   FTP_PASS='senha'
 #   FTP_DIR=site/public                   (raiz pública confirmada com arquivo de teste)
