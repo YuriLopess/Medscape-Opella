@@ -12,6 +12,9 @@
 #   FTP_PASS='senha'
 #   FTP_DIR=site/public                   (raiz pública confirmada com arquivo de teste)
 #
+# server/config.local.php (credenciais do banco) é criado só no servidor e fica fora do espelhamento:
+# o --delete nunca o apaga e nenhum deploy o sobrescreve.
+#
 # Opella Hub: https://opellahub.medscapegrupo.com — VPS root@179.236.232.166 (chave ~/.ssh/hpn_deploy).
 # dns:order inet força IPv4: a Medscape libera o IPv4 da VPS, que também tem IPv6.
 #
@@ -50,6 +53,9 @@ set -a; . "$ENV"; set +a
 WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK" "/tmp/$PKG"' EXIT
 tar -xzf "/tmp/$PKG" -C "$WORK"
+# server/ sempre existe no pacote: se faltasse (ex.: build antigo, sem login), o --delete removeria a
+# pasta inteira do servidor, e o --exclude abaixo não protegeria o config.local.php.
+mkdir -p "$WORK/server"
 
 # a senha vai por variável de ambiente (--env-password), não aparece na lista de processos
 export LFTP_PASSWORD="$FTP_PASS"
@@ -60,7 +66,7 @@ set ssl:verify-certificate no
 set net:max-retries 2
 set net:timeout 20
 mirror -R --delete --verbose=1 --parallel=4 $DRY \
-  --exclude-glob config.php --exclude-glob .well-known/ \
+  --exclude '^server/config\.local\.php$' --exclude-glob .well-known/ \
   "$WORK/" "$FTP_DIR/"
 bye
 LFTP
