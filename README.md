@@ -55,6 +55,17 @@ dependências) com MariaDB, mesma validação na tela e no servidor.
   dígito repetido, sequência) e grava todo cadastro como `nao_verificado`.
 - Um campo "armadilha" (honeypot) invisível recusa cadastros de robô sem dizer o motivo.
 
+### Vercel (ambiente de teste)
+
+A Vercel publica um build **estático, sem backend** (`npm run build:vercel`, configurado em
+`vercel.json`): o login é checado no navegador contra um único usuário de teste e o cadastro avisa
+que está em fase de testes (`src/gate/demo.ts`, ligado por `.env.demo`). A senha não fica no código,
+só o SHA-256 dela com sal. **Não é proteção de verdade** — o código do app vai junto no build —,
+serve só para demonstração. O login real (banco + sessão no servidor) é o da publicação na Medscape.
+
+Para trocar a senha de teste: `printf '%s' "opellahub-teste-v1:NOVA_SENHA" | sha256sum` e cole o
+resultado em `passwordSha256` no `demo.ts`.
+
 ### Rodando localmente
 
 Requisitos: Node.js e Docker Desktop.

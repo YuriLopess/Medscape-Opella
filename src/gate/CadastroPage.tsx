@@ -6,6 +6,7 @@ import { brazilianStates } from './data/brazilianStates';
 import { medicalSpecialties } from './data/medicalSpecialties';
 import { commonPasswords } from './data/commonPasswords';
 import { login, register } from './api';
+import { DEMO_MODE, DEMO_REGISTER_MESSAGE } from './demo';
 import { img } from '../lib/assets';
 
 const stateOptions = brazilianStates.map((s) => ({ value: s.uf, label: s.name }));
@@ -151,6 +152,12 @@ export default function CadastroPage({ onEnter }: CadastroPageProps) {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (submitting) return;
+    // modo teste (Vercel): o cadastro ainda não está aberto — avisa já, sem pedir o formulário inteiro
+    if (DEMO_MODE && mode === 'cadastro') {
+      setErrors({});
+      setServerError({ error: 'fase_de_teste', message: DEMO_REGISTER_MESSAGE });
+      return;
+    }
     const nextErrors = validate();
     setErrors(nextErrors);
     setServerError(null);
@@ -415,9 +422,9 @@ export default function CadastroPage({ onEnter }: CadastroPageProps) {
             {serverError && (
               <div className="cadastro-alert" role="alert">
                 <p>{serverError.message}</p>
-                {serverError.error === 'ja_cadastrado' && (
+                {(serverError.error === 'ja_cadastrado' || serverError.error === 'fase_de_teste') && (
                   <button type="button" className="cadastro-link" onClick={() => switchMode('entrar')}>
-                    Entrar com meu cadastro
+                    {serverError.error === 'fase_de_teste' ? 'Entrar com o login de teste' : 'Entrar com meu cadastro'}
                   </button>
                 )}
               </div>

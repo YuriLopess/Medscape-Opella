@@ -29,7 +29,14 @@ function copyBackend(): Plugin {
   };
 }
 
-export default defineConfig({
+// Modo teste (`vite build --mode demo`, usado pela Vercel): site estático, sem backend PHP. Uma única
+// página (index.html = tela de login) que carrega o app sob demanda depois do login de teste.
+const demoBuild = {
+  outDir: OUT_DIR,
+  emptyOutDir: true,
+};
+
+export default defineConfig(({ mode }) => (mode === 'demo' ? { plugins: [react()], build: demoBuild } : {
   plugins: [react(), copyBackend()],
   build: {
     outDir: OUT_DIR,
@@ -69,4 +76,4 @@ export default defineConfig({
       },
     },
   },
-});
+}));

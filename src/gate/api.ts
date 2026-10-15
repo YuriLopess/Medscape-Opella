@@ -1,3 +1,5 @@
+import { DEMO_MODE, DEMO_REGISTER_MESSAGE, demoCredentialsMatch, endDemoSession, startDemoSession } from './demo';
+
 /** `fields` mapeia um campo do formulário à mensagem quando o servidor recusa campos específicos. */
 export type ApiResult =
   | { ok: true }
@@ -40,6 +42,19 @@ async function post(path: string, body: object): Promise<ApiResult> {
   }
 }
 
-export const register = (data: RegisterData) => post('/api/register.php', data);
-export const login = (data: LoginData) => post('/api/login.php', data);
-export const logout = () => post('/api/logout.php', {});
+// Build da Vercel (modo teste): sem backend — ver demo.ts.
+async function demoLogin({ email, senha }: LoginData): Promise<ApiResult> {
+  if (!(await demoCredentialsMatch(email, senha))) {
+    return { ok: false, error: 'credenciais', message: 'E-mail ou senha incorretos.' };
+  }
+  startDemoSession();
+  return { ok: true };
+}
+
+export const register = (data: RegisterData): Promise<ApiResult> =>
+  DEMO_MODE
+    ? Promise.resolve({ ok: false, error: 'fase_de_teste', message: DEMO_REGISTER_MESSAGE })
+    : post('/api/register.php', data);
+export const login = (data: LoginData) => (DEMO_MODE ? demoLogin(data) : post('/api/login.php', data));
+export const logout = (): Promise<ApiResult> =>
+  DEMO_MODE ? (endDemoSession(), Promise.resolve({ ok: true })) : post('/api/logout.php', {});
