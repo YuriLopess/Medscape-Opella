@@ -1,0 +1,38 @@
+# Ambiente local que espelha a produção (Debian + Apache + PHP + MariaDB).
+# Serve o site já construído em ./dist em http://localhost:8081 — rode `npm run build` antes.
+# Portas (8081/3308) diferentes das do HPN (8080/3307) para os dois rodarem juntos.
+services:
+  web:
+    build: ./docker
+    ports:
+      - "8081:80"
+    volumes:
+      - ./dist:/var/www/html
+    environment:
+      DB_HOST: db
+      DB_NAME: opella_hub
+      DB_USER: opella_hub
+      DB_PASS: opella-local
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mariadb:10.11
+    environment:
+      MARIADB_DATABASE: opella_hub
+      MARIADB_USER: opella_hub
+      MARIADB_PASSWORD: opella-local
+      MARIADB_ROOT_PASSWORD: opella-local-root
+    ports:
+      - "3308:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./backend/database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      retries: 20
+
+volumes:
+  db-data:

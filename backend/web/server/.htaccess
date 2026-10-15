@@ -1,0 +1,2 @@
+# Código e configuração do servidor nunca são servidos diretamente.
+Require all denied

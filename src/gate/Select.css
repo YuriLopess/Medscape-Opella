@@ -1,0 +1,129 @@
+.cs-select {
+  position: relative;
+}
+
+.cs-select-trigger {
+  display: block;
+  width: 100%;
+  font: inherit;
+  font-size: 15px;
+  text-align: left;
+  padding: 13px 38px 13px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--field-radius, var(--radius-sm));
+  color: var(--text);
+  background: var(--cream-soft);
+  cursor: pointer;
+  position: relative;
+  transition: border-color .18s, box-shadow .18s, background .18s;
+}
+.cs-select-trigger span {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.cs-select-trigger::after {
+  content: '';
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--ink-muted);
+  border-bottom: 2px solid var(--ink-muted);
+  transform: translateY(-65%) rotate(45deg);
+  transition: transform .18s, border-color .18s;
+  pointer-events: none;
+}
+.cs-select-placeholder { color: #a8a39b; }
+
+.cs-select-trigger:hover {
+  border-color: var(--sage-500);
+  background: #fff;
+}
+.cs-select-trigger:focus-visible {
+  outline: none;
+}
+.cs-select.is-open .cs-select-trigger,
+.cs-select-trigger:focus-visible {
+  border-color: var(--red);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(19,65,36,.14);
+}
+.cs-select.is-open .cs-select-trigger::after {
+  transform: translateY(-35%) rotate(-135deg);
+  border-color: var(--red);
+}
+.cs-select.has-error .cs-select-trigger {
+  border-color: var(--orange);
+  background: #fff;
+}
+
+.cs-select-panel {
+  position: fixed;
+  z-index: 500;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: 0 16px 32px rgba(4,43,10,.16);
+  overflow: hidden;
+  animation: cs-select-pop .15s ease-out backwards;
+}
+@keyframes cs-select-pop {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cs-select-panel { animation: none; }
+}
+
+.cs-select-search {
+  display: block;
+  width: 100%;
+  font: inherit;
+  font-size: 14px;
+  padding: 11px 14px;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  background: var(--cream-soft);
+  color: var(--text);
+}
+.cs-select-search:focus { outline: none; background: #fff; }
+.cs-select-search::placeholder { color: #a8a39b; }
+
+.cs-select-list {
+  list-style: none;
+  margin: 0;
+  padding: 4px;
+  max-height: 236px;
+  overflow-y: auto;
+}
+.cs-select-option {
+  padding: 9px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--text);
+  cursor: pointer;
+}
+.cs-select-option.is-active {
+  background: var(--cream-soft);
+  color: var(--red);
+}
+.cs-select-option.is-selected {
+  font-weight: 700;
+  color: var(--red);
+}
+.cs-select-option.is-selected::after {
+  content: '✓';
+  float: right;
+  color: var(--orange);
+  font-weight: 700;
+}
+.cs-select-empty {
+  padding: 16px 12px;
+  font-size: 13px;
+  color: var(--ink-muted);
+  text-align: center;
+}

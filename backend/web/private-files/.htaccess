@@ -1,0 +1,3 @@
+# Scripts e estilos do app. Nunca servidos diretamente: a URL pública /private/* é
+# roteada para private.php, que verifica a sessão antes.
+Require all denied

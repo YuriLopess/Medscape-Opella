@@ -1,0 +1,495 @@
+@import '../styles/base.css';
+
+/* Tela de cadastro/login — mesma identidade do site (src/styles/base.css):
+   fundo creme, verde-escuro da Opella, Opella Sans, laranja só como sinal (aba ativa e erros).
+   Tokens em :root (não escopados a .cadastro-screen) porque o Select abre num portal em
+   document.body — variável escopada numa classe não chegaria lá. */
+:root {
+  --red: var(--green-800);          /* nome legado usado pelo Select: cor de ação */
+  --red-ink: var(--green-900);
+  --orange: var(--accent-orange);
+  --ink-muted: #59605a;
+  --line: var(--cream-border);
+  --cream-soft: #fbf7f2;
+  --text: var(--green-900);
+  --field-radius: 10px;
+}
+
+.cadastro-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 56px 20px 40px;
+  background: var(--cream);
+  color: var(--text);
+}
+
+.cadastro-shell {
+  width: 100%;
+  max-width: 1040px;
+  display: grid;
+  grid-template-columns: 380px minmax(0, 1fr);
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 1px 0 rgba(4, 43, 10, .04), 0 30px 60px -20px rgba(4, 43, 10, .22);
+  overflow: hidden;
+  animation: cadastro-rise .55s cubic-bezier(.16, 1, .3, 1) backwards;
+}
+
+/* ── Painel da marca: o que o cadastro libera ── */
+.cadastro-hero {
+  background: var(--green-900);
+  color: var(--cream);
+}
+
+/* fica parado enquanto o formulário (mais alto) rola */
+.cadastro-hero-inner {
+  position: sticky;
+  top: 0;
+  padding: 44px 40px 40px;
+}
+
+.cadastro-wordmark {
+  display: block;
+  width: 132px;
+  height: auto;
+  filter: brightness(0) invert(1);
+}
+
+.cadastro-hero-title {
+  margin-top: 28px;
+  font-size: 30px;
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--white);
+  text-wrap: balance;
+}
+
+.cadastro-areas-label {
+  margin-top: 40px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  color: color-mix(in srgb, var(--cream) 70%, transparent);
+}
+
+.cadastro-areas {
+  margin-top: 14px;
+  display: grid;
+  gap: 10px;
+}
+
+.cadastro-areas li {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  align-items: center;
+  column-gap: 16px;
+  animation: cadastro-item-in .55s cubic-bezier(.16, 1, .3, 1) backwards;
+}
+
+.cadastro-areas li:nth-child(1) { animation-delay: .18s; }
+.cadastro-areas li:nth-child(2) { animation-delay: .26s; }
+.cadastro-areas li:nth-child(3) { animation-delay: .34s; }
+.cadastro-areas li:nth-child(4) { animation-delay: .42s; }
+
+.cadastro-areas img {
+  display: block;
+  width: 140px;
+  height: auto;
+  border-radius: 9px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .08);
+}
+
+.cadastro-areas span {
+  font-size: 16px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.cadastro-areas-caption { display: none; }
+
+.cadastro-hero-note {
+  margin-top: 36px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(247, 238, 230, .16);
+  font-size: 14px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--cream) 78%, transparent);
+  max-width: 30ch;
+}
+
+/* ── Formulário ── */
+.cadastro-form-pane {
+  padding: 40px 56px 48px;
+}
+
+/* alternância Criar cadastro / Entrar */
+.cadastro-tabs {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--cream);
+}
+
+.cadastro-tabs button {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 9px 20px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink-muted);
+  cursor: pointer;
+  transition: background-color .2s, color .2s, box-shadow .2s;
+}
+
+.cadastro-tabs button:hover { color: var(--green-900); }
+
+.cadastro-tabs button[aria-pressed='true'] {
+  background: var(--white);
+  color: var(--green-900);
+  box-shadow: 0 1px 2px rgba(4, 43, 10, .12), inset 0 -2px 0 var(--orange);
+}
+
+.cadastro-tabs button:focus-visible {
+  outline: 2px solid var(--green-800);
+  outline-offset: 2px;
+}
+
+.cadastro-title {
+  margin-top: 28px;
+  font-size: 32px;
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--green-900);
+}
+
+.cadastro-subtitle {
+  margin-top: 10px;
+  margin-bottom: 32px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink-muted);
+  max-width: 52ch;
+}
+
+.cadastro-form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.cadastro-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cadastro-group-tag {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  color: var(--green-900);
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.cadastro-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.cadastro-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.cadastro-field label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--green-900);
+}
+
+.cadastro-field label .req {
+  margin-left: 2px;
+  color: var(--orange);
+}
+
+.cadastro-field input {
+  width: 100%;
+  min-width: 0; /* campos têm largura mínima própria; sem isso o grid estoura no celular */
+  font: inherit;
+  font-size: 15px;
+  padding: 13px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--field-radius);
+  color: var(--text);
+  background: var(--cream-soft);
+  transition: border-color .18s, box-shadow .18s, background-color .18s;
+}
+
+.cadastro-field input:hover { border-color: var(--sage-500); background: var(--white); }
+
+.cadastro-field input:focus-visible {
+  outline: none;
+  border-color: var(--green-800);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(19, 65, 36, .14);
+}
+
+.cadastro-field input::placeholder { color: #a9a49c; }
+
+.cadastro-field.has-error input { border-color: var(--orange); background: var(--white); }
+
+.cadastro-field-msg {
+  font-size: 13px;
+  line-height: 1.4;
+  color: #c2410c;
+}
+
+/* Honeypot: fora da tela, não display:none, que alguns bots sabem ignorar. */
+.cadastro-hp {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Campo de senha com alternador de visibilidade embutido. */
+.cadastro-password { position: relative; }
+.cadastro-password input { width: 100%; padding-right: 48px; }
+.cadastro-password input::-ms-reveal,
+.cadastro-password input::-ms-clear { display: none; }
+
+.cadastro-password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  translate: 0 -50%;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: var(--ink-muted);
+  cursor: pointer;
+  transition: color .15s, background-color .15s;
+}
+
+.cadastro-password-toggle:hover { color: var(--green-800); background: rgba(19, 65, 36, .06); }
+.cadastro-password-toggle:focus-visible { outline: 2px solid var(--green-800); outline-offset: 1px; }
+
+/* declaração: caixa de seleção num bloco creme, para não passar despercebida */
+.cadastro-checkbox-field {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--field-radius);
+  background: var(--cream-soft);
+  cursor: pointer;
+  transition: border-color .15s, background-color .15s;
+}
+
+.cadastro-checkbox-field:hover { border-color: var(--sage-500); background: var(--white); }
+.cadastro-checkbox-field.has-error { border-color: var(--orange); }
+
+.cadastro-checkbox-field input {
+  margin-top: 2px;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  accent-color: var(--green-800);
+  cursor: pointer;
+}
+
+.cadastro-checkbox-field span {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--green-900);
+}
+
+.cadastro-submit {
+  font: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 16px 24px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--green-800);
+  color: var(--white);
+  cursor: pointer;
+  transition: background-color .2s, transform .2s, box-shadow .2s;
+}
+
+.cadastro-submit::after {
+  content: "→";
+  display: inline-block;
+  margin-left: 8px;
+  transition: transform .2s;
+}
+
+.cadastro-submit:hover {
+  background: var(--green-900);
+  box-shadow: 0 10px 22px -8px rgba(4, 43, 10, .45);
+}
+
+.cadastro-submit:hover::after { transform: translateX(3px); }
+
+.cadastro-submit:focus-visible { outline: 3px solid rgba(19, 65, 36, .35); outline-offset: 2px; }
+
+.cadastro-submit:disabled {
+  opacity: .7;
+  cursor: progress;
+  box-shadow: none;
+}
+
+.cadastro-submit:disabled::after { content: none; }
+
+.cadastro-alert {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  padding: 13px 16px;
+  border-left: 3px solid var(--orange);
+  border-radius: var(--field-radius);
+  background: rgba(236, 84, 30, .07);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--green-900);
+}
+
+.cadastro-link {
+  font: inherit;
+  font-weight: 700;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--green-800);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(19, 65, 36, .35);
+  transition: text-decoration-color .15s;
+}
+
+.cadastro-link:hover { text-decoration-color: currentColor; }
+.cadastro-link:focus-visible { outline: 2px solid var(--green-800); outline-offset: 2px; border-radius: 2px; }
+
+.cadastro-footer {
+  margin-top: 32px;
+  max-width: 640px;
+  text-align: center;
+}
+
+.cadastro-footer p {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--ink-muted);
+}
+
+/* ── Movimento ── */
+@keyframes cadastro-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes cadastro-item-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes cadastro-leave {
+  from { opacity: 1; transform: none; }
+  to { opacity: 0; transform: scale(.985); }
+}
+
+.cadastro-screen.is-leaving {
+  animation: cadastro-leave .45s cubic-bezier(.4, 0, 1, 1) both;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cadastro-shell,
+  .cadastro-areas li { animation: none; }
+  .cadastro-screen.is-leaving { animation-duration: .01s; }
+  .cadastro-submit::after { transition: none; }
+}
+
+/* ── Responsivo ── */
+@media (max-width: 980px) {
+  .cadastro-shell { grid-template-columns: 300px minmax(0, 1fr); }
+  .cadastro-hero-inner { padding: 36px 28px; }
+  .cadastro-hero-title { font-size: 26px; }
+  .cadastro-areas li { grid-template-columns: 1fr; row-gap: 6px; }
+  .cadastro-form-pane { padding: 36px 36px 40px; }
+  .cadastro-grid-2--wide { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 760px) {
+  .cadastro-screen { padding: 0 0 32px; }
+  .cadastro-shell { grid-template-columns: minmax(0, 1fr); border-radius: 0; box-shadow: none; }
+
+  /* painel da marca vira um cabeçalho compacto */
+  .cadastro-hero-inner { position: static; padding: 24px 20px 22px; }
+  .cadastro-wordmark { width: 96px; }
+  .cadastro-hero-title { margin-top: 14px; font-size: 20px; line-height: 1.15; }
+  .cadastro-areas-label { margin-top: 18px; font-size: 12px; }
+  /* marcas: quatro logos numa linha; as áreas vão para a legenda logo abaixo */
+  .cadastro-areas { margin-top: 10px; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+  .cadastro-areas li { grid-template-columns: minmax(0, 1fr); }
+  .cadastro-areas img { width: 100%; border-radius: 6px; }
+  .cadastro-areas span { display: none; }
+  .cadastro-areas-caption {
+    display: block;
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 1.45;
+    color: color-mix(in srgb, var(--cream) 85%, transparent);
+  }
+  /* cada área inteira numa linha: a quebra só acontece entre áreas */
+  .cadastro-areas-caption span { white-space: nowrap; }
+  .cadastro-hero-note { display: none; }
+
+  .cadastro-form-pane { padding: 24px 20px 32px; }
+  /* abas em largura total */
+  .cadastro-tabs { display: flex; }
+  .cadastro-tabs button { flex: 1; padding: 11px 12px; }
+  .cadastro-title { margin-top: 22px; font-size: 26px; }
+  .cadastro-subtitle { margin-bottom: 26px; font-size: 14px; }
+  .cadastro-form { gap: 26px; }
+  .cadastro-group { gap: 14px; }
+
+  /* pares curtos (nome/sobrenome, CRM/UF) seguem lado a lado; senhas, que têm o botão do olho, empilham */
+  .cadastro-grid-2 { gap: 14px 12px; }
+  .cadastro-grid-2--wide { grid-template-columns: minmax(0, 1fr); }
+  .cadastro-field input,
+  .cadastro-field .cs-select-trigger { font-size: 16px; } /* 16px evita o zoom automático do iOS ao focar */
+  .cadastro-checkbox-field { padding: 14px; }
+  .cadastro-submit { width: 100%; }
+  .cadastro-footer { padding: 0 20px; }
+}
+
+@media (max-width: 340px) {
+  .cadastro-areas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cadastro-grid-2 { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* senhas lado a lado só com espaço para o placeholder e o botão do olho */
+@media (max-width: 1100px) {
+  .cadastro-grid-2--wide { grid-template-columns: minmax(0, 1fr); }
+}

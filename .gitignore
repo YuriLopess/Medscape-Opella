@@ -16,6 +16,9 @@ dist/
 # Claude Code — configurações pessoais
 .claude/settings.local.json
 
+# Credenciais de produção (criado só no servidor)
+backend/web/server/config.local.php
+
 # Python
 __pycache__/
 *.pyc

@@ -1,12 +1,13 @@
 # Opella — Hub científico
 
-Site em **React 19 + TypeScript**, com **Vite** e **React Router**.
+Site em **React 19 + TypeScript**, com **Vite** e **React Router**. O conteúdo fica atrás de
+cadastro/login de profissional de saúde — veja [Login / acesso](#login--acesso).
 
 ```bash
 npm install        # primeira vez
-npm run dev        # desenvolvimento em http://localhost:5173
-npm run build      # checa tipos e gera o site em dist/
-npm run preview    # serve o build de dist/ em http://localhost:4173
+npm run dev        # desenvolvimento em http://localhost:5173 (front só; API precisa do Docker, ver abaixo)
+npm run build      # checa tipos, gera o site em dist/ e copia o backend PHP pra junto
+npm run preview    # serve o build de dist/ em http://localhost:4173 (sem PHP — só pra conferir o front)
 ```
 
 ## Rotas
@@ -23,22 +24,99 @@ npm run preview    # serve o build de dist/ em http://localhost:4173
 | `/politica-de-privacidade`, `/termos-de-uso` | Textos legais |
 | qualquer outra | Página não encontrada |
 
-**Hospedagem:** como é uma SPA, o servidor precisa devolver o `index.html` nas rotas (senão um F5
-em `/allegra` dá 404). O `npm run build` gera `dist/.htaccess` para Apache (tools/postbuild.mjs): rotas
-conhecidas com status 200, o resto com 404, arquivos com ponto bloqueados e cache dos assets.
-**Publicação (servidor da Medscape):** no ar em https://opellahub.medscapegrupo.com (raiz `site/public`).
-`VPS=root@179.236.232.166 VPS_KEY=~/.ssh/hpn_deploy bash tools/deploy.sh` — build local, envio à VPS
-liberada e FTP (lftp) de lá; as senhas ficam só em `~/.opella.env` na VPS. Use `--dry-run` para simular.
+**Hospedagem:** todas as rotas do site passam por `index.php` (gerado em `dist/.htaccess` por
+`tools/postbuild.mjs`), que decide entre a tela de cadastro/login e o app conforme a sessão — ver
+a seção seguinte. **Publicação (servidor da Medscape):** no ar em https://opellahub.medscapegrupo.com
+(raiz `site/public`). `VPS=root@179.236.232.166 VPS_KEY=~/.ssh/hpn_deploy bash tools/deploy.sh` —
+build local, envio à VPS liberada e FTP (lftp) de lá; as senhas ficam só em `~/.opella.env` na VPS.
+Use `--dry-run` para simular.
+
+## Login / acesso
+
+O site inteiro é protegido por cadastro, nos mesmos moldes do HPN Eu Existo: backend PHP puro (sem
+dependências) com MariaDB, mesma validação na tela e no servidor.
+
+- `/` (e qualquer outra rota do app) é atendida pelo `index.php`: **sem sessão**, entrega a tela de
+  cadastro/login (`src/gate/`, construída em `index.html`); **com sessão**, entrega o app
+  (`home.html`) — na própria URL pedida, sem redirecionar, então um link direto pra `/allegra` volta
+  pra lá depois do login.
+- O código e os estilos do app (inclusive os artigos e documentos, carregados sob demanda) ficam em
+  `private-files/` e só saem por `/private/*` (via `private.php`) pra quem tem sessão válida — não é
+  só uma tela escondida no React, o bundle em si não é servido sem sessão.
+- O cadastro pede nome, sobrenome, e-mail, senha (8 a 200 caracteres, letras e números, gravada só
+  como hash bcrypt), CRM, UF e especialidade, mais a declaração de ser profissional de saúde. Regras
+  iguais na tela (`src/gate/CadastroPage.tsx`) e no servidor (`backend/web/server/bootstrap.php`), que
+  devolve o erro de cada campo pra aparecer embaixo dele. Quem já tem cadastro entra com e-mail + senha.
+  A sessão dura 30 dias (cookie `opella_session`) ou até clicar em "Sair".
+- Depois de 5 senhas erradas pro mesmo e-mail (ou 20 do mesmo IP) em 15 minutos, o login fica
+  bloqueado por 15 minutos. O cadastro aceita até 20 tentativas por IP por hora. Limites em
+  `backend/web/server/config.php`.
+- **CRM:** não há consulta oficial — o site só recusa números claramente inventados (zeros,
+  dígito repetido, sequência) e grava todo cadastro como `nao_verificado`.
+- Um campo "armadilha" (honeypot) invisível recusa cadastros de robô sem dizer o motivo.
+
+### Rodando localmente
+
+Requisitos: Node.js e Docker Desktop.
+
+```bash
+npm install
+npm run build          # gera dist/ (front + backend PHP)
+docker compose up -d   # Apache + PHP em http://localhost:8081, MariaDB na porta 3308
+```
+
+As portas (8081/3308) são diferentes das do projeto HPN (8080/3307) pra rodar os dois ao mesmo tempo.
+`npm run dev` (porta 5173) ainda funciona pro front, mas a API precisa do Docker rodando — o proxy em
+`vite.config.ts` encaminha `/api` pra `localhost:8081`.
+
+### Publicação no servidor da Medscape
+
+Mesmos requisitos do HPN: PHP 7.4+ com `pdo_mysql`, Apache com `mod_rewrite` e `AllowOverride All`
+(`mod_headers` recomendado), MariaDB 10.x (ou MySQL 5.7+), HTTPS.
+
+1. `npm run build`.
+2. Enviar o **conteúdo** de `dist/` pra raiz pública por FTP. Confira abrindo `/server/config.php` no
+   navegador — tem que dar 403.
+3. Criar `backend/web/server/config.local.php` no servidor (nunca vai no build; veja o modelo abaixo),
+   com permissão **644**.
+4. **Só no primeiro deploy**, criar as tabelas: envie `backend/database/instalar.php` com um nome
+   aleatório (ex.: `instalar-<aleatório>.php`) e `backend/database/schema.sql` pra `server/`. Abra o
+   instalador uma vez (diagnóstico) e depois com `?criar=1`. Se o Apache não conseguir apagar os
+   arquivos enviados por FTP, apague **pelo FTP** o instalador e o `schema.sql` em seguida.
+
+Modelo do `config.local.php`:
+
+```php
+<?php
+return [
+    'db_host' => 'localhost',
+    'db_name' => '...',
+    'db_user' => '...',
+    'db_pass' => '...',
+];
+```
 
 ## Estrutura
 
 ```
-index.html                 Entrada do Vite (fontes pré-carregadas, favicon)
+index.html                 Tela pública de cadastro/login (src/gate/main.tsx)
+home.html                  App — só servido pelo index.php, com sessão válida (src/main.tsx)
+404.html                   Página de erro (ErrorDocument do Apache)
+backend/
+  database/                schema.sql, instalar.php (instalador avulso pro servidor da Medscape)
+  web/                     Copiado pra dist/ no build (vite.config.ts) — vira a raiz do site
+    index.php              Decide entre cadastro/login e o app, conforme a sessão
+    private.php            Entrega os scripts/estilos do app (private-files/) com checagem de sessão
+    api/                   login.php, register.php, logout.php
+    server/                bootstrap.php, config.php (negados por .htaccess, nunca servidos direto)
+docker/                    Dockerfile (Apache + PHP, espelha o servidor da Medscape)
+docker-compose.yml         Ambiente local: Apache+PHP (8081) e MariaDB (3308)
 public/
   fonts/                   Opella Sans (woff2), servidas como /fonts/…
   documentos/              PDFs da SBP (ID13–ID15) para download, com os links limpos
   favicon.svg
 src/
+  gate/                    Tela de cadastro/login (CadastroPage, Select, api.ts, data/ — CRM, UF, especialidades)
   main.tsx                 Monta o app com o roteador e os estilos globais
   App.tsx                  Tabela de rotas (gerada a partir dos dados)
   pages/                   Uma por tipo de página
