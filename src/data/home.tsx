@@ -83,7 +83,8 @@ export const experts: ExpertCard[] = [
     name: 'Dr. Flávio Melo',
     photo: 'experts/flavio-melo.webp',
     meta: <>Médico Pediatra<br />Hospital Regional de Guarabira<br />CRM-PB: 5239<br />RQE: 3065</>,
-    bio: 'Pediatra com experiência em saúde infantil, aborda o manejo da febre e da dor.',
+    // um card só (pedido do cliente): reúne os conteúdos de Novalgina (febre e dor) e Enterogermina (microbiota)
+    bio: 'Pediatra com experiência em saúde infantil, aborda o manejo da febre e da dor e compartilha orientações sobre a saúde da microbiota intestinal.',
     profile: LATTES.flavio,
   },
   {
@@ -92,13 +93,6 @@ export const experts: ExpertCard[] = [
     meta: <>Médico Otorrinolaringologista<br />CLIAOD (Clínica de Otorrinolaringologia e Fonoaudiologia)<br />CRM-DF: 15474<br />RQE: 15338</>,
     bio: 'Otorrinolaringologista, aborda o manejo das doenças alérgicas e o papel dos anti-histamínicos no controle dos sintomas.',
     profile: LATTES.carlos,
-  },
-  {
-    name: 'Dr. Flávio Melo',
-    photo: 'experts/flavio-melo.webp',
-    meta: <>Médico Pediatra<br />Hospital Regional de Guarabira<br />CRM-PB: 5239<br />RQE: 3065</>,
-    bio: 'Especialista em Pediatria, compartilha orientações sobre a saúde da microbiota intestinal.',
-    profile: LATTES.flavio,
   },
   {
     name: 'Dra. Lucia Costa Paiva',
