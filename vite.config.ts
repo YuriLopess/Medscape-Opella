@@ -1,7 +1,7 @@
 import { cpSync, renameSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
-import type { Plugin } from 'vite';
+import type { Plugin, UserConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { medicalSpecialties } from './src/gate/data/medicalSpecialties';
 import { commonPasswords } from './src/gate/data/commonPasswords';
@@ -29,14 +29,25 @@ function copyBackend(): Plugin {
   };
 }
 
-// Modo teste (`vite build --mode demo`, usado pela Vercel): site estático, sem backend PHP. Uma única
-// página (index.html = tela de login) que carrega o app sob demanda depois do login de teste.
+// Builds estáticos (sem backend PHP): `--mode demo` (Vercel: tela de login de teste que carrega o app
+// sob demanda) e `--mode publico` (Medscape sem login, ver appWithoutGate).
 const demoBuild = {
   outDir: OUT_DIR,
   emptyOutDir: true,
 };
 
-export default defineConfig(({ mode }) => (mode === 'demo' ? { plugins: [react()], build: demoBuild } : {
+// Sem login (`vite build --mode publico`, servidor da Medscape enquanto o banco não é liberado):
+// o index.html carrega o app direto, sem a tela de cadastro/login nem backend PHP.
+function appWithoutGate(): Plugin {
+  return {
+    name: 'app-without-gate',
+    // 'pre': precisa rodar antes do Vite ler o <script> do HTML, senão a entrada continua sendo o gate
+    transformIndexHtml: { order: 'pre', handler: (html) => html.replace('/src/gate/main.tsx', '/src/main.tsx') },
+  };
+}
+
+// Build padrão (`npm run build`): servidor da Medscape com login (index.php + backend PHP + banco).
+const withLogin: UserConfig = {
   plugins: [react(), copyBackend()],
   build: {
     outDir: OUT_DIR,
@@ -76,4 +87,10 @@ export default defineConfig(({ mode }) => (mode === 'demo' ? { plugins: [react()
       },
     },
   },
-}));
+};
+
+export default defineConfig(({ mode }): UserConfig => {
+  if (mode === 'publico') return { plugins: [react(), appWithoutGate()], build: demoBuild };
+  if (mode === 'demo') return { plugins: [react()], build: demoBuild };
+  return withLogin;
+});

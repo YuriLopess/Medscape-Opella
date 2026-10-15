@@ -1,6 +1,9 @@
 // Roda depois do `vite build` (ver "build" no package.json): gera dist/.htaccess para Apache.
 //
-// O site inteiro fica atrás de login (ver README, seção "Login / acesso"): toda rota do app passa
+// `--publico` (npm run build:publico): versão SEM login — as rotas servem o index.html (app direto),
+// endereço inexistente responde 404, dotfiles e listagem de pastas bloqueados, cache dos assets.
+//
+// Sem a flag: o site inteiro fica atrás de login (ver README, seção "Login / acesso"): toda rota do app passa
 // por index.php, que decide servir a tela de cadastro (sem sessão) ou o app (com sessão). O
 // .htaccess também
 //   - nega acesso direto a home.html (só index.php pode servi-lo, depois de checar a sessão);
@@ -29,7 +32,55 @@ if (Object.keys(brands).length < 4 || docs.length < 4 || articles.length < 12) {
 }
 const pattern = routes.map((r) => r.slice(1).replace(/[.+*?^$()[\]{}|\\]/g, '\\$&')).join('|');
 
-const htaccess = `# GERADO por tools/postbuild.mjs — não editar à mão.
+const htaccessPublico = `# GERADO por tools/postbuild.mjs — não editar à mão.
+Options -Indexes
+DirectoryIndex index.html
+AddDefaultCharset utf-8
+
+# endereço inexistente: index.html com status 404 (o app mostra a página "não encontrada")
+ErrorDocument 404 /index.html
+
+# arquivos e pastas com ponto (.htaccess, .git, .env…): 403
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule (^|/)\\. - [F]
+
+  # rotas do site (${routes.length}): servem o index.html com status 200
+  RewriteRule ^(${pattern})/?$ index.html [L]
+</IfModule>
+
+<IfModule mod_mime.c>
+  AddType font/woff2 .woff2
+  AddType image/webp .webp
+  AddType image/svg+xml .svg
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  <FilesMatch "^index\\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType text/javascript "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType application/pdf "access plus 1 week"
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript image/svg+xml
+</IfModule>
+`;
+
+const htaccessLogin = `# GERADO por tools/postbuild.mjs — não editar à mão.
 DirectoryIndex index.php
 Options -Indexes
 AddDefaultCharset utf-8
@@ -85,5 +136,6 @@ ErrorDocument 404 /404.html
 </IfModule>
 `;
 
-writeFileSync(new URL('../dist/.htaccess', import.meta.url), htaccess);
-console.log(`postbuild: dist/.htaccess com ${routes.length} rotas (todas atrás do login)`);
+const publico = process.argv.includes('--publico');
+writeFileSync(new URL('../dist/.htaccess', import.meta.url), publico ? htaccessPublico : htaccessLogin);
+console.log(`postbuild: dist/.htaccess com ${routes.length} rotas (${publico ? 'site público, sem login' : 'todas atrás do login'})`);

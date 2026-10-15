@@ -18,7 +18,7 @@
 # Opella Hub: https://opellahub.medscapegrupo.com — VPS root@179.236.232.166 (chave ~/.ssh/hpn_deploy).
 # dns:order inet força IPv4: a Medscape libera o IPv4 da VPS, que também tem IPv6.
 #
-# Uso:  VPS=usuario@ip-da-vps [VPS_KEY=~/.ssh/chave] bash tools/deploy.sh [--dry-run]
+# Uso:  VPS=usuario@ip-da-vps [VPS_KEY=~/.ssh/chave] [BUILD=build] bash tools/deploy.sh [--dry-run]
 #   --dry-run  mostra o que o lftp enviaria/apagaria, sem mudar nada no servidor.
 set -euo pipefail
 
@@ -30,7 +30,11 @@ DRY=""
 
 cd "$(dirname "$0")/.."
 echo "› build"
-npm run build --silent
+# BUILD escolhe a versão: build:publico (padrão, sem login, enquanto o banco da Medscape não é
+# liberado) ou build (com login: index.php + backend PHP + banco).
+BUILD="${BUILD:-build:publico}"
+echo "  (npm run $BUILD)"
+npm run "$BUILD" --silent
 test -f dist/index.html && test -f dist/.htaccess
 
 PKG="opella-$(date +%Y%m%d-%H%M%S).tar.gz"
@@ -70,5 +74,15 @@ mirror -R --delete --verbose=1 --parallel=4 $DRY \
   "$WORK/" "$FTP_DIR/"
 bye
 LFTP
+# Os arquivos de entrada têm sempre o mesmo nome e quase sempre o mesmo tamanho; se a data do servidor
+# parecer mais nova (fuso), o mirror pula e o site fica apontando para scripts já apagados. Então eles
+# sobem sempre, por último, depois que os assets novos já estão no lugar.
+if [[ -z "$DRY" ]]; then
+  ENTRY=""
+  for f in .htaccess index.html index.php home.html 404.html private.php; do
+    [[ -f "$WORK/$f" ]] && ENTRY+="put \"$WORK/$f\" -o \"$FTP_DIR/$f\"; chmod 644 \"$FTP_DIR/$f\"; "
+  done
+  lftp --env-password -u "$FTP_USER" "$FTP_HOST" -e "set dns:order inet; set ftp:ssl-allow yes; set ssl:verify-certificate no; set net:max-retries 2; $ENTRY bye"
+fi
 echo "ok: ${DRY:+simulação de }publicação em $FTP_DIR"
 REMOTE

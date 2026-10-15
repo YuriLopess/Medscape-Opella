@@ -27,7 +27,7 @@ npm run preview    # serve o build de dist/ em http://localhost:4173 (sem PHP �
 **Hospedagem:** todas as rotas do site passam por `index.php` (gerado em `dist/.htaccess` por
 `tools/postbuild.mjs`), que decide entre a tela de cadastro/login e o app conforme a sessão — ver
 a seção seguinte. **Publicação (servidor da Medscape):** no ar em https://opellahub.medscapegrupo.com
-(raiz `site/public`). `VPS=root@179.236.232.166 VPS_KEY=~/.ssh/hpn_deploy bash tools/deploy.sh` —
+(raiz `site/public`). `VPS=root@179.236.232.166 VPS_KEY=~/.ssh/hpn_deploy bash tools/deploy.sh` (publica a versão **sem login**, `npm run build:publico`, enquanto o banco da Medscape não é liberado; com login: `BUILD=build` antes do comando) —
 build local, envio à VPS liberada e FTP (lftp) de lá; as senhas ficam só em `~/.opella.env` na VPS.
 Use `--dry-run` para simular.
 
