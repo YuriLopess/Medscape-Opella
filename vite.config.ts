@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
 import type { Plugin, UserConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { searchIndex } from './tools/searchIndex';
 import { medicalSpecialties } from './src/gate/data/medicalSpecialties';
 import { commonPasswords } from './src/gate/data/commonPasswords';
 
@@ -48,7 +49,7 @@ function appWithoutGate(): Plugin {
 
 // Build padrão (`npm run build`): servidor da Medscape com login (index.php + backend PHP + banco).
 const withLogin: UserConfig = {
-  plugins: [react(), copyBackend()],
+  plugins: [react(), searchIndex(), copyBackend()],
   build: {
     outDir: OUT_DIR,
     emptyOutDir: true,
@@ -90,7 +91,7 @@ const withLogin: UserConfig = {
 };
 
 export default defineConfig(({ mode }): UserConfig => {
-  if (mode === 'publico') return { plugins: [react(), appWithoutGate()], build: demoBuild };
-  if (mode === 'demo') return { plugins: [react()], build: demoBuild };
+  if (mode === 'publico') return { plugins: [react(), searchIndex(), appWithoutGate()], build: demoBuild };
+  if (mode === 'demo') return { plugins: [react(), searchIndex()], build: demoBuild };
   return withLogin;
 });

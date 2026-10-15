@@ -52,6 +52,7 @@ export const routes = {
   home: '/',
   privacy: '/politica-de-privacidade',
   terms: '/termos-de-uso',
+  search: '/busca',
   docAntiHistaminicos: '/allegra/anti-histaminicos-em-doencas-alergicas',
   docProbioticos: '/enterogermina/uso-de-probioticos-em-criancas',
   docSaudeOssea: '/os-cal/saude-ossea-feminina',

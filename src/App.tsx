@@ -10,6 +10,7 @@ import { HomePage } from './pages/HomePage';
 import { LegalPage } from './pages/LegalPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { ProductPage } from './pages/ProductPage';
+import { SearchPage } from './pages/SearchPage';
 
 /**
  * Rotas:
@@ -17,6 +18,7 @@ import { ProductPage } from './pages/ProductPage';
  *   /<marca>                       página da marca (data/products)
  *   /<marca>/<documento>           documento científico (data/documents)
  *   /<marca>/<artigo>              artigo ID01–ID12 no layout dos PDFs (data/articles, carregado sob demanda)
+ *   /busca?q=…                     resultados da busca do cabeçalho
  *   /politica-de-privacidade, /termos-de-uso
  */
 export function App() {
@@ -40,6 +42,7 @@ export function App() {
 
         <Route path={routes.privacy} element={<LegalPage page="privacy" />} />
         <Route path={routes.terms} element={<LegalPage page="terms" />} />
+        <Route path={routes.search} element={<SearchPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>

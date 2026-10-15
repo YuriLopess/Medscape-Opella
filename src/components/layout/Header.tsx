@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import type { FormEvent } from 'react';
 import { Link, NavLink, useLocation } from 'react-router';
 import { brandOrder, brands } from '../../data/brands';
 import { Icon } from '../ui/Icon';
+import { SearchBox } from './SearchBox';
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -24,9 +24,6 @@ export function Header() {
       mq.removeEventListener('change', onMq);
     };
   }, [open]);
-
-  // TODO: a busca ainda não tem destino
-  const onSearch = (e: FormEvent) => e.preventDefault();
 
   return (
     <header className="site-header">
@@ -56,15 +53,7 @@ export function Header() {
             </ul>
           </nav>
 
-          <form className="search" role="search" onSubmit={onSearch}>
-            <label className="visually-hidden" htmlFor="search-input">
-              Buscar no site
-            </label>
-            <input className="search__input" id="search-input" type="search" name="q" placeholder="Buscar" autoComplete="off" />
-            <button className="search__submit" type="submit" aria-label="Buscar">
-              <Icon name="search" />
-            </button>
-          </form>
+          <SearchBox />
 
           <button
             className="nav-toggle"

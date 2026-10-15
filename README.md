@@ -22,6 +22,7 @@ npm run preview    # serve o build de dist/ em http://localhost:4173 (sem PHP �
 | `/novalgina/abordagem-da-febre-aguda` | Documento ID13 |
 | `/<marca>/<slug>` | Artigos ID01–ID12 (lista em `data/articles/index.ts`) |
 | `/politica-de-privacidade`, `/termos-de-uso` | Textos legais |
+| `/busca?q=…` | Resultados da busca do cabeçalho |
 | qualquer outra | Página não encontrada |
 
 **Hospedagem:** todas as rotas do site passam por `index.php` (gerado em `dist/.htaccess` por
@@ -131,9 +132,11 @@ src/
   main.tsx                 Monta o app com o roteador e os estilos globais
   App.tsx                  Tabela de rotas (gerada a partir dos dados)
   pages/                   Uma por tipo de página
-    HomePage, ProductPage, DocumentPage, LegalPage, NotFoundPage
+    HomePage, ProductPage, DocumentPage, LegalPage, SearchPage, NotFoundPage
+  search/search.ts         Busca no navegador (sem acento/maiúsculas, todas as palavras, ranking e trecho marcado)
   components/
-    layout/                PageShell (head + tema + header/footer), Header, Footer, ScrollToTop
+    layout/                PageShell (head + tema + header/footer), Header, SearchBox, Footer, ScrollToTop
+    search/                Resultado da busca (usado nas sugestões e na página /busca)
     ui/                    Icon, DocLink (link de conteúdo, pendente ou não), CarouselDots
     home/                  Seções da home (hero, áreas, especialistas, destaques, números, banners, dizeres legais)
     product/               Seções da página de marca
@@ -161,6 +164,7 @@ src/
     home.css / product.css / document.css / legal.css
   assets/img/              Imagens (o Vite gera nomes com hash no build)
 tools/                     Scripts Python de apoio (ícones, imagens dos .ai e dos PDFs, documentos da SBP)
+  searchIndex.ts           Gera o índice da busca no build a partir de src/data (nada a manter à mão)
 ```
 
 ## Como fazer…
@@ -202,7 +206,7 @@ Até lá a Opella Sans é usada no lugar (`--font-allegra` em `base.css`). Ao re
 - Os-Cal: no layout o rótulo "DOCUMENTO CIENTÍFICO" do destaque sai azul sobre azul (ilegível);
   usado um lilás claro (`--feature-label` em themes.css).
 - Novalgina: no .ai o ícone da busca é roxo (herdado do Os-Cal); mantido o laranja da Opella.
-- A busca do header ainda não tem destino.
+- A busca (sugestões no cabeçalho e a página `/busca`) não tem layout no .ai: segue o visual do site.
 
 ## Arquivos de origem
 
