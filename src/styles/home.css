@@ -306,7 +306,7 @@
 }
 
 .expert-card {
-  flex: 0 0 calc((100% - 18px * 3) / 4);
+  flex: 0 0 calc((100% - 18px * 2) / 3); /* três especialistas: todos visíveis no desktop */
   display: flex;
   min-height: 323px;
   background: var(--white);
@@ -333,7 +333,7 @@
   flex-direction: column;
   flex: 1 1 auto;
   min-width: 0;
-  padding: 23px 0 22px 8px;
+  padding: 23px 22px 22px 12px;
 }
 
 .expert-card__name {
@@ -352,10 +352,10 @@
 }
 
 .expert-card__bio {
-  max-width: 167px;
+  max-width: 34ch;
   margin-top: 14px;
-  font-size: 14px;
-  line-height: 18px;
+  font-size: 15px;
+  line-height: 20px;
   color: var(--black);
 }
 
@@ -414,15 +414,16 @@
   background: var(--sage-600);
 }
 
+/* sem setas (todos visíveis), o carrossel não precisa da margem lateral delas */
+.experts__carousel--static { padding-inline: 0 !important; }
+
 @media (max-width: 1420px) {
   .experts__carousel { padding-inline: 36px; }
   .carousel-btn--prev { left: -8px; }
   .carousel-btn--next { right: -8px; }
 }
 
-/* abaixo de 1380px quatro cards ficam estreitos demais para o texto */
 @media (max-width: 1380px) {
-  .expert-card { flex-basis: calc((100% - 18px * 2) / 3); }
   .expert-card__body { padding-right: 14px; }
   .expert-card__bio { max-width: none; }
 }
