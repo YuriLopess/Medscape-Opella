@@ -206,8 +206,6 @@ Até lá a Opella Sans é usada no lugar (`--font-allegra` em `base.css`). Ao re
   das páginas das marcas ainda não têm arquivo/URL.
 - Lorem ipsum (do próprio layout): só "Informações Regulatórias" do Os-Cal.
 - `/os-cal/saude-ossea-feminina` ainda não tem link de entrada: definir de onde é acessada.
-- Prévias da Shutterstock com marca d'água — trocar pela versão licenciada: card "Allegra D®"
-  (stock-photo-…-2715886517) e card "Febre na Pediatria" (stock-photo-…-2537922789).
 - Os-Cal: no layout o rótulo "DOCUMENTO CIENTÍFICO" do destaque sai azul sobre azul (ilegível);
   usado um lilás claro (`--feature-label` em themes.css).
 - Novalgina: no .ai o ícone da busca é roxo (herdado do Os-Cal); mantido o laranja da Opella.
