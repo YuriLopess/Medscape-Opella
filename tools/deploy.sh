@@ -30,9 +30,9 @@ DRY=""
 
 cd "$(dirname "$0")/.."
 echo "› build"
-# BUILD escolhe a versão: build:publico (padrão, sem login, enquanto o banco da Medscape não é
-# liberado) ou build (com login: index.php + backend PHP + banco).
-BUILD="${BUILD:-build:publico}"
+# BUILD escolhe a versão: build (padrão, com login: index.php + backend PHP + banco) ou
+# build:publico (sem login, só se for preciso abrir o site sem cadastro).
+BUILD="${BUILD:-build}"
 echo "  (npm run $BUILD)"
 npm run "$BUILD" --silent
 test -f dist/index.html && test -f dist/.htaccess

@@ -28,7 +28,9 @@ npm run preview    # serve o build de dist/ em http://localhost:4173 (sem PHP �
 **Hospedagem:** todas as rotas do site passam por `index.php` (gerado em `dist/.htaccess` por
 `tools/postbuild.mjs`), que decide entre a tela de cadastro/login e o app conforme a sessão — ver
 a seção seguinte. **Publicação (servidor da Medscape):** no ar em https://opellahub.medscapegrupo.com
-(raiz `site/public`). `VPS=root@179.236.232.166 VPS_KEY=~/.ssh/hpn_deploy bash tools/deploy.sh` (publica a versão **sem login**, `npm run build:publico`, enquanto o banco da Medscape não é liberado; com login: `BUILD=build` antes do comando) —
+(raiz `site/public`), **com login** (banco MySQL local da Medscape, tabelas criadas em 16/10/2026).
+`VPS=root@179.236.232.166 VPS_KEY=~/.ssh/hpn_deploy bash tools/deploy.sh` (versão com login; sem login,
+só se preciso: `BUILD=build:publico` antes do comando) —
 build local, envio à VPS liberada e FTP (lftp) de lá; as senhas ficam só em `~/.opella.env` na VPS.
 Use `--dry-run` para simular.
 
@@ -95,6 +97,10 @@ Mesmos requisitos do HPN: PHP 7.4+ com `pdo_mysql`, Apache com `mod_rewrite` e `
    aleatório (ex.: `instalar-<aleatório>.php`) e `backend/database/schema.sql` pra `server/`. Abra o
    instalador uma vez (diagnóstico) e depois com `?criar=1`. Se o Apache não conseguir apagar os
    arquivos enviados por FTP, apague **pelo FTP** o instalador e o `schema.sql` em seguida.
+   (Feito em 16/10/2026: as tabelas já existem em produção.)
+
+Os passos 1 e 2 são o que o `tools/deploy.sh` faz. Pedidos HTTP vindos da VPS são barrados pela
+Cloudflare (erro 1005), então um script temporário é enviado pela VPS e aberto deste computador.
 
 Modelo do `config.local.php`:
 
