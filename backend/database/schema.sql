@@ -23,7 +23,8 @@ CREATE TABLE IF NOT EXISTS usuarios (
 
 CREATE TABLE IF NOT EXISTS sessoes (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  usuario_id INT UNSIGNED NOT NULL,
+  -- NULL para quem entrou pelo link sem login (?acesso=CÓDIGO), sem cadastro.
+  usuario_id INT UNSIGNED NULL,
   -- SHA-256 do token do cookie; o token em si nunca é gravado.
   token_hash CHAR(64) NOT NULL,
   criado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -60,8 +61,9 @@ CREATE TABLE IF NOT EXISTS tentativas_cadastro (
 
 CREATE TABLE IF NOT EXISTS acessos (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  usuario_id INT UNSIGNED NOT NULL,
-  -- 'cadastro', 'login' ou 'visita' (cada abertura de uma página com sessão).
+  -- NULL para quem entrou pelo link sem login, sem cadastro.
+  usuario_id INT UNSIGNED NULL,
+  -- 'cadastro', 'login', 'banner' (entrada pelo link sem login) ou 'visita' (cada abertura de uma página com sessão).
   evento VARCHAR(20) NOT NULL,
   criado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id),

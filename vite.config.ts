@@ -47,6 +47,9 @@ function appWithoutGate(): Plugin {
   };
 }
 
+const APP_ENTRY = path('./src/main.tsx').replace(/\\/g, '/');
+const isAppEntry = (id: string | null | undefined) => !!id && id.replace(/\\/g, '/') === APP_ENTRY;
+
 // Build padrão (`npm run build`): servidor da Medscape com login (index.php + backend PHP + banco).
 const withLogin: UserConfig = {
   plugins: [react(), searchIndex(), copyBackend()],
@@ -66,11 +69,14 @@ const withLogin: UserConfig = {
         // O gate (entrada "index") não faz nenhum import() dinâmico, então todo chunk
         // dinâmico do build (artigos e documentos, carregados sob demanda) é exclusivo do
         // app — por isso isDynamicEntry também vai pra private/, não só a entrada "home".
+        // O código do app não fica na entrada "home" (só a página), e sim num chunk à parte com o nome do
+        // arquivo (main): por isso a checagem é pelo módulo src/main.tsx dentro do chunk.
         entryFileNames: (chunk) => (chunk.name === 'home' ? 'private/[name]-[hash].js' : 'assets/[name]-[hash].js'),
-        chunkFileNames: (chunk) => (chunk.isDynamicEntry ? 'private/[name]-[hash].js' : 'assets/[name]-[hash].js'),
+        chunkFileNames: (chunk) =>
+          chunk.isDynamicEntry || chunk.moduleIds.some(isAppEntry) ? 'private/[name]-[hash].js' : 'assets/[name]-[hash].js',
         assetFileNames: (asset) => {
           const name = asset.names?.[0] ?? '';
-          return name === 'home.css' ? 'private/[name]-[hash][extname]' : 'assets/[name]-[hash][extname]';
+          return name === 'main.css' || name === 'home.css' ? 'private/[name]-[hash][extname]' : 'assets/[name]-[hash][extname]';
         },
       },
     },

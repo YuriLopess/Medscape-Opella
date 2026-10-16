@@ -13,6 +13,10 @@ $config = [
     // horários no fuso de Brasília.
     'db_timezone' => '-03:00',
     'session_days' => 30,
+    // Códigos aceitos no link sem login (/?acesso=CÓDIGO, ex.: banner da Medscape), que abre o site sem
+    // cadastro. Em produção ficam só no config.local.php; menos de 16 caracteres é ignorado.
+    'banner_codes' => array_values(array_filter([getenv('BANNER_CODE') ?: ''])),
+    'banner_session_days' => 1,
     // Logins errados permitidos dentro da janela de bloqueio antes de novas tentativas serem recusadas.
     'login_max_failures_per_email' => 5,
     'login_max_failures_per_ip' => 20,

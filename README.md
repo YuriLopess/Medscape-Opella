@@ -50,7 +50,14 @@ dependências) com MariaDB, mesma validação na tela e no servidor.
   como hash bcrypt), CRM, UF e especialidade, mais a declaração de ser profissional de saúde. Regras
   iguais na tela (`src/gate/CadastroPage.tsx`) e no servidor (`backend/web/server/bootstrap.php`), que
   devolve o erro de cada campo pra aparecer embaixo dele. Quem já tem cadastro entra com e-mail + senha.
-  A sessão dura 30 dias (cookie `opella_session`) ou até clicar em "Sair".
+  A sessão dura 30 dias (cookie `opella_session`); o app não tem botão "Sair" (a API `/api/logout.php` existe).
+- **Link sem login (banner da Medscape), igual ao HPN:** `/?acesso=CÓDIGO` (ou qualquer página, ex.:
+  `/allegra?acesso=CÓDIGO`) entra direto, sem cadastro: sessão anônima de 1 dia, registrada em `acessos`
+  como `banner`, sem identificar a pessoa. O servidor tira o código da barra de endereço na entrada.
+  Os códigos válidos ficam só em `banner_codes` no `config.local.php` (mínimo de 16 caracteres), gerado
+  na VPS a partir de `BANNER_CODE` em `~/.opella.env`. Para trocar um código vazado: troque o
+  `BANNER_CODE`, gere o `config.local.php` de novo e atualize o link onde ele é divulgado.
+  Local (Docker): http://localhost:8081/?acesso=banner-local-0123456789.
 - Depois de 5 senhas erradas pro mesmo e-mail (ou 20 do mesmo IP) em 15 minutos, o login fica
   bloqueado por 15 minutos. O cadastro aceita até 20 tentativas por IP por hora. Limites em
   `backend/web/server/config.php`.
@@ -111,8 +118,12 @@ return [
     'db_name' => '...',
     'db_user' => '...',
     'db_pass' => '...',
+    'banner_codes' => ['...'],   // link sem login: /?acesso=CÓDIGO
 ];
 ```
+
+Bancos criados antes de 16/10/2026 precisam de `backend/database/migracao-link-sem-login.sql`
+(já aplicada em produção).
 
 ## Estrutura
 

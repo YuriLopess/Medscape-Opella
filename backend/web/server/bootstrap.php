@@ -45,7 +45,7 @@ function is_https(): bool
 
 /* ── Sessões ── */
 
-/** Retorna a sessão logada (usuario_id) ou null. */
+/** Retorna a sessão logada (usuario_id) ou null. usuario_id é null para quem entrou pelo link sem login. */
 function current_session(): ?array
 {
     $token = $_COOKIE[SESSION_COOKIE] ?? '';
@@ -69,9 +69,10 @@ function current_session_or_null(): ?array
     }
 }
 
-function start_session(int $usuarioId): void
+/** $usuarioId é null na sessão anônima do link sem login; $days padrão: session_days. */
+function start_session(?int $usuarioId, ?int $days = null): void
 {
-    $days = (int) app_config()['session_days'];
+    $days = $days ?? (int) app_config()['session_days'];
     $token = bin2hex(random_bytes(32));
 
     $pdo = db();
@@ -103,9 +104,26 @@ function end_session(): void
     ]);
 }
 
-function log_access(int $usuarioId, string $evento): void
+function log_access(?int $usuarioId, string $evento): void
 {
     db()->prepare('INSERT INTO acessos (usuario_id, evento) VALUES (?, ?)')->execute([$usuarioId, $evento]);
+}
+
+/**
+ * True quando $code é um dos códigos do link sem login (banner_codes). Códigos com menos de 16
+ * caracteres são ignorados, então uma configuração vazia ou descuidada não abre o site.
+ */
+function banner_code_valid($code): bool
+{
+    if (!is_string($code) || strlen($code) < 16) {
+        return false;
+    }
+    foreach ((array) app_config()['banner_codes'] as $valid) {
+        if (is_string($valid) && strlen($valid) >= 16 && hash_equals($valid, $code)) {
+            return true;
+        }
+    }
+    return false;
 }
 
 /* ── Auxiliares da API JSON ── */

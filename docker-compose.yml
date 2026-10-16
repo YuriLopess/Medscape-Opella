@@ -13,6 +13,8 @@ services:
       DB_NAME: opella_hub
       DB_USER: opella_hub
       DB_PASS: opella-local
+      # link sem login local: http://localhost:8081/?acesso=banner-local-0123456789 (código só de teste)
+      BANNER_CODE: banner-local-0123456789
     depends_on:
       db:
         condition: service_healthy
