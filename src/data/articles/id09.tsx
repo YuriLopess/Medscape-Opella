@@ -21,10 +21,10 @@ const article: ArticleContent = {
         <h2 id="art-docs-title">Documentos Relacionados.</h2>
         <ul>
           <li>
-            {/* o PDF "Allegra D Mais que um descongestionante" não veio com os arquivos: entra como link quando for enviado */}
-            <span className="art-docs__pending" title="Documento em breve">
+            <a href="/documentos/allegra-d-mais-que-um-descongestionante.pdf" download>
               Allegra D Mais que um descongestionante
-            </span>
+              <span className="visually-hidden"> (PDF)</span>
+            </a>
           </li>
         </ul>
       </section>

@@ -131,7 +131,7 @@ docker/                    Dockerfile (Apache + PHP, espelha o servidor da Medsc
 docker-compose.yml         Ambiente local: Apache+PHP (8081) e MariaDB (3308)
 public/
   fonts/                   Opella Sans (woff2), servidas como /fonts/…
-  documentos/              PDFs da SBP (ID13–ID15) para download, com os links limpos
+  documentos/              PDFs para download: SBP (ID13–ID15, com os links limpos) e o Allegra D do ID09
   favicon.svg
 src/
   gate/                    Tela de cadastro/login (CadastroPage, Select, api.ts, data/ — CRM, UF, especialidades)
@@ -204,7 +204,6 @@ Até lá a Opella Sans é usada no lugar (`--font-allegra` em `base.css`). Ao re
 
 - Vídeos: nenhum "Ver vídeo" tem arquivo/URL ainda. O ID08 mostra o quadro do vídeo; com o link,
   preencha `youtubeId` no `<Video>` de `data/articles/id08.tsx`.
-- ID09: o PDF "Allegra D Mais que um descongestionante" (Documentos Relacionados) não foi entregue.
 - Lorem ipsum (do próprio layout): só "Informações Regulatórias" do Os-Cal.
 - `/os-cal/saude-ossea-feminina` ainda não tem link de entrada: definir de onde é acessada.
 - Prévias da Shutterstock com marca d'água — trocar pela versão licenciada: card "Allegra D®"

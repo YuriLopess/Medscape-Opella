@@ -646,19 +646,26 @@ button.art-video--cover:hover .art-video__play { transform: scale(1.08); }
   font-weight: 700;
 }
 
-/* documento citado no original, mas ainda não enviado pelo cliente */
-.art-docs__pending {
-  display: inline-flex;
-  align-items: center;
-  gap: 18px;
-  cursor: not-allowed;
+/* título do PDF + seta de download rosa, como no layout (inline: se o título quebrar, a seta
+   acompanha a última palavra) */
+.art-docs a {
+  color: inherit;
+  text-decoration: underline 1.5px transparent;
+  text-underline-offset: 5px;
+  transition: text-decoration-color 0.2s ease;
 }
 
-.art-docs__pending::after {
+.art-docs a:hover { color: inherit; text-decoration-color: currentColor; }
+
+.art-docs a::after {
   content: "";
+  display: inline-block;
   width: 22px;
   height: 22px;
+  margin-left: 18px;
+  vertical-align: -3px;
   background: #ee82c8;
+  transition: transform 0.2s ease;
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3v12M6.5 9.5 12 15l5.5-5.5M3 15v5h18v-5'/%3E%3C/svg%3E") center / contain no-repeat;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3v12M6.5 9.5 12 15l5.5-5.5M3 15v5h18v-5'/%3E%3C/svg%3E") center / contain no-repeat;
 }
@@ -671,17 +678,10 @@ button.art-video--cover:hover .art-video__play { transform: scale(1.08); }
 
 .art-docs ul { margin-top: 8px; }
 
-.art-docs a {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
-}
+.art-docs a:hover::after { transform: translateY(2px); }
 
-.art-docs a::after {
-  content: "⤓";
-  color: #e05aa8;
-  font-weight: 400;
+@media (prefers-reduced-motion: reduce) {
+  .art-docs a, .art-docs a::after { transition: none; }
 }
 
 /* ---------- responsivo ---------- */
