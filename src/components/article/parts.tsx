@@ -207,9 +207,10 @@ export function Video({
   const [playing, setPlaying] = useState(false);
   if (youtubeId && playing) {
     return (
-      <div className="art-video">
+      <div className="art-video art-video--player">
         <iframe
-          src={`https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1`}
+          // rel=0: sugestões só do próprio canal, não de vídeos aleatórios do YouTube
+          src={`https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&rel=0`}
           title={title}
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen

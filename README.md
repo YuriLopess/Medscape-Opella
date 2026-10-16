@@ -202,8 +202,8 @@ Até lá a Opella Sans é usada no lugar (`--font-allegra` em `base.css`). Ao re
 
 ## Pendências de conteúdo
 
-- Vídeos: nenhum "Ver vídeo" tem arquivo/URL ainda. O ID08 mostra o quadro do vídeo; com o link,
-  preencha `youtubeId` no `<Video>` de `data/articles/id08.tsx`.
+- Vídeos: o do ID08 (Tati Mota) está no ar pelo YouTube (`youtubeId` no `<Video>`); os "Ver vídeo"
+  das páginas das marcas ainda não têm arquivo/URL.
 - Lorem ipsum (do próprio layout): só "Informações Regulatórias" do Os-Cal.
 - `/os-cal/saude-ossea-feminina` ainda não tem link de entrada: definir de onde é acessada.
 - Prévias da Shutterstock com marca d'água — trocar pela versão licenciada: card "Allegra D®"

@@ -488,6 +488,9 @@ ol.art-list--hang { list-style: decimal outside; }
 
 button.art-video--cover { cursor: pointer; }
 
+/* o player ocupa o mesmo espaço da capa que ele substitui */
+.art-video--player { width: min(100%, 836px); }
+
 /* quadro do player recortado do PDF: proporção e borda do próprio recorte */
 .art-video--framed {
   aspect-ratio: 840 / 471;

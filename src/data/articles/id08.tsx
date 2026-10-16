@@ -75,6 +75,7 @@ const article: ArticleContent = {
       </p>
       <Video
         framed
+        youtubeId="WpR1pIfwB6s"
         poster="artigos/id08/video-capa.webp"
         title="Muito além da sonolência: veja os efeitos dos antialérgicos de 1ª geração em crianças"
       />
